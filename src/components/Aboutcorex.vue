@@ -177,6 +177,7 @@
 
     /* Small screens tweaks */
     @media (max-width: 520px){
+    
         .corex_inner img{ 
             height: 220px; 
         }
