@@ -1,6 +1,8 @@
 
 <script setup>
 import { ref } from 'vue'
+import img from '/src/assets/image/img.png'
+
 const email = ref('')
 const submitted = ref(false)
 
@@ -30,7 +32,7 @@ function handleSubmit(e){
                 </form>
             </div>
             <div class="contact_img" aria-hidden="true">
-                <img src="/public/img.png" alt="Corex Tek-Academy illustration">
+                <img :src="img" alt="Corex Tek-Academy illustration">
             </div>
         </div>
     </div>

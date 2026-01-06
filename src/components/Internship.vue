@@ -1,5 +1,5 @@
 <script setup>
-
+    import img2 from '/src/assets/image/img2.png'
 </script>
 <template>
     <div class="container internship">
@@ -16,7 +16,7 @@
             </div>
         
             <div class="">
-                <img src="/public/img2.png" alt="">
+                <img :src="img2" alt="">
             </div>
         </div>
     </div>

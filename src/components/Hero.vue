@@ -1,5 +1,5 @@
 <script setup>
-
+  import img1 from '/src/assets/image/img1.png'
 </script>
 
 <template>
@@ -31,7 +31,7 @@
       </div>
 
       <div class="hero-visual" aria-hidden="true">
-        <img src="/public/img1.png" alt="">
+        <img :src="img1" alt="">
       </div>
     </div>
   </section>

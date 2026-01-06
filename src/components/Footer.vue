@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import logo from '/src/assets/image/logo.png'
+
 const email = ref('')
 const sent = ref(false)
 function subscribe(e){
@@ -17,7 +19,7 @@ function subscribe(e){
     <div class="site-footer__inner container">
       <div class="footer-brand">
         <a href="/" class="logo" aria-label="Corex Tek-Academy home">
-          <img src="/logo.png" alt="Corex logo" />
+          <img :src="logo" alt="Corex logo" />
         </a>
         <p class="brand-desc">Corex Tek-Academy — hands-on tech training, mentorship, and career support for beginner and aspiring professionals.</p>
         <div class="socials" aria-label="Social links">

@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import logoblue from '/src/assets/image/logoblue.png'
 
 const isOpen = ref(false)
 
@@ -25,7 +26,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
       <div class="container">
         <div class="nav-main">
           <a class="brand" href="/">
-            <img src="/public/logo blue.png" alt="Corex logo">
+            <img :src="logoblue" alt="Corex logo">
           </a>
 
           <button

@@ -1,11 +1,12 @@
 <script setup>
 import { onMounted } from 'vue'
+import logoblue from '/src/assets/image/logoblue.png'
 
 const logos = [
-  '/logo blue.png',
-  '/logo blue.png',
-  '/logo blue.png',
-  '/logo blue.png',
+  '/logoblue.png',
+  '/logoblue.png',
+  '/logoblue.png',
+  '/logoblue.png',
 ]
 
 onMounted(() => {
@@ -33,14 +34,14 @@ onMounted(() => {
 
       <div class="logo-track" role="presentation">
         <div class="logo-set">
-          <img v-for="(logo, i) in logos" :key="`a-${i}`" :src="logo" :alt="`Sponsor ${i+1}`" />
+          <img v-for="(logo, i) in logos" :key="`a-${i}`" :src="logoblue" :alt="`Sponsor ${i+1}`" />
         </div>
         <!-- duplicate set for seamless infinite scroll -->
         <div class="logo-set" aria-hidden="true">
-          <img v-for="(logo, i) in logos" :key="`b-${i}`" :src="logo" :alt="''" />
+          <img v-for="(logo, i) in logos" :key="`b-${i}`" :src="logoblue" :alt="''" />
         </div>
         <div class="logo-set" aria-hidden="true">
-          <img v-for="(logo, i) in logos" :key="`b-${i}`" :src="logo" :alt="''" />
+          <img v-for="(logo, i) in logos" :key="`b-${i}`" :src="logoblue" :alt="''" />
         </div>
       </div>
     </div>

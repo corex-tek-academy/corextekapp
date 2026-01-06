@@ -1,5 +1,5 @@
 <script setup>
-
+  import Corexthumbnail2 from '/src/assets/image/Corexthumbnail2.jpg'
 </script>
 
 <template>
@@ -14,7 +14,7 @@
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
             <div class="profile">
-              <img src="/public/Corex thumbnail 2.jpg" alt="Student Photo" class="student-photo">
+              <img :src="Corexthumbnail2" alt="Student Photo" class="student-photo">
               <div>
                 <h3 class="student-name">Jane Doe</h3>
                 <p class="student-course">Full-Stack Web Development</p>
@@ -28,7 +28,7 @@
 
           <div class="carousel-item" data-bs-interval="10000">
             <div class="profile">
-              <img src="/public/Corex thumbnail 2.jpg" alt="Student Photo" class="student-photo">
+              <img :src="Corexthumbnail2" alt="Student Photo" class="student-photo">
               <div>
                 <h3 class="student-name">John Smith</h3>
                 <p class="student-course">Data Science</p>
@@ -41,7 +41,7 @@
           </div>
           <div class="carousel-item" data-bs-interval="10000">
             <div class="profile">
-              <img src="/public/Corex thumbnail 2.jpg" alt="Student Photo" class="student-photo">
+              <img :src="Corexthumbnail2" alt="Student Photo" class="student-photo">
               <div class="profile_details">
                 <h3 class="student-name">Alice Johnson</h3>
                 <p class="student-course">Cybersecurity</p>

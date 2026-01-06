@@ -1,11 +1,11 @@
 <script setup>
-
+  import img1 from '/src/assets/image/img1.png' 
 </script>
 <template>
     <div class="about container">
         <div class="about_content">
           <div class="about_img">
-              <img src="/public/img1.png" alt="Corex Tek-Academy">
+              <img :src="img1" alt="Corex Tek-Academy">
           </div>
           <div class="about_text">
             <h1>Become Job-Ready. Add a Competitive Edge to Your Skills Today.</h1>

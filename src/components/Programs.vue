@@ -1,20 +1,24 @@
 <script setup>
 import { ref, computed } from 'vue'
+import progimg22 from '/src/assets/image/progimg22.jpg'
+import progimg1 from '/src/assets/image/progimg1.jpg'
+import proimg0 from '/src/assets/image/proimg0.jpg'
+
 
 const pageSize = 3
 const programs = ref([
-  { id: 1, title: 'Front-End Development', img: '/prog-img22.jpg', desc: 'Explore our diverse range of tech programs', duration: '8 Weeks', price: '₦65,000' },
-  { id: 2, title: 'Back-End Development', img: '/prog-img1.jpg', desc: 'Explore our diverse range of tech programs', duration: '12 Weeks', price: '₦75,000' },
-  { id: 3, title: 'Full-Stack Development', img: '/pro-img0.jpg', desc: 'Explore our diverse range of tech programs', duration: '16 Weeks', price: '₦120,000' },
-  { id: 4, title: 'Mobile App Development', img: '/prog-img22.jpg', desc: 'Explore our diverse range of tech programs', duration: '12 Weeks', price: '₦85,000' },
-  { id: 5, title: 'Data Science', img: '/prog-img22.jpg', desc: 'Explore our diverse range of tech programs', duration: '16 Weeks', price: '₦100,000' },
-  { id: 6, title: 'Cybersecurity', img: '/prog-img1.jpg', desc: 'Explore our diverse range of tech programs', duration: '10 Weeks', price: '₦90,000' },
+  { id: 1, title: 'Front-End Development', img: '/progimg22.jpg', desc: 'Explore our diverse range of tech programs', duration: '8 Weeks', price: '₦65,000' },
+  { id: 2, title: 'Back-End Development', img: '/progimg1.jpg', desc: 'Explore our diverse range of tech programs', duration: '12 Weeks', price: '₦75,000' },
+  { id: 3, title: 'Full-Stack Development', img: '/proimg0.jpg', desc: 'Explore our diverse range of tech programs', duration: '16 Weeks', price: '₦120,000' },
+  { id: 4, title: 'Mobile App Development', img: '/progimg22.jpg', desc: 'Explore our diverse range of tech programs', duration: '12 Weeks', price: '₦85,000' },
+  { id: 5, title: 'Data Science', img: '/progimg22.jpg', desc: 'Explore our diverse range of tech programs', duration: '16 Weeks', price: '₦100,000' },
+  { id: 6, title: 'Cybersecurity', img: '/progimg1.jpg', desc: 'Explore our diverse range of tech programs', duration: '10 Weeks', price: '₦90,000' },
   { id: 7, title: 'Cloud Computing', img: '/pro-img0.jpg', desc: 'Explore our diverse range of tech programs', duration: '14 Weeks', price: '₦110,000' },
-  { id: 8, title: 'DevOps Engineering', img: '/prog-img1.jpg', desc: 'Explore our diverse range of tech programs', duration: '12 Weeks', price: '₦95,000' },
-  { id: 9, title: 'Artificial Intelligence', img: '/pro-img0.jpg', desc: 'Explore our diverse range of tech programs', duration: '16 Weeks', price: '₦130,000' },
-  { id: 10, title: 'Machine Learning', img: '/prog-img22.jpg', desc: 'Explore our diverse range of tech programs', duration: '14 Weeks', price: '₦115,000' },
-  { id: 11, title: 'Blockchain Development', img: '/prog-img1.jpg', desc: 'Explore our diverse range of tech programs', duration: '10 Weeks', price: '₦105,000' },
-  { id: 12, title: 'Internet of Things (IoT)', img: '/pro-img0.jpg', desc: 'Explore our diverse range of tech programs', duration: '12 Weeks', price: '₦98,000' },
+  { id: 8, title: 'DevOps Engineering', img: '/progimg1.jpg', desc: 'Explore our diverse range of tech programs', duration: '12 Weeks', price: '₦95,000' },
+  { id: 9, title: 'Artificial Intelligence', img: '/proimg0.jpg', desc: 'Explore our diverse range of tech programs', duration: '16 Weeks', price: '₦130,000' },
+  { id: 10, title: 'Machine Learning', img: '/progimg22.jpg', desc: 'Explore our diverse range of tech programs', duration: '14 Weeks', price: '₦115,000' },
+  { id: 11, title: 'Blockchain Development', img: '/progimg1.jpg', desc: 'Explore our diverse range of tech programs', duration: '10 Weeks', price: '₦105,000' },
+  { id: 12, title: 'Internet of Things (IoT)', img: '/proimg0.jpg', desc: 'Explore our diverse range of tech programs', duration: '12 Weeks', price: '₦98,000' },
 
   // add more programs here if needed
 ])
@@ -53,7 +57,7 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
 
       <div class="program_inner">
         <article class="program_card" v-for="program in paginatedPrograms" :key="program.id">
-          <img :src="program.img" :alt="program.title">
+          <img :src="proimg0" :alt="program.title">
           <div class="card_body">
             <h4>{{ program.title }}</h4>
             <p>{{ program.desc }}</p>
@@ -159,7 +163,7 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   justify-content: space-between; 
   gap: 12px; 
   padding: 8px;
-  background-color: var(--accent-green-50);
+  /* background-color: var(--accent-green-50); */
   border-radius: 8px; 
 }
 .Price{  
@@ -171,13 +175,13 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
 }
 .card_last a{ 
   padding: 8px 12px; 
-  color: var(--text); 
+  color: var(--primary); 
   text-decoration: none; 
   border-radius: 8px; 
   font-weight: 600; 
   transition: background .15s ease, transform .12s ease; 
-  /* border: 1px solid var(--accent-green); */
-  background-color: var(--accent-green-50)
+  border: 1px solid var(--primary);
+  /* background-color: var(--accent-green-50) */
 }
 .card_last a:hover{ 
   background: var(--primary);
