@@ -154,16 +154,17 @@
 @media (max-width: 426px){
   .hero-content h1{
     font-size: 44px;
+    line-height: 1.2;
   }
 }
-@media (max-width: 376px){
+@media (max-width: 375.9px){
 
   .hero-inner{
     padding: 28px 8px;
   }
   .key_highllight{
 
-    gap: 8px;
+    gap: 4px;
 
   }
  
