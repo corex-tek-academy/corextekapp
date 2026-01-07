@@ -2,7 +2,7 @@
   import img1 from '/src/assets/image/img1.png' 
 </script>
 <template>
-    <div class="about container">
+    <div class="about container ">
         <div class="about_content">
           <div class="about_img">
               <img :src="img1" alt="Corex Tek-Academy">
@@ -54,8 +54,6 @@
   mix-blend-mode: overlay;
 } */
 
-/* hover lifts content and gently scales image */
-/* .about_content:hover{ transform: translateY(-6px); box-shadow: 0 20px 50px rgba(16,24,40,0.09); } */
 
 /* Layout for larger screens: image + text side-by-side */
 @media (min-width: 900px){
@@ -114,9 +112,23 @@
 }
 
 @media (min-width: 900px){
-  .cta{ justify-content: flex-start; }
+  .cta{ 
+    justify-content: flex-start; 
+  }
 }
-
+@media (max-width: 768.9px){
+  .cta{ 
+    margin-top: 0px;
+    justify-content: left;
+  }
+}
+@media (max-width: 425.9px){
+  .about_content{ 
+    padding: 0px;
+    border-radius: 0px;
+    background-color: transparent;
+  }
+}
 .cta .btn{
     padding: 12px 20px;
     border-radius: 8px;

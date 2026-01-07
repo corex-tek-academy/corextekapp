@@ -97,6 +97,11 @@ function subscribe(e){
   align-items: start;
   padding: 24px;
 }
+@media (max-width:320.9px){
+  .footer-nav{
+    flex-direction: column;
+  }
+}
 .footer-brand img{ 
     width: 132px; 
     height: auto; 
@@ -167,6 +172,11 @@ function subscribe(e){
 .subscribe-row{ 
     display:flex; 
     gap:8px; 
+}
+@media (max-width:320.9px){
+  .subscribe-row{
+    flex-direction: column;
+  }
 }
 .subscribe-row input{ 
     flex:1; 

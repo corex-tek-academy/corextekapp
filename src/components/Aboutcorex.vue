@@ -81,12 +81,19 @@
         padding: 48px 16px 0 16px;
         --accent: var(--primary, #4f46e5);
         --muted: #6b7280;
-        /* --card-bg: linear-gradient(180deg, rgba(79,70,229,0.04), rgba(255,255,255,0)); */
     }
+    
     .corex{
-        background: var(--primary);
+        background-color: var(--primary);
         padding: 28px;
         border-radius: 20px;
+    }
+    @media (max-width:425.9px){
+        .corex{
+            /* background-color: transparent ; */
+            padding: 14px;
+           border-radius: 10px;
+        }
     }
     .corex_header h1{
         color: var(--light);

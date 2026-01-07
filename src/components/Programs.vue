@@ -95,6 +95,14 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   display: flex;
   flex-direction: column;
 }
+
+@media (max-width: 425.9px){
+  .programs-inner{ 
+    padding: 0px;
+    border-radius: 0px;
+    background-color: transparent;
+  }
+}
 /* .header{ 
   padding: 0 36px; 
 } */

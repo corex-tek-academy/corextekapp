@@ -19,21 +19,21 @@ function handleSubmit(e){
 <template>
     <div class="contact container">
         <div class="contact_inner">
-            <div class="contact_text">
-                <h1>Get updates and happenings at Corex Tek-Academy</h1>
-                <p>Subscribe to our newsletter to receive regular updates and announcements about our programs.</p>
-                <form class="newsletter-form" @submit.prevent="handleSubmit" novalidate>
-                    <label for="email" class="sr-only">Email address</label>
-                    <div class="form-control">
-                        <input type="email" id="email" name="email" v-model="email" placeholder="you@example.com" required>
-                        <button type="submit" class="btn-subscribe">Subscribe</button>
-                    </div>
-                    <p class="subscribe-msg" v-if="submitted">Thanks! We've received your subscription.</p>
-                </form>
-            </div>
-            <div class="contact_img" aria-hidden="true">
-                <img :src="img" alt="Corex Tek-Academy illustration">
-            </div>
+          <div class="contact_text">
+            <h1>Get updates and happenings at Corex Tek-Academy</h1>
+            <p>Subscribe to our newsletter to receive regular updates and announcements about our programs.</p>
+            <form class="newsletter-form" @submit.prevent="handleSubmit" novalidate>
+                <label for="email" class="sr-only">Email address</label>
+                <div class="form-control">
+                    <input type="email" id="email" name="email" v-model="email" placeholder="you@example.com" required>
+                    <button type="submit" class="btn-subscribe">Subscribe</button>
+                </div>
+                <p class="subscribe-msg" v-if="submitted">Thanks! We've received your subscription.</p>
+            </form>
+          </div>
+          <div class="contact_img" aria-hidden="true">
+            <img :src="img" alt="Corex Tek-Academy illustration">
+          </div>
         </div>
     </div>
 </template>
@@ -58,13 +58,16 @@ function handleSubmit(e){
 }
 
 .contact_text h1{
-  margin: 0 0 8px 0;
+  /* margin: 0 0 8px 0; */
   font-size: clamp(1.25rem, 3vw, 2rem);
   line-height: 1.12;
   font-weight: 700;
   color: var(--light);
 }
-.contact_text p{ margin: 0 0 8px 0; color: rgba(255,255,255,0.9); }
+.contact_text p{ 
+  /* margin: 0 0 8px 0;  */
+  color: var(--light);
+}
 
 .contact_text{
   display:flex ;
@@ -124,6 +127,7 @@ function handleSubmit(e){
     justify-content: center;
 }
 
+
 /* small screens: stack and expand image */
 @media (max-width: 600px){
   .newsletter-form .form-control{ 
@@ -144,6 +148,16 @@ function handleSubmit(e){
     .contact_img img{ 
         max-width: 420px; 
     }
+}
+@media (max-width: 425.9px){
+  .contact_inner{
+    padding: 16px;
+    border-radius: 14px;
+    display: block;
+  }
+  .contact_img {
+    display: none;
+  }
 }
 
 /* utility: visually-hidden label */

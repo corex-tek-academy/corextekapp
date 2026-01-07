@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <section class="hero Expanded" aria-labelledby="hero-heading">
+  <section class="hero" aria-labelledby="hero-heading">
     <div class="hero-inner container">
       <div class="hero-content">
         <div>
@@ -142,16 +142,10 @@
     margin-top: 70px;
     padding: 40px 16px;
   }
-  /* .hero-content h1{
-    font-size: 52px;
-  } */
-}
-@media (max-width: 426px){
-  .hero-content h1{
-    font-size: 44px;
+  .hero-content{
+    gap: 16px;
   }
 }
-
 @media (max-width: 426px){
   .hero-content h1{
     font-size: 44px;

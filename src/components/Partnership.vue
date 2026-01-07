@@ -28,7 +28,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="sponsor-section container">
+  <div class="sponsor-section container ">
     <div class="sponsor-logos" aria-hidden="false">
       <h2>Our Sponsors</h2>
 
@@ -87,7 +87,17 @@ onMounted(() => {
   border-radius: 14px;
   border: 1px solid #0257FF23;
 }
+@media (max-width: 425.9px){
+    .sponsor-logos{
+    padding: 0px ;
+    border-radius: 0px;
+    border: none ;
+  }
+  .sponsor-section h2{
+    display: none;
+  }
 
+}
 /* The track is 200% width and contains two identical sets for seamless looping */
 .logo-track{
   display: flex;

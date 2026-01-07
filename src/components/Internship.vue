@@ -79,7 +79,19 @@
         justify-content:flex-start; 
     } 
 }
-
+@media (max-width: 768.9px){
+  .cta{ 
+    margin-top: 0px;
+    justify-content: left;
+  }
+}
+@media (max-width: 425.9px){
+  .internship_inner{ 
+    padding: 0px;
+    border-radius: px;
+    background-color: transparent;
+  }
+}
 .cta .btn{
     padding: 12px 20px;
     border-radius: 8px;
