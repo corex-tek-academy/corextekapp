@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <section class="hero" aria-labelledby="hero-heading">
+  <section class="hero Expanded" aria-labelledby="hero-heading">
     <div class="hero-inner container">
       <div class="hero-content">
         <div>
@@ -38,6 +38,7 @@
 </template>
 
 <style scoped>
+
     /* Image area */
     .hero-visual img{
     width: 100%;
@@ -91,6 +92,7 @@
   radial-gradient(circle at 100% 100%,  #019c9a27 10%, transparent 10%);
 }
 
+
 .hero-inner{
   width: 100%;
   max-width: var(--container-max-width);
@@ -117,7 +119,8 @@
 }
 
 .hero-content h1{
-  font-size: clamp(1.6rem, 4.4vw, 4rem);
+  font-size: 52px;
+  /* font-size: clamp(1.6rem, 4.4vw, 4rem); */
   line-height: 1.1;
   color: var(--text);
   margin-bottom: 0.8rem;
@@ -132,6 +135,35 @@
     font-weight: 500;
     color: #0257FF;
     letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px){
+  .hero{
+    margin-top: 70px;
+  }
+  /* .hero-content h1{
+    font-size: 52px;
+  } */
+}
+@media (max-width: 426px){
+  .hero-content h1{
+    font-size: 44px;
+  }
+}
+
+@media (max-width: 426px){
+  .hero-content h1{
+    font-size: 44px;
+  }
+}
+@media (max-width: 376px){
+  .hero-content h1{
+    font-size: 40px;
+  }
+  .hero-inner{
+    padding: 28px 8px;
+  }
+ 
 }
 
 /* subtle accent under the heading */
@@ -211,16 +243,29 @@
 
 /* larger layout */
 @media (min-width: 900px){
-  .hero-inner{ grid-template-columns: 1fr 480px; text-align: left; gap: 48px; }
-  .hero-visual{ display: block; }
-  .hero-actions{ justify-content: flex-start; }
-  .hero-content h1{ margin-left: 0; margin-right: 0; }
+  .hero-inner{ 
+    grid-template-columns: 1fr 480px; 
+    text-align: left; gap: 48px; 
+  }
+  .hero-visual{ 
+    display: block; 
+  }
+  .hero-actions{ 
+    justify-content: flex-start;
+   }
+  .hero-content h1{ 
+    margin-left: 0; margin-right: 0; 
+  }
 }
 
 /* ensure accessible reduced motion */
 @media (prefers-reduced-motion: reduce){
-  .hero-content, .hero-visual { animation: none !important; }
-  .btn, .btn--primary, .btn--secondary { transition: none !important; }
+  .hero-content, .hero-visual { 
+    animation: none !important; 
+  }
+  .btn, .btn--primary, .btn--secondary { 
+    transition: none !important; 
+  }
 }
 
 </style>

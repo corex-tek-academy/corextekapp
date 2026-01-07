@@ -114,3 +114,14 @@ p {
   font-family: var(--font-body);
   color: var(--small--text);
 }
+.Expanded{
+  max-width: 1320px;
+}
+@media (min-with: 768px) {
+  .Expanded{
+    width: 100%;
+    overflow: hidden;
+    max-width: 100%;
+    padding: 0px 7%;
+  }
+}
