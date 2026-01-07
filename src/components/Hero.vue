@@ -157,9 +157,7 @@
   }
 }
 @media (max-width: 376px){
-  .hero-content h1{
-    font-size: 40px;
-  }
+
   .hero-inner{
     padding: 28px 8px;
   }
