@@ -23,7 +23,7 @@
 </template>
 
 <style scoped>
-/* Keep structure, modernize look + subtle interactions */
+
 .about{
   padding: 32px 16px 0 16px;
 }
@@ -34,30 +34,17 @@
   gap: 28px;
   padding: 28px;
   border-radius: 20px;
-  background-color: #0257FF13;
-  /* background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(250,250,250,0.85)); */
+  background-color: var(--primary-50);
   box-shadow: 0 10px 30px rgba(16,24,40,0.01);
   transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease;
   position: relative;
   overflow: hidden;
 }
 
-/* subtle decorative texture */
-/* .about_content::before{
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(2,87,255,0.02) 1px, transparent 1px);
-  background-size: 22px 22px;
-  opacity: 0.35;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-} */
-
-
-/* Layout for larger screens: image + text side-by-side */
 @media (min-width: 900px){
-  .about_content{ grid-template-columns: 420px 1fr; gap: 36px; padding: 36px; }
+  .about_content{ 
+    grid-template-columns: 420px 1fr; 
+    gap: 36px; padding: 36px; }
 }
 
 /* Image area */
@@ -68,7 +55,6 @@
   border-radius: 14px;
   object-fit: cover;
   transition: transform 420ms cubic-bezier(.2,.9,.2,1), filter 420ms ease, box-shadow 420ms ease;
-  /* box-shadow: 0 10px 26px rgba(16,24,40,0.06); */
 }
 .about_content:hover .about_img img{ transform: scale(1.03) translateZ(0); filter: saturate(1.02); }
 
@@ -89,21 +75,9 @@
   margin: 0.6rem auto 1.25rem auto;
   line-height: 1.6;
   font-weight: normal;
-  /* font-size: 18px; */
 }
 
-/* Small decorative accent under the heading */
-.about_text h2::after{
-  content: '';
-  display: block;
-  width: 56px;
-  height: 4px;
-  margin-top: 10px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--primary), rgba(2,87,255,0.6));
-}
 
-/* CTA styling: centered on mobile, left-aligned on desktop, with subtle motion */
 .cta{
   display: flex;
   gap: 12px;
@@ -123,10 +97,13 @@
   }
 }
 @media (max-width: 425.9px){
+  .about{
+    margin: 20px 0px;
+  }
   .about_content{ 
-    padding: 0px;
-    border-radius: 0px;
-    background-color: transparent;
+    padding: 16px;
+    border-radius: 14px;
+    /* background-color: transparent; */
   }
 }
 .cta .btn{

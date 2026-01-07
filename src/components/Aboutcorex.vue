@@ -1,195 +1,247 @@
 <template>
-    <div class="aboutcorex container">
-        
-        <div class="corex">
-            <div class="corex_header">
-                <h1>Corex Tek-Academy</h1>
-                <p>Corex Tek-Academy is a forward-thinking technology academy focused on equipping beginners and aspiring professionals with the skills, confidence, and experience required to succeed in today’s digital economy.</p>
-            </div>
-            <hr>
-            <!-- <div class="corex_inner"> -->
-                <!-- <img src="/public/img1.png" alt=""> -->
-                <!-- <div class="corex_content"> -->
-                    <div class="corex_options">
-                        <div class="vision">
-                            <span class="icon" aria-hidden="true">
-                            <!-- Target / Mission -->
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <circle cx="12" cy="12" r="8" stroke-linecap="round" stroke-linejoin="round"></circle>
-                                <circle cx="12" cy="12" r="4" stroke-linecap="round" stroke-linejoin="round"></circle>
-                                <path d="M21 12h-2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M12 3v2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                            </span>
-                            <div>
-                            <h5>Our Mission</h5>
-                            <p>To make high-quality, practical tech education accessible by providing structured, mentor-led, and project-driven learning experiences.</p>
-                            </div>
-                        </div>
-                        <div class="vision">
-                            <span class="icon" aria-hidden="true">
-                            <!-- Lightbulb / Vision -->
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M9 18h6" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M10 22h4" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M12 2a6 6 0 0 0-4 10v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-1a6 6 0 0 0-4-10z" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                            </span>
-                            <div>
-                            <h5>Our Vision</h5>
-                            <p>To become a trusted pathway for individuals transitioning into technology careers through hands-on learning and real-world application.</p>
-                            </div>
-                        </div>
-                        <div class="vision">
-                            <span class="icon" aria-hidden="true">
-                            <!-- Users / Who we serve -->
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H11a4 4 0 0 0-4 4v2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <circle cx="12" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round"></circle>
-                            </svg>
-                            </span>
-                            <div>
-                            <h5>Who We Serve</h5>
-                            <p>We support individuals at the early stages of their tech journey—those seeking clarity, structure, mentorship, and practical exposure.</p>
-                            </div>
-                        </div>
-                        <div class="vision">
-                            <span class="icon" aria-hidden="true">
-                            <!-- Sparkles / What makes us different -->
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M12 3l1.3 2.6L16 7l-2.7 1.4L12 11l-1.3-2.6L8 7l2.7-1.4L12 3z" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M4 13l.8 1.6L7 16l-1.2.6L4 18l-.8-1.4L2 16l1.2-.6L4 13z" stroke-linecap="round" stroke-linejoin="round"></path>
-                                <path d="M20 16l.6 1.2L22 18l-1.2.6L20 20l-.6-1.4L18 18l1.2-.6L20 16z" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                            </span>
-                            <div>
-                            <h5>What Makes Us Different</h5>
-                            <p>We focus on learning by doing, guided by experienced mentors, with a clear emphasis on real-world relevance rather than theory alone.</p>
-                            </div>
-                        </div>
+  <section class="aboutcorex container">
 
-                    </div>
-                <!-- </div> -->
-            <!-- </div> -->
-        </div>
-
+    <!-- HERO AREA -->
+    <div class="about_intro">
+      <h1>About Corex Tek-Academy</h1>
+      <p>
+        We are a training-driven technology academy helping beginners and career-shifters
+        unlock real digital skills through structured learning, mentorship, and practice.
+      </p>
     </div>
+
+    <!-- STORY / WHO WE ARE -->
+    <!-- <div class="about_story">
+      <h2>Who We Are</h2>
+      <p>
+        Corex Tek-Academy was created to solve a real problem — talented people want to learn tech,
+        but don’t know where to start, who to trust, or how to stay consistent long enough to
+        build true ability. Our academy bridges that gap by turning learners into confident
+        developers, problem-solvers, and job-ready professionals through guidance, community,
+        and hands-on execution.
+      </p>
+    </div> -->
+
+    <!-- OUR IDENTITY -->
+    <div class="identity_section">
+        <div class="mission">
+            <h3>Our Mission</h3>
+            <p>
+            To make practical, high-quality tech education accessible through curated learning,
+            real-world projects, and mentor accountability.
+            </p>
+        </div>
+        <div class="mission">
+            <h3>Our Vision</h3>
+            <p>
+            To become a trusted launchpad for beginners to gain clarity, build confidence,
+            and transition into meaningful technology careers.
+            </p>
+        </div>
+    </div>
+
+    <!-- 4 CORE VALUES -->
+    <div class="values_grid">
+        <article class="value">
+            <span class="icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.5">
+                    <circle cx="12" cy="12" r="8"></circle>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <path d="M21 12h-2"></path><path d="M12 3v2"></path>
+                </svg>
+            </span>
+            <h4>We Build Confidence</h4>
+            <p>Beginners learn by doing, asking, failing, improving, and growing with support.</p>
+        </article>
+
+        <article class="value">
+            <span class="icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.5">
+                    <path d="M9 18h6"></path><path d="M10 22h4"></path>
+                    <path d="M12 2a6 6 0 0 0-4 10v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-1a6 6 0 0 0-4-10z"></path>
+                </svg>
+            </span>
+            <h4>We Make Tech Accessible</h4>
+            <p>No jargon. No gatekeeping. Just structured clarity and real understanding.</p>
+        </article>
+
+        <article class="value">
+            <span class="icon">
+                <svg viewBox="0 0 24 24" stroke-width="1.5">
+                    <path d="M12 3l1.3 2.6L16 7l-2.7 1.4L12 11l-1.3-2.6L8 7l2.7-1.4L12 3z"></path>
+                    <path d="M4 13l.8 1.6L7 16l-1.2.6L4 18l-.8-1.4L2 16l1.2-.6L4 13z"></path>
+                    <path d="M20 16l.6 1.2L22 18l-1.2.6L20 20l-.6-1.4L18 18l1.2-.6L20 16z"></path>
+                </svg>
+            </span>
+            <h4>We Focus on Results</h4>
+            <p>Projects, portfolio, experience, direction, not just lessons and theory.</p>
+        </article>
+    </div>
+
+  </section>
 </template>
+
 <style scoped>
-  /* Modernized About section styles */
-    .aboutcorex{
-        padding: 48px 16px 0 16px;
-        --accent: var(--primary, #4f46e5);
-        --muted: #6b7280;
-    }
-    
-    .corex{
-        background-color: var(--primary);
-        padding: 28px;
-        border-radius: 20px;
-    }
-    @media (max-width:425.9px){
-        .corex{
-            /* background-color: transparent ; */
-            padding: 14px;
-           border-radius: 10px;
-        }
-    }
-    .corex_header h1{
-        color: var(--light);
-        margin: 0 0 8px 0; 
-        font-weight: 700;
-    }
-    .corex_header p{
-        max-width: 600px;
-        margin: 0; 
-        color: var(--bg);
-    }
 
-    .corex_options{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 16px;
-        width: 100%;
-    }
+.mission{
+    padding: 16px;
+    border-radius: 12px;
+    background-color: var(--gray);
+    border: 1px solid rgba(0,0,0,0.05);
+}
 
-    .vision{
-        background: linear-gradient(180deg, #fff, #fbfbff);
-        padding: 18px;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(15,23,42,0.04);
-        border: 1px solid rgba(79,70,229,0.04);
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        align-items: flex-start;
-        transition: transform .22s ease, box-shadow .22s ease;
+.values_grid .value:nth-child(1){
+    background-color: #8502ff13;
+    h4{
+        color: #8502ff;
     }
-    .vision:hover{ transform: translateY(-6px); box-shadow: 0 14px 36px rgba(79,70,229,0.06); }
+    svg{
+        fill: #8502ff;
+    }
+    .icon{
+        background-color:#8502ff13;
+    }
+}
+.values_grid .value:nth-child(3){
+    background-color: #ff5f0213;
+    h4{
+        color: #ff5f02;
+    }
+    svg{
+        fill: #ff5f02;
+    }
+    .icon{
+        background-color:#ff5f0213;
+    }
+ 
+}
+.values_grid .value:nth-child(2){
+    background-color: #019c9a13;
+    h4{
+        color: #019c9a;
+    }
+    svg{
+        fill: #019c9a;
+    }
+    .icon{
+        background-color:#019c9a13;
+    }
+ 
+}
+/* .values_grid .value:nth-child(3){
+    background-color: #0256ff13;
+    h4{
+        color: #0256ff;
+    }
+    svg{
+        fill: #0256ff;
+    }
+    .icon{
+        background-color:#0256ff13;
+    }
+ 
+} */
 
-    .vision .icon{
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
-        background: rgba(79,70,229,0.08);
-        color: var(--accent);
-        display: grid;
-        place-items: center;
-        font-size: 18px;
-        flex-shrink: 0;
-        transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .vision .icon svg{ 
-        width: 22px; 
-        height: 22px; 
-        color: var(--accent); 
-    }
-    .vision:hover .icon{ 
-        transform: translateY(-4px); 
-        box-shadow: 0 8px 18px rgba(79,70,229,0.06); 
-    }
+.aboutcorex{
+  padding: 40px 16px 0 16px 16px;
+  --accent: var(--primary, #4f46e5);
+  --muted: #6b7280;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
 
-    .vision h5{
-        margin: 0 0 6px 0;
-        color: #0f172a;
-        line-height: 1.2;
-        font-weight: 700;
-        font-size: 0.98rem;
-    }
+/* HERO */
+.about_intro{
+  background: var(--primary);
+  padding: 36px 24px;
+  border-radius: 18px;
+  text-align: center;
+}
+.about_intro h1{ 
+    color: var(--light); 
+    margin: 0 0 12px; 
+}
+.about_intro p{
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--bg);
+  line-height: 1.6;
+}
 
-    .vision p{
-        margin: 0;
-        line-height: 1.6;
-        color: var(--muted);
-        font-size: 0.95rem;
-    }
+/* STORY */
+.about_story{
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+.about_story h2{
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+.about_story p{
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
 
-    /* Larger layout on wide screens */
-    @media (min-width: 900px){
-        .corex_inner{
-        grid-template-columns: 420px 1fr;
-        gap: 36px;
-        padding: 36px;
-        align-items: center;
-        }
-        .corex_content{ 
-            align-items: flex-start; 
-            text-align: left; 
-        }
-        .corex_inner img{ 
-            /* height: 100%;  */
-            max-height: 420px; 
-        }
-    }
+/* IDENTITY (Mission + Vision) */
+.identity_section{
+  display: grid;
+  gap: 24px;
+}
+.identity_section h3{
+  margin: 0 0 6px;
+}
+.identity_section p{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+@media(min-width:700px){
+  .identity_section{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
 
-    /* Small screens tweaks */
-    @media (max-width: 520px){
-    
-        .corex_inner img{ 
-            height: 220px; 
-        }
-        .corex_content p{ 
-            font-size: 0.98rem; 
-        }
+/* VALUES */
+.values_grid{
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.value{
+    padding: 24px 22px;
+    border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.05);
+    /* box-shadow: 0 8px 24px rgba(15,23,42,0.05); */
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.value:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 14px 38px rgba(79,70,229,0.08);
+}
+.icon{
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 10px;
+}
+.icon svg{ 
+    width: 22px; 
+    height: 22px; 
+}
+.value h4{ 
+    margin: 0 0 6px; 
+    font-size: 1rem; 
+    font-weight: 700; 
+}
+.value p{ 
+    margin: 0; 
+    /* color: var(--text);  */
+    line-height: 1.55; 
     }
 </style>

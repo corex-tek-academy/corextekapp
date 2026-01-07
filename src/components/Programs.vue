@@ -88,7 +88,7 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   padding: 32px 16px 0 16px;
 }
 .programs-inner{
-  background-color: #0257FF13;
+  background-color: var(--primary-50);
   border-radius: 24px;
   padding: 36px; 
   gap: 36px;
@@ -98,9 +98,9 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
 
 @media (max-width: 425.9px){
   .programs-inner{ 
-    padding: 0px;
-    border-radius: 0px;
-    background-color: transparent;
+    padding: 16px;
+    border-radius: 14px;
+    /* background-color: transparent; */
   }
 }
 /* .header{ 
@@ -161,7 +161,7 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   line-height: 1.3;
 }
 .program_card h6{ 
-  color: var(--primary);
+  color: var(--accent-green);
   margin: 0 0 12px 0; 
   font-size: 0.85rem; 
 }
@@ -178,7 +178,7 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   font-weight: 700; 
   /* padding: 6px 10px;  */
   border-radius: 8px; 
-  color: var(--accent-green);
+  color: var(--primary);
   
 }
 .card_last a{ 

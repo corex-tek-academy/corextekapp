@@ -39,13 +39,14 @@
   /* project primary colors */
   --primary: #0257FF;
   --primary-50: #0257FF20;
+  --gray: #f0f0f0;
   --bg: #f9fafb;
   --text: #212121;
   --small--text: #6b7280;
 ;
   --light: #fff;
   --accent-green: #019c9a;
-  --accent-green-50: #02ffab13;
+  --accent-green-50: #019c9a13;
   --orange: #ff5f02;
   --orange-50: #ff5f0213;
 

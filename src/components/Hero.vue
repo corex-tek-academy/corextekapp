@@ -145,6 +145,7 @@
   .hero-content{
     gap: 16px;
   }
+  
 }
 @media (max-width: 426px){
   .hero-content h1{
@@ -154,6 +155,7 @@
   .lead{
     font-size: 16px;
   }
+
 }
 @media (max-width: 375.9px){
 

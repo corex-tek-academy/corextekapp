@@ -86,11 +86,13 @@
   }
 }
 @media (max-width: 425.9px){
-  .internship_inner{ 
-    padding: 0px;
-    border-radius: px;
-    background-color: transparent;
-  }
+    .internship{
+        margin: 20px 0px;
+    }
+    .internship_inner{ 
+        padding: 16px;
+        border-radius: 14px;
+    }
 }
 .cta .btn{
     padding: 12px 20px;
