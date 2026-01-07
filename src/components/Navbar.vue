@@ -43,10 +43,28 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
           <ul
             id="primary-navigation" class="nav-list" :class="{ open: isOpen }">
 
-            <li><a href="#" class="active" @click="closeMenu"><i class="bi bi-house-door" aria-hidden="true"></i><span>Home</span></a></li>
-            <li><a href="#" @click="closeMenu"><i class="bi bi-info-circle" aria-hidden="true"></i><span>About us</span></a></li>
-            <li><a href="#" @click="closeMenu"><i class="bi bi-telephone" aria-hidden="true"></i><span>Contacts</span></a></li>
-            <li><a href="#" @click="closeMenu"><i class="bi bi-journal-text" aria-hidden="true"></i><span>Blog</span></a></li>
+            <li>
+            <router-link to="/" @click="closeMenu">
+              <i class="bi bi-house-door"></i><span>Home</span>
+            </router-link>
+          </li>
+
+          <li>
+            <router-link to="/enrollment" @click="closeMenu">
+              <i class="bi bi-journal-text"></i><span>Enrollment</span>
+            </router-link>
+          </li>
+
+          <li>
+            <router-link to="/contact" @click="closeMenu">
+              <i class="bi bi-telephone"></i><span>Contact</span>
+            </router-link>
+          </li>
+
+            <!-- <li><a href="#" class="active" @click="closeMenu"><i class="bi bi-house-door" aria-hidden="true"></i><span>Home</span></a></li>
+            <li> <a href="#about" @click="closeMenu"><i class="bi bi-info-circle" aria-hidden="true"></i><span>About us</span></a></li>
+            <li><a href="#contact" @click="closeMenu"><i class="bi bi-telephone" aria-hidden="true"></i><span>Contact</span></a></li>
+            <li><a href="#" @click="closeMenu"><i class="bi bi-journal-text" aria-hidden="true"></i><span>Enrollment</span></a></li> -->
           </ul>
 
           <div class="cta">

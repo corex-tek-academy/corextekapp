@@ -1,5 +1,5 @@
 <template>
-  <section class="aboutcorex container">
+  <section class="aboutcorex container" id="about">
 
     <!-- HERO AREA -->
     <div class="about_intro">

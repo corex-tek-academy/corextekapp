@@ -15,7 +15,7 @@ function subscribe(e){
 </script>
 
 <template>
-  <footer class="site-footer mt-5" role="contentinfo">
+  <footer class="site-footer mt-5" role="contentinfo" id="contact">
     <div class="site-footer__inner container">
       <div class="footer-brand">
         <a href="/" class="logo" aria-label="Corex Tek-Academy home">
