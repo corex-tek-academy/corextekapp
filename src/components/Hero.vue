@@ -140,6 +140,7 @@
 @media (max-width: 768px){
   .hero{
     margin-top: 70px;
+    padding: 40px 16px;
   }
   /* .hero-content h1{
     font-size: 52px;
@@ -156,11 +157,14 @@
     font-size: 44px;
     line-height: 1.2;
   }
+  .lead{
+    font-size: 16px;
+  }
 }
 @media (max-width: 375.9px){
 
   .hero-inner{
-    padding: 28px 8px;
+    padding: 28px 0px;
   }
   .key_highllight{
 
