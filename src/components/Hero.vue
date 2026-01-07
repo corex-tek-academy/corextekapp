@@ -163,6 +163,11 @@
   .hero-inner{
     padding: 28px 8px;
   }
+  .key_highllight{
+
+    gap: 8px;
+
+  }
  
 }
 
