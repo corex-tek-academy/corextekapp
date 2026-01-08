@@ -1,8 +1,6 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import path from 'path'
+
 import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
@@ -23,6 +21,10 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 //   base: '/corextekapp/'
 // })
 
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
+
 export default defineConfig({
   plugins: [vue()],
   resolve: {
@@ -30,7 +32,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  base: '/corextekapp/',
+  // base: '/corextekapp/',
 })
 
 
