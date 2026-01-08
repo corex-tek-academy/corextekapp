@@ -17,46 +17,40 @@
 
         <!-- Form + Newsletter -->
         <section class="form-news-container">
-            <form name="contact" class="contact-form"
-            method="/"
-            data-netlify="true"
-            netlify-honeypot="bot-field">
+            <form name="contact" class="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
 
                 <!-- required hidden inputs -->
                 <input type="hidden" name="form-name" value="contact" />
                 <input type="hidden" name="bot-field" />
 
                 <div class="split">
-                    <input type="email" name="email" v-model="email" placeholder="Email" required />
-                    <input type="tel" name="phone" v-model="phone" placeholder="Phone" required />
+                    <input type="email" name="email" placeholder="Email" required />
+                    <input type="tel" name="phone" placeholder="Phone" required />
                 </div>
 
-                <input type="text" name="name" v-model="name" placeholder="Full Name" required />
-                <textarea rows="5" name="message" v-model="message" placeholder="Message" required></textarea>
+                <input type="text" name="name" placeholder="Full Name" required />
+                <textarea rows="5" name="message" placeholder="Message" required></textarea>
 
                 <button type="submit">Send Message</button>
             </form>
 
 
-            <aside class="newsletter">
-                <h3>Join Our Newsletters</h3>
-                <p>Stay updated with new courses, free workshops and job-ready opportunities.</p>
 
-                <form name="newsletter"
-                    method="/"
-                    data-netlify="true"
-                    netlify-honeypot="bot-field"
-                    class="newsletter-form">
+            <aside class="newsletter">
+            <h3>Join Our Newsletters</h3>
+            <p>Stay updated with new courses, free workshops and job-ready opportunities.</p>
+
+                <form name="newsletter" class="newsletter-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
 
                     <!-- required hidden fields -->
                     <input type="hidden" name="form-name" value="newsletter" />
                     <input type="hidden" name="bot-field" />
 
-                    <input type="email" name="email" v-model="newsletterEmail" placeholder="Email Address" required />
+                    <input type="email" name="email" placeholder="Email Address" required />
                     <button type="submit">Subscribe</button>
                 </form>
-
             </aside>
+
         </section>
 
         <!-- Contact Feature Blocks -->
@@ -83,7 +77,7 @@
     </div>
 </template>
 
-<script setup>
+<!-- <script setup>
 
     import { ref } from 'vue'
 
@@ -132,7 +126,7 @@
     }
     }
 
-</script>
+</script> -->
 
 <style scoped>
     *{
