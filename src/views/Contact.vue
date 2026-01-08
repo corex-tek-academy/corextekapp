@@ -18,7 +18,7 @@
         <!-- Form + Newsletter -->
         <section class="form-news-container">
             <form name="contact" class="contact-form"
-            method="POST"
+            method="/"
             data-netlify="true"
             netlify-honeypot="bot-field">
 
@@ -43,7 +43,7 @@
                 <p>Stay updated with new courses, free workshops and job-ready opportunities.</p>
 
                 <form name="newsletter"
-                    method="POST"
+                    method="/"
                     data-netlify="true"
                     netlify-honeypot="bot-field"
                     class="newsletter-form">
