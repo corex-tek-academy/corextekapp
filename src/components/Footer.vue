@@ -21,7 +21,7 @@ function subscribe(e){
         <a href="/" class="logo" aria-label="Corex Tek-Academy home">
           <img :src="logo" alt="Corex logo" />
         </a>
-        <p class="brand-desc">Corex Tek-Academy — hands-on tech training, mentorship, and career support for beginner and aspiring professionals.</p>
+        <p class="brand-desc">Corex Tek-Academy; hands-on tech training, mentorship, and career support for beginner and aspiring professionals.</p>
         <div class="socials" aria-label="Social links">
           <a href="#" aria-label="Twitter" class="social"><i class="bi bi-twitter"></i></a>
           <a href="#" aria-label="LinkedIn" class="social"><i class="bi bi-linkedin"></i></a>
