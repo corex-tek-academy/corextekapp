@@ -23,9 +23,9 @@ function subscribe(e){
         </a>
         <p class="brand-desc">Corex Tek-Academy; hands-on tech training, mentorship, and career support for beginner and aspiring professionals.</p>
         <div class="socials" aria-label="Social links">
-          <a href="#" aria-label="Twitter" class="social"><i class="bi bi-twitter"></i></a>
-          <a href="#" aria-label="LinkedIn" class="social"><i class="bi bi-linkedin"></i></a>
-          <a href="#" aria-label="facebook" class="social"><i class="bi bi-facebook"></i></a>
+          <a href="https://x.com/CorexTek_Acad" aria-label="Twitter" class="social"><i class="bi bi-twitter"></i></a>
+          <a href="https://www.linkedin.com/company/110778439/admin/" aria-label="LinkedIn" class="social"><i class="bi bi-linkedin"></i></a>
+          <a href="https://web.facebook.com/profile.php?id=61585524490063" aria-label="facebook" class="social"><i class="bi bi-facebook"></i></a>
         </div>
       </div>
 
@@ -53,9 +53,9 @@ function subscribe(e){
       <div class="footer-contact">
         <h4>Contact</h4>
         <address>
-          <div>Email: <a href="mailto:hello@corexacademy.com">hello@corexacademy.com</a></div>
-          <div>Phone: <a href="tel:+2348012345678">+234 801 234 5678</a></div>
-          <div>Address: Lagos, Nigeria</div>
+          <div>Email: <a href="mailto:hello@corexacademy.com">corextekacademy@gmail.com</a></div>
+          <div>Phone: <a href="tel:+2348012345678">+234 813 5711 038</a></div>
+          <div>Address: Abuja, Nigeria</div>
         </address>
 
         <form class="footer-subscribe" @submit.prevent="subscribe" novalidate>

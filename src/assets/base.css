@@ -126,3 +126,11 @@ p {
     padding: 0px 7%;
   }
 }
+
+.highlights {
+  background: linear-gradient(90deg, var(--primary), #019c9a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}

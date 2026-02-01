@@ -11,7 +11,7 @@
                     If you’re a beginner and ready to upskill, learn from scratch, and build real projects, this is for you.
                 </p>
                 <div class="cta">
-                    <a href="#" class="btn btn--primary" role="button">Join cohort 1 <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+                    <router-link to="/enrollment" class="btn btn--primary" role="button">Join cohort 1<i class="bi bi-arrow-right-short" aria-hidden="true"></i></router-link>
                 </div>
             </div>
         

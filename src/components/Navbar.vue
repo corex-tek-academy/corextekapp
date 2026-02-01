@@ -60,15 +60,10 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
               <i class="bi bi-telephone"></i><span>Contact</span>
             </router-link>
           </li>
-
-            <!-- <li><a href="#" class="active" @click="closeMenu"><i class="bi bi-house-door" aria-hidden="true"></i><span>Home</span></a></li>
-            <li> <a href="#about" @click="closeMenu"><i class="bi bi-info-circle" aria-hidden="true"></i><span>About us</span></a></li>
-            <li><a href="#contact" @click="closeMenu"><i class="bi bi-telephone" aria-hidden="true"></i><span>Contact</span></a></li>
-            <li><a href="#" @click="closeMenu"><i class="bi bi-journal-text" aria-hidden="true"></i><span>Enrollment</span></a></li> -->
           </ul>
 
           <div class="cta">
-            <a href="#">Contact Us <i class="bi bi-telephone-inbound-fill" aria-hidden="true"></i></a>
+            <router-link to="/enrollment">Join cohort 1<i class="bi bi-arrow-right-short" aria-hidden="true"></i></router-link>
           </div>
         </div>
       </div>

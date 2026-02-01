@@ -1,7 +1,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import img from '/src/assets/image/img.png'
+import img from '/src/assets/image/img1.png'
 
 const email = ref('')
 const submitted = ref(false)
@@ -22,13 +22,18 @@ function handleSubmit(e){
           <div class="contact_text">
             <h1>Get updates and happenings at Corex Tek-Academy</h1>
             <p>Subscribe to our newsletter to receive regular updates and announcements about our programs.</p>
-            <form class="newsletter-form" @submit.prevent="handleSubmit" novalidate>
-                <label for="email" class="sr-only">Email address</label>
-                <div class="form-control">
-                    <input type="email" id="email" name="email" v-model="email" placeholder="you@example.com" required>
-                    <button type="submit" class="btn-subscribe">Subscribe</button>
-                </div>
-                <p class="subscribe-msg" v-if="submitted">Thanks! We've received your subscription.</p>
+            <form name="newsletter" class="newsletter-form" method="POST" action="/src/views/Contact.vue" data-netlify="true" netlify-honeypot="bot-field">
+
+              <!-- required hidden fields -->
+              <input type="hidden" name="form-name" value="newsletter" />
+              <input type="hidden" name="bot-field" />
+
+              <label for="email" class="sr-only">Email address</label>
+              <div class="form-control">
+                  <input type="email" name="email" placeholder="Email Address" required />
+                  <button type="submit" class="btn-subscribe">Subscribe</button>
+              </div>
+              <p class="subscribe-msg" v-if="submitted">Thanks! We've received your subscription.</p>
             </form>
           </div>
           <div class="contact_img" aria-hidden="true">

@@ -10,11 +10,6 @@
         </p>
         </section>
 
-        <!-- Brand Row -->
-        <!-- <section class="brands">
-        <img v-for="n in 5" :key="n" :src="`/assets/brand${n}.svg`" alt="Brand logo" />
-        </section> -->
-
         <!-- Form + Newsletter -->
         <section class="form-news-container">
             <form name="contact" class="contact-form" method="POST" action="/src/views/Contact.vue" data-netlify="true" netlify-honeypot="bot-field">
@@ -58,19 +53,19 @@
             <div class="cell">
                 <i class="bi bi-telephone-fill"></i>
                 <h4>Call Us</h4>
-                <p>(+234) 900 000 0000</p>
+                <p>(+234) 813 5711 038</p>
             </div>
 
             <div class="cell">
                 <i class="bi bi-envelope-fill"></i>
                 <h4>Email</h4>
-                <p>info@corextekacademy.com</p>
+                <p>corextekacademy@gmail.com</p>
             </div>
 
             <div class="cell">
                 <i class="bi bi-geo-alt-fill"></i>
                 <h4>Location</h4>
-                <p>Lagos, Nigeria (Remote Classes)</p>
+                <p>Abuja, Nigeria (Remote Classes)</p>
             </div>
         </section>
 
@@ -205,7 +200,8 @@
         background: #fff;
         padding: 30px;
         border-radius: 20px;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        border: #0066ff13 1px solid;
+        /* box-shadow: 0 4px 14px rgba(0,0,0,0.08); */
     }
     .contact-form input,
     .contact-form textarea {
@@ -292,8 +288,13 @@
         padding: 30px;
         border-radius: 14px;
         text-align: center;
+        border: #0d6efd13 1px solid;
+        &:hover {
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            scale: 1.02;
+        }
     }
-        .cell i {
+    .cell i {
         font-size: 2rem;
         margin-bottom: 10px;
         display: block;

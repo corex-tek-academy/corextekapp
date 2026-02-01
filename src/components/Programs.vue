@@ -1,9 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue'
-import progimg22 from '/src/assets/image/progimg22.jpg'
-import progimg1 from '/src/assets/image/progimg1.jpg'
-import proimg0 from '/src/assets/image/proimg0.jpg'
-
 
 const pageSize = 3
 const programs = ref([
@@ -55,20 +51,21 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
         <p>Explore our diverse range of tech programs designed <br> to equip you with the skills needed for a successful career in technology.</p>
       </div>
 
-      <div class="program_inner">
+      <div > <router-link to="/enrollment" class="program_inner">
         <article class="program_card" v-for="program in paginatedPrograms" :key="program.id">
-          <img :src="proimg0" :alt="program.title">
+          <!-- <img :src="program.img" :alt="program.title"> -->
           <div class="card_body">
             <h4>{{ program.title }}</h4>
             <p>{{ program.desc }}</p>
-            <h6>Duration: {{ program.duration }}</h6>
+            <!-- <h6>Duration: {{ program.duration }}</h6> -->
 
             <div class="card_last">
+              <h6>Duration: {{ program.duration }}</h6>
               <h5 class="Price">{{ program.price }}</h5>
-              <a href="#">Enroll Now</a>
+              <!-- <a href="#">Enroll Now</a> -->
             </div>
           </div>
-        </article>
+        </article></router-link>
       </div>
 
       <div class="pagination" v-if="totalPages > 1">
@@ -100,25 +97,22 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   .programs-inner{ 
     padding: 16px;
     border-radius: 14px;
-    /* background-color: transparent; */
+    
   }
 }
-/* .header{ 
-  padding: 0 36px; 
-} */
+
 .header h1{ 
   margin: 0 0 8px 0; 
-  /* font-size: 1.8rem;  */
   font-weight: 700;
 }
 .header p{ 
   margin: 0; 
 }
 .program_inner{
-  /* padding: 36px; */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
+  text-decoration: none;
 }
 .program_card{
   display: flex;
@@ -132,6 +126,43 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   box-shadow: 0 6px 18px rgba(9,30,66,0.06);
   transition: transform .18s ease, box-shadow .18s ease;
 }
+.program_card:nth-child(1){
+  background-color: var(--accent-green);
+  h4,h6,h5{
+    color: var(--bg);
+  }
+  h5{
+    color: #ffffff;
+  }
+  p{
+    color: #f0f0f0;
+  }
+}
+.program_card:nth-child(2){
+  background-color: #fb9052;
+  h4,h6,h5{
+    color: var(--bg);
+  }
+  h5{
+    color: #ffffff;
+  }
+  p{
+    color: #f0f0f0;
+  }
+}
+.program_card:nth-child(3){
+  background-color: #7b00ff;
+  h4,h6,h5{
+    color: var(--bg);
+  }
+  h5{
+    color: #ffffff;
+  }
+  p{
+    color: #f0f0f0;
+  }
+}
+
 .program_card:hover{ 
   transform: translateY(-6px); 
   box-shadow: 0 18px 36px rgba(2,87,255,0.12); 
@@ -150,8 +181,8 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   gap: 8px;
 }
 .program_card h4{  
-  margin: 0 0 6px 0;
-  font-size: 1rem; 
+  margin:  0;
+  font-size: 1.6rem; 
   font-weight: 700;
 }
 .program_card p{ 
@@ -161,7 +192,7 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   line-height: 1.3;
 }
 .program_card h6{ 
-  color: var(--accent-green);
+  /* color: var(--accent-green); */
   margin: 0 0 12px 0; 
   font-size: 0.85rem; 
 }
@@ -170,33 +201,14 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   align-items: center; 
   justify-content: space-between; 
   gap: 12px; 
-  padding: 8px;
-  /* background-color: var(--accent-green-50); */
   border-radius: 8px; 
 }
 .Price{  
   font-weight: 700; 
-  /* padding: 6px 10px;  */
   border-radius: 8px; 
-  color: var(--primary);
+  /* color: var(--primary); */
   
 }
-.card_last a{ 
-  padding: 8px 12px; 
-  color: var(--primary); 
-  text-decoration: none; 
-  border-radius: 8px; 
-  font-weight: 600; 
-  transition: background .15s ease, transform .12s ease; 
-  border: 1px solid var(--primary);
-  /* background-color: var(--accent-green-50) */
-}
-.card_last a:hover{ 
-  background: var(--primary);
-  color: var(--light); 
-  transform: translateY(-2px); 
-}
-
 /* Small screens: stack card elements */
 @media (max-width: 600px){
   .program_card{ 
@@ -224,13 +236,12 @@ function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.lo
   gap: 8px;
   justify-content: center;
   align-items: center;
-  /* margin-top: 16px; */
   padding-bottom: 8px;
   padding: 8px;
   background: rgba(255,255,255,0.92);
   border-radius: 10px;
   border: 1px solid rgba(33,33,33,0.04);
-  box-shadow: 0 6px 18px rgba(9,30,66,0.04);
+  /* box-shadow: 0 6px 18px rgba(9,30,66,0.04); */
 }
 .page-btn{
   padding: 6px 10px;

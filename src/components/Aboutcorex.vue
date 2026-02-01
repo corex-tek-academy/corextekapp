@@ -10,18 +10,6 @@
       </p>
     </div>
 
-    <!-- STORY / WHO WE ARE -->
-    <!-- <div class="about_story">
-      <h2>Who We Are</h2>
-      <p>
-        Corex Tek-Academy was created to solve a real problem — talented people want to learn tech,
-        but don’t know where to start, who to trust, or how to stay consistent long enough to
-        build true ability. Our academy bridges that gap by turning learners into confident
-        developers, problem-solvers, and job-ready professionals through guidance, community,
-        and hands-on execution.
-      </p>
-    </div> -->
-
     <!-- OUR IDENTITY -->
     <div class="identity_section">
         <div class="mission">
@@ -94,6 +82,8 @@
         border-radius: 12px;
         background-color: var(--gray);
         border: 1px solid rgba(0,0,0,0.05);
+
+        
     }
 
     .values_grid .value:nth-child(1){
@@ -134,27 +124,16 @@
         }
     
     }
-    /* .values_grid .value:nth-child(3){
-        background-color: #0256ff13;
-        h4{
-            color: #0256ff;
-        }
-        svg{
-            fill: #0256ff;
-        }
-        .icon{
-            background-color:#0256ff13;
-        }
-    
-    } */
+
 
     .aboutcorex{
-    padding: 40px 16px 0 16px 16px;
-    --accent: var(--primary, #4f46e5);
-    --muted: #6b7280;
-    display: flex;
-    flex-direction: column;
-    gap: 44px;
+        padding: 40px 16px 0 16px 16px;
+        --accent: var(--primary, #4f46e5);
+        --muted: #6b7280;
+        display: flex;
+        flex-direction: column;
+        gap: 44px;
+
     }
 
     /* HERO */

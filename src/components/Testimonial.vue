@@ -1,157 +1,242 @@
-<script setup>
-  import Corexthumbnail2 from '/src/assets/image/Corexthumbnail2.jpg'
-</script>
-
 <template>
-  <section class="testimonial container">
-    <header class="testimonial-header">
-      <h2 class="title">What Our Students Say</h2>
-      <p class="subtitle">Real stories from learners who changed careers with Corex Tek-Academy</p>
-    </header>
-    
-    <div class="testimonial_inner">
-      <div id="carouseltestimonialInterval" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="10000">
-            <div class="profile">
-              <img :src="Corexthumbnail2" alt="Student Photo" class="student-photo">
-              <div>
-                <h3 class="student-name">Jane Doe</h3>
-                <p class="student-course">Full-Stack Web Development</p>
-                <h6 class="student-rating">★★★★★</h6>
-              </div>
-            </div>
-            <div class="text">
-              <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
-            </div>
-          </div>
-
-          <div class="carousel-item" data-bs-interval="10000">
-            <div class="profile">
-              <img :src="Corexthumbnail2" alt="Student Photo" class="student-photo">
-              <div>
-                <h3 class="student-name">John Smith</h3>
-                <p class="student-course">Data Science</p>
-                <h6 class="student-rating">★★★★☆</h6>
-              </div>
-            </div>
-            <div class="text">
-              <p>"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-            </div>
-          </div>
-          <div class="carousel-item" data-bs-interval="10000">
-            <div class="profile">
-              <img :src="Corexthumbnail2" alt="Student Photo" class="student-photo">
-              <div class="profile_details">
-                <h3 class="student-name">Alice Johnson</h3>
-                <p class="student-course">Cybersecurity</p>
-                <h6 class="student-rating">★★★★★</h6>
-              </div>
-            </div>
-            <div class="text">
-              <p>"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p> 
-            </div>
-          </div>
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouseltestimonialInterval" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouseltestimonialInterval" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+  <div class="testimonial container">
+   
+    <div class="header">
+      <p class="section-tag">TESTIMONIALS</p>
+      <h1>
+      Real Stories. <span class="highlight">Real Growth.</span>
+      </h1>
+      <p class="section-subtitle">
+      Hear directly from our students about how Corex Tek-Academy helped them build confidence, master in-demand skills, and launch their tech careers.
+      </p>
     </div>
 
-  </section>
+    <div class="testify">
+      <div class="testimonial_inner" v-if="currentTestimonial">
+        <div class="testimonial_img">
+          <img :src="currentTestimonial.image" alt="student image" />
+        </div>
+
+        <div class="testimonial_text">
+          <p class="txt">
+            {{ currentTestimonial.text }}
+          </p>
+
+          <div class="profile">
+            <h5><strong>{{ currentTestimonial.name }}</strong></h5>
+            <p><strong>{{ currentTestimonial.role }}</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta">
+        <button class="prev" @click="prevTestimonial"><i class="bi bi-arrow-left-short"></i></button>
+        <button class="next" @click="nextTestimonial"><i class="bi bi-arrow-right-short"></i></button>
+      </div>
+    </div>
+  </div>
 </template>
 
-<style scoped>
-  .testimonial{
-    padding: 48px 16px 0 16px;
-  }
-  .testimonial-header{
-    text-align: center;
-    margin-bottom: 32px;
-  }
-  .testimonial_inner{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+<script setup>
+  import { ref, computed, onMounted, onUnmounted } from 'vue'
+  import Img1 from '/src/assets/image/progimg22.png'
+  import Img2 from '/src/assets/image/progimg1.png'
+  import Img3 from '/src/assets/image/proimg0.png'
 
-    gap: 24px;
-    padding: 24px;
+  // Testimonial Data (Scalable & Clean)
+  const testimonials = ref([
+    {
+      id: 1,
+      name: 'Patrick Okoli',
+      role: 'Fullstack Developer',
+      text: 'Corex Tek-Academy transformed my confidence as a backend engineer. Working on real-world projects with structured mentorship exposed me to professional workflows and industry best practices.',
+      image: Img1
+    },
+    {
+      id: 2,
+      name: 'Sandra Collins',
+      role: 'Frontend Developer',
+      text: 'The hands-on projects and mentor feedback gave me clarity and confidence. I moved from beginner level to building production-ready applications.',
+      image: Img2
+    },
+    {
+      id: 3,
+      name: 'Michael Obi',
+      role: 'Backend Developer',
+      text: 'Corex provided real structure. The learning environment was practical, collaborative, and industry-aligned. It prepared me for real client work.',
+      image: Img3
+    }
+  ])
+
+  const currentIndex = ref(0)
+  let interval = null
+
+  const currentTestimonial = computed(() => testimonials.value[currentIndex.value])
+
+  const nextTestimonial = () => {
+    currentIndex.value = (currentIndex.value + 1) % testimonials.value.length
+  }
+
+  const prevTestimonial = () => {
+    currentIndex.value =
+      (currentIndex.value - 1 + testimonials.value.length) % testimonials.value.length
+  }
+
+  // Auto Slide (Professional Touch)
+  const startAutoSlide = () => {
+    interval = setInterval(() => {
+      nextTestimonial()
+    }, 5000)
+  }
+
+  const stopAutoSlide = () => {
+    if (interval) clearInterval(interval)
+  }
+
+  onMounted(() => {
+    startAutoSlide()
+  })
+
+  onUnmounted(() => {
+    stopAutoSlide()
+  })
+</script>
+
+<style scoped>
+  .testimonial {
+    padding: 32px 16px 0 16px;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 40px auto;
+    max-width: 750px;
+  }
+
+
+  .section-tag {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+
+
+  .header h1 {
+    font-size: 38px;
+    line-height: 1.2;
+    font-weight: 800;
+    margin: 0 0 16px 0;
+  }
+
+
+  .highlight {
+    background: linear-gradient(90deg, var(--primary), #019c9a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+  }
+
+
+  .section-subtitle {
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .testify {
+    background-image: url(/src/assets/image/bg2.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
+    background-color: #111111f0;
+    padding: 28px;
     border-radius: 20px;
-    background-color: var(--primary-50);
+    box-shadow: 0 10px 30px rgba(16,24,40,0.01);
     transition: transform 260ms cubic-bezier(.2,.9,.2,1), box-shadow 260ms ease;
     position: relative;
     overflow: hidden;
-    place-items: center;
+    place-content: center;
   }
-  /* .carouseltestimonialInterval{
-    border-radius: 20px;
-    overflow: hidden;
-    margin: 0 auto;
-    max-width: 600px;
-    background-color: var(--light) ;
-    min-height: 300px;
-  } */
 
-  
-  /* ====================== Profile Section ====================== */
-  .profile{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 16px;
-    border-bottom: 1px solid var(--light-gray);
+  .testimonial_inner {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 28px;
+    
   }
-  .profile_details{
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  @media (max-width:600px) {
+    .testimonial_inner {
+      display: block;
+      text-align: center;
+    }
+    .testimonial_img img {
+      display: none !important;
+    }
+    .header{
+      margin: 20px auto;
+    }
   }
-  .student-photo{
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
+  .testimonial_img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 14px;
     object-fit: cover;
   }
-  .student-name{
+
+  .profile h5 {
     margin: 0;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .student-course{
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1;
-    color: var(--small--text);
-  }
-  /* ====================== Text Section ====================== */
-  .text{
-    padding: 16px;
-    text-align: center;
-    max-width: 700px;
-    font-size: 20px !important;
-  }
-  .text p{
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: var(--dark);
-    font-style: italic;
-    color: var(--small--text);
-  }
-  .student-rating{
-    margin:  0;
-    color: #FFD700; /* Gold color for stars */
-    font-size: 1rem;
+    color: #fff;
   }
 
+  .profile p {
+    color: #fff999;
+    margin: 0;
+  }
+
+  .testimonial_text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .txt {
+    line-height: 1.6;
+    font-weight: 500;
+    margin: 0;
+    font-size: 20px;
+    color: #cdcaca;
+  }
+
+  .cta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  button {
+    border-radius: 200px;
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover{
+    border: 1px solid var(--primary);
+    background-color: var(--light);
+    color: var(--primary);
+  }
 </style>

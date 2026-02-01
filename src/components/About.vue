@@ -1,25 +1,25 @@
 <script setup>
-  import img1 from '/src/assets/image/img1.png' 
+  import img3 from '/src/assets/image/img3.png'
 </script>
 <template>
-    <div class="about container ">
-        <div class="about_content">
-          <div class="about_img">
-              <img :src="img1" alt="Corex Tek-Academy">
-          </div>
-          <div class="about_text">
-            <h1>Become Job-Ready. Add a Competitive Edge to Your Skills Today.</h1>
-            <p>
-                You don’t need to have it all figured out to start, you just need the right guidance and environment to grow. At Corex Tek-Academy, we provide structured learning, hands-on projects, and mentorship that help you develop in-demand skills and build confidence at every stage. This is your opportunity to become job-ready and elevate your skill set with purpose.
+  <div class="about container ">
+    <div class="about_content">
+      <div class="about_img">
+          <img :src="img3" alt="Corex Tek-Academy">
+      </div>
+      <div class="about_text">
+        <h1>Become Job-Ready. Add a Competitive Edge to Your Skills Today.</h1>
+        <p>
+          You don’t need to have it all figured out to start, you just need the right guidance and environment to grow. At Corex Tek-Academy, we provide structured learning, hands-on projects, and mentorship that help you develop in-demand skills and build confidence at every stage. This is your opportunity to become job-ready and elevate your skill set with purpose.
 
-            </p>
-            <div class="cta">
-                <a href="#" class="btn btn--primary" role="button">Join cohort 1 <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
-                
-              </div>
-          </div>
+        </p>
+        <div class="cta">
+          <router-link to="/enrollment" class="btn btn--primary" role="button">Join cohort 1<i class="bi bi-arrow-right-short" aria-hidden="true"></i></router-link>
+          
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
@@ -56,7 +56,10 @@
   object-fit: cover;
   transition: transform 420ms cubic-bezier(.2,.9,.2,1), filter 420ms ease, box-shadow 420ms ease;
 }
-.about_content:hover .about_img img{ transform: scale(1.03) translateZ(0); filter: saturate(1.02); }
+.about_content:hover .about_img img{ 
+  transform: scale(1.03) translateZ(0); 
+  filter: saturate(1.02); 
+}
 
 /* Text area */
 .about_text{

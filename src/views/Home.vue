@@ -11,9 +11,7 @@
 </script>
 
 <template>
-  <!-- <nav>
-    <Navbar />
-  </nav> -->
+ 
   <header>
     <Hero />
   </header>
@@ -38,7 +36,5 @@
   <section>
     <Testimonial />
   </section>
-  <!-- <footer>
-    <Footer />
-  </footer> -->
+  
 </template>
