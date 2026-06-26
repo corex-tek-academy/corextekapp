@@ -1,12 +1,19 @@
 @import './base.css';
 
-:root{
-  --background--color: #f6f6f6;
-  --txt-dark-:#212121;
-  --txt-gray-:#333333;
-  --primary-blue-:#0257FF;
-  --color--yellow-:#FFF600;
+/* Global application style overrides or additional page transitions */
+body {
+  background-color: var(--color-background);
+  color: var(--text);
+  margin: 0;
 }
-body{
-  background-color: var(--background--color);
+
+/* Base link behavior */
+a {
+  color: var(--primary-text);
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+a:hover {
+  color: var(--primary-text-hover);
 }
