@@ -1,5 +1,5 @@
 <template>
-  <section class="why-choose container">
+  <section class="why-choose container bg-dots">
     <div class="section-header" v-scroll-reveal>
       <span class="badge-pill badge-pill--purple">
         <i class="bi bi-stars"></i>

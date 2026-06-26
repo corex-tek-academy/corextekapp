@@ -1,7 +1,8 @@
 <template>
-  <div class="testimonial container">
+  <section class="testimonial-section bg-lines divider-line-y" id="testimonials">
+    <div class="testimonial container">
    
-    <div class="header">
+      <div class="header">
       <span class="badge-pill badge-pill--primary">
         <i class="bi bi-chat-heart-fill"></i>
         Success Stories
@@ -13,7 +14,7 @@
     </div>
 
     <div class="testify-wrapper">
-      <div class="testify glass-panel-dark">
+      <div class="testify acrylic-card box-3d-extruded" style="--card-accent: var(--primary);">
         <div class="quote-icon">
           <i class="bi bi-quote"></i>
         </div>
@@ -57,8 +58,9 @@
           </button>
         </div>
       </div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
@@ -135,8 +137,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.testimonial-section {
+  padding: var(--section-padding-y) 0;
+}
+
 .testimonial {
-  padding: 80px 24px 0 24px;
+  padding: 0;
 }
 
 .header {
@@ -181,13 +187,11 @@ onUnmounted(() => {
 
 /* Dark glassmorphic container */
 .testify {
-  background: #090d16;
-  border: 1px solid rgba(255, 255, 255, 0.05);
   padding: 60px;
-  border-radius: 8px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-xl);
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 /* Decorative background glow inside the dark card */
@@ -350,13 +354,17 @@ onUnmounted(() => {
 
 /* Responsive configurations */
 @media (max-width: 768px) {
+  .testimonial-section {
+    padding: 60px 0;
+  }
+  
   .testimonial {
-    padding: 60px 16px 0 16px;
+    padding: 0;
   }
 
   .testify {
     padding: 40px 24px;
-    border-radius: 8px;
+    border-radius: var(--radius-lg);
   }
 
   .testimonial_inner {

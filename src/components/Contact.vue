@@ -35,8 +35,9 @@ async function handleSubmit(e) {
 </script>
 
 <template>
-  <div class="contact container">
-    <div class="contact_inner glass-panel-dark">
+  <section class="contact-section bg-diagonal-grid divider-line-y">
+    <div class="contact container">
+      <div class="contact_inner acrylic-card acrylic-card--flat" style="--card-accent: var(--accent-teal);">
       <div class="contact_text">
         <span class="badge-pill badge-pill-dark">
           <i class="bi bi-envelope-open-fill"></i>
@@ -82,13 +83,18 @@ async function handleSubmit(e) {
           <img :src="img" alt="Corex Tek-Academy tech workspace illustration">
         </div>
       </div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
+.contact-section {
+  padding: var(--section-padding-y) 0;
+}
+
 .contact {
-  padding: 80px 24px 0 24px;
+  padding: 0 var(--container-padding-x);
 }
 
 .contact_inner {
@@ -96,13 +102,11 @@ async function handleSubmit(e) {
   grid-template-columns: 1.2fr 1fr;
   gap: 48px;
   padding: 60px;
-  border-radius: 28px;
-  background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+  border-radius: var(--radius-2xl);
   align-items: center;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 /* Decorative glowing radial blob */
@@ -208,7 +212,6 @@ async function handleSubmit(e) {
   background: var(--primary);
   color: var(--light);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
 }
 
 .btn-subscribe:disabled {
@@ -247,19 +250,14 @@ async function handleSubmit(e) {
 
 .image-wrapper {
   width: 100%;
-  max-width: 320px;
-  border-radius: 20px;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  max-width: 100%;
 }
 
 .image-wrapper img {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 14px;
-  object-fit: cover;
+  object-fit: contain;
   opacity: 0.85;
 }
 
@@ -281,13 +279,17 @@ async function handleSubmit(e) {
 }
 
 @media (max-width: 576px) {
+  .contact-section {
+    padding: 60px 0;
+  }
+
   .contact {
-    padding: 60px 16px 0 16px;
+    padding: 0 16px;
   }
 
   .contact_inner {
     padding: 32px 20px;
-    border-radius: 20px;
+    border-radius: var(--radius-xl);
   }
 
   .form-row {

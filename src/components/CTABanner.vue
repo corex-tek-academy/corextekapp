@@ -1,6 +1,9 @@
 <template>
-  <section class="cta-banner container">
-    <div class="cta-card glass-panel-dark" v-scroll-reveal.scale>
+  <section class="cta-section bg-diagonal-grid divider-line-y">
+    <div class="cta-banner container">
+      <div class="cta-card acrylic-card acrylic-card--flat" style="--card-accent: var(--accent-purple);" v-scroll-reveal.scale>
+      <!-- Circular ring decorations -->
+      <div class="cta-rings" aria-hidden="true"></div>
       <!-- Background Aurora Glow -->
       <div class="cta-bg-glow" aria-hidden="true">
         <div class="orb orb-primary"></div>
@@ -29,6 +32,7 @@
         </div>
       </div>
     </div>
+    </div>
   </section>
 </template>
 
@@ -36,18 +40,53 @@
 </script>
 
 <style scoped>
+.cta-section {
+  padding: var(--section-padding-y) 0;
+}
+
 .cta-banner {
-  padding: var(--space-8) var(--container-padding-x) 0;
+  padding: 0 var(--container-padding-x);
 }
 
 .cta-card {
   position: relative;
-  background: linear-gradient(135deg, #090d16 0%, #0c1221 100%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: var(--radius-2xl);
   padding: var(--space-12) var(--space-8);
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+/* Circular rings pattern — large left cluster */
+.cta-card::before {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  left: -180px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Ccircle cx='250' cy='250' r='240' fill='none' stroke='%23fb923c' stroke-width='1'/%3E%3Ccircle cx='250' cy='250' r='200' fill='none' stroke='%23fb923c' stroke-width='0.8' stroke-dasharray='8 6'/%3E%3Ccircle cx='250' cy='250' r='160' fill='none' stroke='%23fb923c' stroke-width='1'/%3E%3Ccircle cx='250' cy='250' r='120' fill='none' stroke='%23fb923c' stroke-width='0.6' stroke-dasharray='3 8'/%3E%3Ccircle cx='250' cy='250' r='80' fill='none' stroke='%23fb923c' stroke-width='0.8' stroke-dasharray='1.5 6'/%3E%3Ccircle cx='250' cy='250' r='40' fill='none' stroke='%23fb923c' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 500px 500px;
+  background-repeat: no-repeat;
+}
+
+/* Circular rings pattern — large right cluster */
+.cta-rings {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 50%;
+  right: -180px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Ccircle cx='250' cy='250' r='240' fill='none' stroke='%23fb923c' stroke-width='0.8' stroke-dasharray='4 8'/%3E%3Ccircle cx='250' cy='250' r='200' fill='none' stroke='%23fb923c' stroke-width='1'/%3E%3Ccircle cx='250' cy='250' r='160' fill='none' stroke='%23fb923c' stroke-width='0.6' stroke-dasharray='1.5 6'/%3E%3Ccircle cx='250' cy='250' r='120' fill='none' stroke='%23fb923c' stroke-width='1' stroke-dasharray='8 4'/%3E%3Ccircle cx='250' cy='250' r='80' fill='none' stroke='%23fb923c' stroke-width='0.8'/%3E%3Ccircle cx='250' cy='250' r='40' fill='none' stroke='%23fb923c' stroke-width='0.6' stroke-dasharray='2 5'/%3E%3C/svg%3E");
+  background-size: 500px 500px;
+  background-repeat: no-repeat;
 }
 
 /* Background glows */
@@ -148,12 +187,10 @@
 .btn-primary {
   background: var(--primary-gradient);
   color: var(--text-on-primary);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(59, 130, 246, 0.35);
   color: var(--text-on-primary);
 }
 

@@ -3,7 +3,8 @@ import img3 from '/src/assets/image/img3.png'
 </script>
 
 <template>
-  <div class="about container">
+  <section class="about-section bg-dots">
+    <div class="about container">
     <div class="about-grid">
       <div class="about-img" v-scroll-reveal.left>
         <div class="img-frame">
@@ -52,11 +53,19 @@ import img3 from '/src/assets/image/img3.png'
       </div>
     </div>
   </div>
+  </section>
 </template>
 
 <style scoped>
+.about-section {
+  padding: var(--section-padding-y) 0;
+}
+
 .about {
-  padding: var(--section-padding-y) var(--container-padding-x);
+  padding: var(--space-12) var(--space-12);
+  background: var(--color-background-soft);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
 }
 
 .about-grid {
@@ -73,10 +82,6 @@ import img3 from '/src/assets/image/img3.png'
 
 .img-frame {
   position: relative;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(59, 130, 246, 0.06);
 }
 
 .img-frame img {
@@ -172,29 +177,11 @@ import img3 from '/src/assets/image/img3.png'
 .btn-primary {
   background: var(--primary-gradient);
   color: var(--text-on-primary);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
-}
-
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: inherit;
-  background: var(--primary-gradient);
-  opacity: 0;
-  filter: blur(14px);
-  z-index: -1;
-  transition: opacity 0.3s ease;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.3);
   color: var(--text-on-primary);
-}
-
-.btn-primary:hover::after {
-  opacity: 0.4;
 }
 
 .btn-primary i {
@@ -213,7 +200,7 @@ import img3 from '/src/assets/image/img3.png'
   }
   
   .img-frame {
-    max-width: 500px;
+    max-width: 100%;
   }
 }
 

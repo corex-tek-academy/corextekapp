@@ -3,7 +3,7 @@ import img2 from '/src/assets/image/img2.png'
 </script>
 
 <template>
-  <div class="container internship">
+  <div class="container internship bg-dots">
     <div class="internship-grid">
       <div class="internship-text" v-scroll-reveal.left>
         <span class="badge-pill badge-pill--teal">
@@ -44,7 +44,7 @@ import img2 from '/src/assets/image/img2.png'
       </div>
     
       <div class="internship-img" v-scroll-reveal.right>
-        <div class="img-frame box-3d-extruded" style="--card-accent: rgba(13, 148, 136, 0.55);" aria-hidden="true">
+        <div class="img-frame" aria-hidden="true">
           <img :src="img2" alt="Corex student working on frontend code" loading="lazy">
         </div>
       </div>
@@ -54,7 +54,10 @@ import img2 from '/src/assets/image/img2.png'
 
 <style scoped>
 .internship {
-  padding: var(--section-padding-y) var(--container-padding-x);
+  padding: var(--space-12);
+  background: var(--color-background-soft);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
 }
 
 .internship-grid {
@@ -137,12 +140,10 @@ import img2 from '/src/assets/image/img2.png'
 .btn-primary {
   background: var(--secondary-gradient);
   color: var(--text-on-primary);
-  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(13, 148, 136, 0.3);
   color: var(--text-on-primary);
 }
 
@@ -160,8 +161,7 @@ import img2 from '/src/assets/image/img2.png'
 }
 
 .img-frame {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
+  position: relative;
 }
 
 .img-frame img {
@@ -184,7 +184,7 @@ import img2 from '/src/assets/image/img2.png'
   }
 
   .img-frame {
-    max-width: 500px;
+    max-width: 100%;
   }
 }
 

@@ -37,8 +37,8 @@
   --accent-rose: #f43f5e;
   --accent-rose-50: rgba(244, 63, 94, 0.08);
 
-  --secondary: #0d9488;
-  --secondary-gradient: linear-gradient(135deg, #0d9488 0%, #10b981 100%);
+  --secondary: #fb923c;
+  --secondary-gradient: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
 
   /* ── Premium Figma Dark Theme Surface Colors ── */
   --color-background: #0c0c0e;
@@ -81,8 +81,8 @@
   --glass-bg-strong: rgba(24, 25, 32, 0.85);
   --glass-border: rgba(255, 255, 255, 0.06);
   --glass-border-subtle: rgba(255, 255, 255, 0.03);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
-  --glass-shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.50);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.20);
+  --glass-shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.35);
   --glass-blur: blur(20px);
 
   /* ── Dark Contrast Tokens (Footer, Testimonials, CTA) ── */
@@ -124,14 +124,14 @@
   --space-40: 10rem;      /* 160px */
 
   /* ── Semantic Layout Spacing ── */
-  --section-padding-y: 7rem;
-  --section-gap: var(--space-12);
+  --section-padding-y: 5.5rem;
+  --section-gap: var(--space-10);
   --card-padding: var(--space-8);
   --card-padding-lg: var(--space-12);
   --grid-gap: var(--space-8);
 
   /* ── Layout Container ── */
-  --container-max-width: 1200px;
+  --container-max-width: 1400px;
   --container-padding-x: var(--space-6);
 
   /* ── Transitions ── */
@@ -143,10 +143,10 @@
   --transition-slow: 0.5s var(--ease-out-expo);
 
   /* ── Shadows (dark-mode optimised) ── */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.40);
-  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.50);
-  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.60);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.35);
+  --shadow-xl: 0 24px 80px rgba(0, 0, 0, 0.45);
   --shadow-glow-primary: 0 0 40px rgba(59, 130, 246, 0.20);
   --shadow-glow-purple: 0 0 40px rgba(139, 92, 246, 0.20);
 
@@ -375,7 +375,7 @@ a {
   border-radius: var(--radius-lg);
   box-shadow: 
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    0 8px 32px rgba(0, 0, 0, 0.35);
+    0 8px 32px rgba(0, 0, 0, 0.25);
   transition: all 0.4s var(--ease-out-expo);
   overflow: hidden;
 }
@@ -395,8 +395,20 @@ a {
   border-color: rgba(59, 130, 246, 0.2);
   box-shadow: 
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 16px 48px rgba(0, 0, 0, 0.45);
+    0 16px 48px rgba(0, 0, 0, 0.35);
   transform: translateY(-4px);
+}
+
+/* Flat acrylic card variant without shadow or hover lifting */
+.acrylic-card--flat {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+.acrylic-card--flat:hover {
+  transform: none !important;
+  background: linear-gradient(135deg, rgba(24, 25, 32, 0.55), rgba(12, 12, 14, 0.45)) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
 }
 
 /* 3D Extruded Box Shadow Effect with custom or fallback accent color */
@@ -406,10 +418,10 @@ a {
   border: 1px solid var(--color-border);
   box-shadow: 
     1px 1px 0px rgba(255, 255, 255, 0.05),
-    2px 2px 0px var(--card-accent, rgba(59, 130, 246, 0.2)),
-    3px 3px 0px var(--card-accent, rgba(59, 130, 246, 0.25)),
-    4px 4px 0px var(--card-accent, rgba(59, 130, 246, 0.25)),
-    8px 8px 24px rgba(0, 0, 0, 0.45);
+    2px 2px 0px var(--card-accent, rgba(59, 130, 246, 0.15)),
+    3px 3px 0px var(--card-accent, rgba(59, 130, 246, 0.20)),
+    4px 4px 0px var(--card-accent, rgba(59, 130, 246, 0.20)),
+    8px 8px 24px rgba(0, 0, 0, 0.30);
   transition: transform 0.4s var(--ease-out-expo), box-shadow 0.4s var(--ease-out-expo);
 }
 
@@ -417,11 +429,11 @@ a {
   transform: translate3d(-4px, -4px, 12px);
   box-shadow: 
     1px 1px 0px rgba(255, 255, 255, 0.1),
-    2px 2px 0px var(--card-accent, rgba(59, 130, 246, 0.35)),
-    4px 4px 0px var(--card-accent, rgba(59, 130, 246, 0.4)),
-    6px 6px 0px var(--card-accent, rgba(59, 130, 246, 0.45)),
-    8px 8px 0px var(--card-accent, rgba(59, 130, 246, 0.5)),
-    16px 16px 36px rgba(0, 0, 0, 0.55);
+    2px 2px 0px var(--card-accent, rgba(59, 130, 246, 0.25)),
+    4px 4px 0px var(--card-accent, rgba(59, 130, 246, 0.30)),
+    6px 6px 0px var(--card-accent, rgba(59, 130, 246, 0.35)),
+    8px 8px 0px var(--card-accent, rgba(59, 130, 246, 0.40)),
+    16px 16px 36px rgba(0, 0, 0, 0.40);
 }
 
 /* 3D Tilt perspective effect */
@@ -435,8 +447,102 @@ a {
 .tilt-3d:hover {
   transform: perspective(1000px) rotateX(6deg) rotateY(-6deg) translate3d(-4px, -4px, 15px);
   box-shadow: 
-    0 15px 35px rgba(0, 0, 0, 0.5),
+    0 15px 35px rgba(0, 0, 0, 0.35),
     0 0 25px var(--card-accent, rgba(59, 130, 246, 0.15));
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PREMIUM BACKGROUND PATTERNS (DOTS & LINES)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Modern dotted background with elegant edge-fading mask */
+.bg-dots {
+  position: relative;
+}
+
+.bg-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(circle at center, black 65%, transparent 98%);
+  -webkit-mask-image: radial-gradient(circle at center, black 65%, transparent 98%);
+  z-index: 0;
+}
+
+/* Figma-style grid layout line overlays with edge-fading mask */
+.bg-lines {
+  position: relative;
+}
+
+.bg-lines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(circle at center, black 50%, transparent 95%);
+  -webkit-mask-image: radial-gradient(circle at center, black 50%, transparent 95%);
+  z-index: 0;
+}
+
+/* Diagonal Grid pattern */
+.bg-diagonal-grid {
+  position: relative;
+}
+
+.bg-diagonal-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(45deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(circle at center, black 55%, transparent 95%);
+  -webkit-mask-image: radial-gradient(circle at center, black 55%, transparent 95%);
+  z-index: 0;
+}
+
+/* Thin Figma-style vertical layout thread */
+.divider-line-y {
+  position: relative;
+}
+
+.divider-line-y::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.08), transparent);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Thin Figma-style horizontal layout thread */
+.divider-line-x {
+  position: relative;
+}
+
+.divider-line-x::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.08), transparent);
+  pointer-events: none;
+  z-index: 5;
 }
 
 

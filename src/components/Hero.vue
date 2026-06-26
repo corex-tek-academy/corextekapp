@@ -74,8 +74,8 @@ onMounted(() => {
         </div>
         
         <h1 id="hero-heading" class="hero-title" v-scroll-reveal="1">
-          Build Real Tech Skills.<br>
-          <span class="text-gradient-vibrant">Launch Your Career</span><br>
+          Build Real Tech Skills.
+          <span class="text-gradient-vibrant">Launch Your Career</span>
           with Confidence.
         </h1>
             
@@ -311,7 +311,9 @@ onMounted(() => {
   align-items: center;
   text-align: center;
   gap: var(--space-6);
-  max-width: 800px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* ── Animated Badge ── */
@@ -371,7 +373,7 @@ onMounted(() => {
 .hero-lead {
   font-size: clamp(1.05rem, 1.5vw, 1.2rem);
   color: var(--text-secondary);
-  max-width: 580px;
+  max-width: 650px;
   line-height: 1.7;
   margin: 0;
 }
@@ -405,30 +407,11 @@ onMounted(() => {
 .btn-primary {
   background: var(--primary-gradient);
   color: var(--text-on-primary);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.25);
-}
-
-/* Glow effect */
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  inset: -3px;
-  border-radius: inherit;
-  background: var(--primary-gradient);
-  opacity: 0;
-  filter: blur(16px);
-  z-index: -1;
-  transition: opacity 0.3s ease;
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(59, 130, 246, 0.35);
   color: var(--text-on-primary);
-}
-
-.btn-primary:hover::after {
-  opacity: 0.5;
 }
 
 .btn-primary i {
@@ -443,13 +426,11 @@ onMounted(() => {
   background: var(--color-surface);
   color: var(--text);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary:hover {
   transform: translateY(-3px);
   border-color: var(--color-border-hover);
-  box-shadow: var(--shadow-md);
   color: var(--text);
 }
 

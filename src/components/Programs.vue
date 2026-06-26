@@ -79,7 +79,7 @@ function prevPage() { if (currentPage.value > 1) { currentPage.value-- } }
 </script>
 
 <template>
-  <section class="programs container" data-component="programs">
+  <section class="programs container bg-lines" data-component="programs">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
       <span class="badge-pill badge-pill--primary">

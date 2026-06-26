@@ -1,5 +1,6 @@
 <template>
-  <section class="aboutcorex container" id="about">
+  <section class="aboutcorex-section bg-lines" id="about">
+    <div class="container aboutcorex">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
       <span class="badge-pill badge-pill--primary">
@@ -13,7 +14,7 @@
     </div>
 
     <!-- Mission + Vision Grid -->
-    <div class="identity-grid">
+    <div class="identity-grid divider-line-x" style="padding-bottom: var(--space-12);">
       <article class="identity-card acrylic-card" v-scroll-reveal="1">
         <div class="card-accent accent-blue"></div>
         <div class="card-icon-wrap">
@@ -78,15 +79,21 @@
         </article>
       </div>
     </div>
+    </div>
   </section>
 </template>
 
 <style scoped>
+.aboutcorex-section {
+  padding: var(--section-padding-y) 0;
+}
+
 .aboutcorex {
-  padding: var(--section-padding-y) var(--container-padding-x);
   display: flex;
   flex-direction: column;
   gap: var(--space-14);
+  padding-left: var(--container-padding-x);
+  padding-right: var(--container-padding-x);
 }
 
 /* Identity Grid (Mission/Vision) */

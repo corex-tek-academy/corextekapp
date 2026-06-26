@@ -124,7 +124,6 @@ onBeforeUnmount(() => {
   box-shadow: 
     inset 0 1px 0 rgba(255, 255, 255, 0.1),
     0 4px 30px rgba(0, 0, 0, 0.35);
-  position: relative;
 }
 
 .site-nav.nav-scrolled::after {
@@ -295,34 +294,15 @@ onBeforeUnmount(() => {
   background: var(--primary-gradient);
   border: none;
   border-radius: var(--radius-full);
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
   transition: all 0.3s var(--ease-out-expo);
   color: var(--text-on-primary);
   position: relative;
   overflow: hidden;
 }
 
-/* Glow effect on hover */
-.btn-nav-cta::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  background: var(--primary-gradient);
-  opacity: 0;
-  filter: blur(12px);
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
 .btn-nav-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
   color: var(--text-on-primary);
-}
-
-.btn-nav-cta:hover::after {
-  opacity: 0.5;
 }
 
 .btn-nav-cta i {
