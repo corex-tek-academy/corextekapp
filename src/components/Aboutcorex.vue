@@ -1,241 +1,262 @@
 <template>
-  <section class="aboutcorex container" id="about">
-
-    <!-- HERO AREA -->
-    <div class="about_intro">
-      <h1>About Corex Tek-Academy</h1>
+  <section class="aboutcorex-section bg-lines" id="about">
+    <div class="container aboutcorex">
+    <!-- Section Header -->
+    <div class="section-header" v-scroll-reveal>
+      <span class="badge-pill badge-pill--primary">
+        <i class="bi bi-info-circle-fill"></i>
+        Who We Are
+      </span>
+      <h2>About <span class="text-gradient">Corex Tek-Academy</span></h2>
       <p>
-        We are a training-driven technology academy helping beginners and career-shifters
-        unlock real digital skills through structured learning, mentorship, and practice.
+        We are a training-driven technology academy helping beginners and career-shifters unlock real digital skills through structured learning, dedicated mentorship, and hands-on project execution.
       </p>
     </div>
 
-    <!-- OUR IDENTITY -->
-    <div class="identity_section">
-        <div class="mission">
-            <h3>Our Mission</h3>
-            <p>
-            To make practical, high-quality tech education accessible through curated learning,
-            real-world projects, and mentor accountability.
-            </p>
+    <!-- Mission + Vision Grid -->
+    <div class="identity-grid divider-line-x" style="padding-bottom: var(--space-12);">
+      <article class="identity-card acrylic-card" v-scroll-reveal="1">
+        <div class="card-accent accent-blue"></div>
+        <div class="card-icon-wrap">
+          <i class="bi bi-bullseye"></i>
         </div>
-        <div class="mission">
-            <h3>Our Vision</h3>
-            <p>
-            To become a trusted launchpad for beginners to gain clarity, build confidence,
-            and transition into meaningful technology careers.
-            </p>
+        <h3>Our Mission</h3>
+        <p>
+          To make practical, high-quality tech education accessible through curated learning paths, real-world portfolio projects, and rigorous mentor accountability.
+        </p>
+      </article>
+      
+      <article class="identity-card acrylic-card" v-scroll-reveal="2">
+        <div class="card-accent accent-purple"></div>
+        <div class="card-icon-wrap icon-purple">
+          <i class="bi bi-eye-fill"></i>
         </div>
+        <h3>Our Vision</h3>
+        <p>
+          To become a trusted global launchpad for beginners to gain absolute clarity, build confidence, and transition smoothly into meaningful technology careers.
+        </p>
+      </article>
     </div>
 
-    <!-- 4 CORE VALUES -->
-    <div class="values_grid">
-        <article class="value">
-            <span class="icon">
-                <svg viewBox="0 0 24 24" stroke-width="1.5">
-                    <circle cx="12" cy="12" r="8"></circle>
-                    <circle cx="12" cy="12" r="4"></circle>
-                    <path d="M21 12h-2"></path><path d="M12 3v2"></path>
-                </svg>
-            </span>
-            <div>
-                <h4>We Prioritize Clarity</h4>
-                <p>Straightforward learning paths, clear goals, and actionable steps to success.</p>
-            </div>
+    <!-- Core Values -->
+    <div class="values-section" v-scroll-reveal>
+      <h3 class="values-heading">Our Core Values</h3>
+      <div class="values-grid">
+        <article class="value-card box-3d-extruded" style="--card-accent: rgba(139, 92, 246, 0.45)" v-scroll-reveal="1">
+          <div class="value-icon icon-purple">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="4"></circle>
+              <line x1="4.93" y1="4.93" x2="9.17" y2="9.17"></line>
+              <line x1="19.07" y1="4.93" x2="14.83" y2="9.17"></line>
+              <line x1="14.83" y1="14.83" x2="19.07" y2="19.07"></line>
+              <line x1="9.17" y1="14.83" x2="4.93" y2="19.07"></line>
+            </svg>
+          </div>
+          <h4>We Prioritize Clarity</h4>
+          <p>Straightforward learning paths, transparent benchmarks, and actionable milestones custom-fit for your learning pace.</p>
         </article>
 
-        <article class="value">
-            <span class="icon">
-                <svg viewBox="0 0 24 24" stroke-width="1.5">
-                    <path d="M9 18h6"></path><path d="M10 22h4"></path>
-                    <path d="M12 2a6 6 0 0 0-4 10v1a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-1a6 6 0 0 0-4-10z"></path>
-                </svg>
-            </span>
-            <div>
-                <h4>We Make Tech Accessible</h4>
-                <p>No jargon. No gatekeeping. Just structured clarity and real understanding.</p>
-            </div>
+        <article class="value-card box-3d-extruded" style="--card-accent: rgba(13, 148, 136, 0.45)" v-scroll-reveal="2">
+          <div class="value-icon icon-teal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+          </div>
+          <h4>We Make Tech Accessible</h4>
+          <p>No unnecessary jargon. No gatekeeping. Just structured clarity, supportive communication, and deep conceptual understanding.</p>
         </article>
 
-        <article class="value">
-            <span class="icon">
-                <svg viewBox="0 0 24 24" stroke-width="1.5">
-                    <path d="M12 3l1.3 2.6L16 7l-2.7 1.4L12 11l-1.3-2.6L8 7l2.7-1.4L12 3z"></path>
-                    <path d="M4 13l.8 1.6L7 16l-1.2.6L4 18l-.8-1.4L2 16l1.2-.6L4 13z"></path>
-                    <path d="M20 16l.6 1.2L22 18l-1.2.6L20 20l-.6-1.4L18 18l1.2-.6L20 16z"></path>
-                </svg>
-            </span>
-           <div>
-                <h4>We Focus on Results</h4>
-                <p>Projects, portfolio, experience, direction, not just lessons and theory.</p>
-           </div>
+        <article class="value-card box-3d-extruded" style="--card-accent: rgba(249, 115, 22, 0.45)" v-scroll-reveal="3">
+          <div class="value-icon icon-orange">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <h4>We Focus on Results</h4>
+          <p>Projects, portfolios, industrial experience, and career guidance. We prepare you to solve real problems and build products.</p>
         </article>
+      </div>
     </div>
-
+    </div>
   </section>
 </template>
 
 <style scoped>
+.aboutcorex-section {
+  padding: var(--section-padding-y) 0;
+}
 
-    .mission{
-        padding: 16px;
-        border-radius: 12px;
-        background-color: var(--gray);
-        border: 1px solid rgba(0,0,0,0.05);
+.aboutcorex {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+  padding-left: var(--container-padding-x);
+  padding-right: var(--container-padding-x);
+}
 
-        
-    }
+/* Identity Grid (Mission/Vision) */
+.identity-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
 
-    .values_grid .value:nth-child(1){
-        background-color: #8502ff13;
-        h4{
-            color: #8502ff;
-        }
-        svg{
-            fill: #8502ff;
-        }
-        .icon{
-            background-color:#8502ff13;
-        }
-    }
-    .values_grid .value:nth-child(3){
-        background-color: #ff5f0213;
-        h4{
-            color: #ff5f02;
-        }
-        svg{
-            fill: #ff5f02;
-        }
-        .icon{
-            background-color:#ff5f0213;
-        }
-    
-    }
-    .values_grid .value:nth-child(2){
-        background-color: #019c9a13;
-        h4{
-            color: #019c9a;
-        }
-        svg{
-            fill: #019c9a;
-        }
-        .icon{
-            background-color:#019c9a13;
-        }
-    
-    }
+.identity-card {
+  position: relative;
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
 
+/* Gradient accent line at top */
+.card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  z-index: 10;
+}
 
-    .aboutcorex{
-        padding: 40px 16px 0 16px 16px;
-        --accent: var(--primary, #4f46e5);
-        --muted: #6b7280;
-        display: flex;
-        flex-direction: column;
-        gap: 44px;
+.accent-blue {
+  background: var(--primary-gradient);
+}
 
-    }
+.accent-purple {
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+}
 
-    /* HERO */
-    .about_intro{
-    /* background: var(--primary); */
-    padding: 16px;
-    border-radius: 18px;
-    text-align: center;
-    margin-top: 48px;
-    }
-    .about_intro h1{ 
-        /* color: var(--light);  */
-        margin: 0 0 12px; 
-        font-weight: 700;
-    }
-    .about_intro p{
-    max-width: 700px;
-    margin: 0 auto;
-    /* color: var(--bg); */
-    line-height: 1.6;
-    }
+.card-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: rgba(59, 130, 246, 0.08);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+}
 
-    /* IDENTITY (Mission + Vision) */
-    .identity_section{
-    display: grid;
-    gap: 24px;
-    }
-    .identity_section h3{
-    margin: 0 0 6px;
-    }
-    .identity_section p{
-    margin: 0;
-    color: var(--muted);
-    line-height: 1.6;
-    }
-    @media(min-width:700px){
-    .identity_section{
-        grid-template-columns: repeat(2,1fr);
-    }
-    }
+.card-icon-wrap.icon-purple {
+  background: var(--accent-purple-50);
+  color: var(--accent-purple);
+}
 
-    /* VALUES */
-    .values_grid{
-    display: grid;
-    gap: 24px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
-    .value{
-        padding: 24px 22px;
-        border-radius: 14px;
-        border: 1px solid rgba(0,0,0,0.05);
-        /* box-shadow: 0 8px 24px rgba(15,23,42,0.05); */
-        transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .value:hover{
-        transform: translateY(-6px);
-        box-shadow: 0 14px 38px rgba(79,70,229,0.08);
-    }
-    .icon{
-        width: 48px;
-        height: 48px;
-        border-radius: 10px;
-        display: grid;
-        place-items: center;
-        margin-bottom: 10px;
-    }
-    .icon svg{ 
-        width: 22px; 
-        height: 22px; 
-    }
-    .value h4{ 
-        margin: 0 0 6px; 
-        font-size: 1rem; 
-        font-weight: 700; 
-    }
-    .value p{ 
-        margin: 0; 
-        /* color: var(--text);  */
-        line-height: 1.55; 
-    }
+.identity-card h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
 
-    @media (max-width:425.9px) {
-        .value{
-            padding: 16px;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            
-        }
-        .about_intro{
-            padding: 0;
-        }
-        .icon{
-            width: 80px;
-            /* height: 40px; */
-        }
-        .values_grid{
-            gap: 8px;
-        }
-        .identity_section{
-            gap: 8px;
-            display: none;
-        }
-    }
+.identity-card p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.975rem;
+}
+
+/* Values Grid */
+.values-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.values-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.value-card {
+  background: var(--color-surface);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.value-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.value-card:hover .value-icon {
+  transform: scale(1.1);
+}
+
+.value-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.value-icon.icon-purple {
+  background: var(--accent-purple-50);
+  color: var(--accent-purple);
+}
+
+.value-icon.icon-teal {
+  background: var(--accent-teal-50);
+  color: var(--accent-teal);
+}
+
+.value-icon.icon-orange {
+  background: var(--accent-orange-50);
+  color: var(--accent-orange);
+}
+
+.value-card h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.value-card p {
+  color: var(--text-secondary);
+  font-size: 0.925rem;
+  line-height: 1.65;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .identity-grid {
+    grid-template-columns: 1fr;
+  }
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .aboutcorex {
+    gap: var(--space-10);
+  }
+  .identity-card {
+    padding: var(--space-6);
+  }
+  .value-card {
+    padding: var(--space-6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .value-card, .identity-card {
+    transition: none !important;
+    transform: none !important;
+  }
+}
 </style>
