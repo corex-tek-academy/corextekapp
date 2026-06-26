@@ -10,7 +10,6 @@ function handleSubmit(e){
   e.preventDefault()
   if(!email.value) return
   submitted.value = true
-  console.log('subscribed', email.value)
   email.value = ''
   setTimeout(()=> submitted.value = false, 4000)
 }

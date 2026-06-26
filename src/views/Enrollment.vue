@@ -797,8 +797,7 @@ const submitForm = async () => {
     resetForm()
 
   } catch (err) {
-    console.log('SUPABASE ERROR:', err)
-
+    // Supabase error occurred
     modalType.value = 'error'
     modalMessage.value = 'Submission failed. Please try again.'
     showModal.value = true

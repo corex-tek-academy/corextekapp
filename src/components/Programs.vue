@@ -25,22 +25,22 @@ const pages = computed(() => Array.from({ length: totalPages.value }, (_, i) => 
 const paginatedPrograms = computed(() => {
   const start = (currentPage.value - 1) * pageSize
   const slice = programs.value.slice(start, start + pageSize)
-  // debug
-  // console.log('paginated slice', start, start + pageSize, slice.length)
   return slice
 })
 
 import { onMounted, watch } from 'vue'
 
 onMounted(() => {
-  console.log('Programs mounted', { totalPrograms: programs.value.length, pageSize, totalPages: totalPages.value })
+  // Programs component mounted
 })
 
-watch(currentPage, (v) => console.log('currentPage changed', v))
+watch(currentPage, (v) => {
+  // Page changed
+})
 
-function setPage(n){ currentPage.value = Math.min(Math.max(1, n), totalPages.value); console.log('setPage', currentPage.value) }
-function nextPage(){ if (currentPage.value < totalPages.value){ currentPage.value++; console.log('nextPage', currentPage.value) } }
-function prevPage(){ if (currentPage.value > 1){ currentPage.value--; console.log('prevPage', currentPage.value) } }
+function setPage(n){ currentPage.value = Math.min(Math.max(1, n), totalPages.value) }
+function nextPage(){ if (currentPage.value < totalPages.value){ currentPage.value++ } }
+function prevPage(){ if (currentPage.value > 1){ currentPage.value-- } }
 </script>
 
 <template>

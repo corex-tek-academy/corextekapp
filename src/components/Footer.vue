@@ -8,7 +8,6 @@ function subscribe(e){
   e.preventDefault()
   if(!email.value) return
   sent.value = true
-  console.log('footer subscribe', email.value)
   email.value = ''
   setTimeout(()=> sent.value = false, 4000)
 }

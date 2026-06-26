@@ -118,7 +118,7 @@ p {
 .Expanded{
   max-width: 1320px;
 }
-@media (min-with: 768px) {
+@media (min-width: 768px) {
   .Expanded{
     width: 100%;
     overflow: hidden;
