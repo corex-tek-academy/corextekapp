@@ -269,7 +269,12 @@ async function handleNewsletterSubmit() {
 .contact-hero {
   margin-top: 80px;
   position: relative;
-  background-image: url('/src/assets/image/contact.jpg');
+  background-image: url('/src/assets/image/contact.jpg'); /* JPEG fallback for older browsers */
+  background-image: image-set(
+    url('/src/assets/image/contact.avif') type('image/avif'),
+    url('/src/assets/image/contact.webp') type('image/webp'),
+    url('/src/assets/image/contact.jpg') type('image/jpeg')
+  );
   background-size: cover;
   background-position: center;
   padding: 100px 0;
@@ -454,10 +459,10 @@ async function handleNewsletterSubmit() {
   margin-top: 8px;
 }
 
-/* Newsletter Column Card */
+/* Newsletter Column Card — styled as dark-accent-card pattern */
 .newsletter-card-wrapper {
-  background: linear-gradient(135deg, #090d16 0%, #0f172a 100%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--bg-dark);
+  border: 1px solid var(--glass-dark-border);
   color: var(--light);
   padding: 40px;
   display: flex;
@@ -485,8 +490,8 @@ async function handleNewsletterSubmit() {
 }
 
 .newsletter-form input {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: var(--dark-highlight-subtle);
+  border-color: var(--glass-dark-border);
   color: var(--light);
 }
 
@@ -496,7 +501,7 @@ async function handleNewsletterSubmit() {
 
 .newsletter-form input:focus {
   border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--dark-highlight-mid);
 }
 
 .btn-submit-light {
@@ -647,8 +652,13 @@ async function handleNewsletterSubmit() {
   }
   
   .info-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+  }
+
+  /* Let the last card span full width if odd count */
+  .info-grid .info-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }
 
@@ -704,5 +714,10 @@ async function handleNewsletterSubmit() {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+@media (max-width: 576px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

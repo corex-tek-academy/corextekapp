@@ -186,7 +186,7 @@ function prevPage() { if (currentPage.value > 1) { currentPage.value-- } }
 /* Program Cards Grid */
 .program-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: var(--space-6);
 }
 
@@ -227,8 +227,8 @@ function prevPage() { if (currentPage.value > 1) { currentPage.value-- } }
   transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translate3d(-4px, -6px, 15px);
   border-color: var(--card-accent);
   box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 20px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 var(--color-inset-strong),
     2px 2px 0px var(--card-accent),
     4px 4px 0px var(--card-accent);
 }
@@ -460,6 +460,18 @@ function prevPage() { if (currentPage.value > 1) { currentPage.value-- } }
 }
 
 /* Responsive */
+@media (max-width: 768px) {
+  .program-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .program-card:hover .card-header,
+  .program-card:hover .card-body,
+  .program-card:hover .card-footer {
+    transform: none;
+  }
+}
+
 @media (max-width: 576px) {
   .program-card {
     padding: var(--space-6);
@@ -483,4 +495,5 @@ function prevPage() { if (currentPage.value > 1) { currentPage.value-- } }
     padding: 8px;
   }
 }
+
 </style>

@@ -1,43 +1,17 @@
 <script setup>
-import { ref, onMounted } from 'vue'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
-import PageLoader from './components/PageLoader.vue'
-
-const isLoading = ref(true)
-
-onMounted(() => {
-  // Simulate initial loading
-  setTimeout(() => {
-    isLoading.value = false
-  }, 800)
-
-  // Smooth scroll behavior for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault()
-      const target = document.querySelector(this.getAttribute('href'))
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        })
-      }
-    })
-  })
-})
 </script>
 
 <template>
   <div class="app-wrapper">
-    <PageLoader v-if="isLoading" />
-    <Navbar v-else />
+    <Navbar />
     <router-view v-slot="{ Component }">
       <transition name="page-fade" mode="out-in">
         <component :is="Component" />
       </transition>
     </router-view>
-    <Footer v-if="!isLoading" />
+    <Footer />
   </div>
 </template>
 

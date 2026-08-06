@@ -1,5 +1,8 @@
 <script setup>
 import img3 from '/src/assets/image/img3.png'
+import img3Webp from '/src/assets/image/img3.webp'
+import img3Avif from '/src/assets/image/img3.avif'
+import OptimizedImage from '@/components/OptimizedImage.vue'
 </script>
 
 <template>
@@ -8,7 +11,14 @@ import img3 from '/src/assets/image/img3.png'
     <div class="about-grid">
       <div class="about-img" v-scroll-reveal.left>
         <div class="img-frame">
-          <img :src="img3" alt="Corex Tek-Academy students pair programming" loading="lazy">
+          <OptimizedImage
+            :src="img3"
+            :webp="img3Webp"
+            :avif="img3Avif"
+            alt="Corex Tek-Academy students pair programming"
+            class="about-img-tag"
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
           <div class="img-glow" aria-hidden="true"></div>
         </div>
       </div>
@@ -64,7 +74,7 @@ import img3 from '/src/assets/image/img3.png'
 .about {
   padding: var(--space-12) var(--space-12);
   background: var(--color-background-soft);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
 }
 
@@ -84,7 +94,7 @@ import img3 from '/src/assets/image/img3.png'
   position: relative;
 }
 
-.img-frame img {
+.img-frame :deep(img) {
   width: 100%;
   height: auto;
   display: block;
@@ -92,7 +102,7 @@ import img3 from '/src/assets/image/img3.png'
   transition: transform 0.7s var(--ease-out-expo);
 }
 
-.img-frame:hover img {
+.img-frame:hover :deep(img) {
   transform: scale(1.04);
 }
 
@@ -192,8 +202,13 @@ import img3 from '/src/assets/image/img3.png'
   transform: translateX(4px);
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 991px) {
+  .about {
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
   .about-grid {
     grid-template-columns: 1fr;
     gap: var(--space-10);
@@ -206,7 +221,7 @@ import img3 from '/src/assets/image/img3.png'
 
 @media (max-width: 576px) {
   .about {
-    padding: var(--space-16) var(--container-padding-x);
+    padding: var(--space-8) var(--container-padding-x);
   }
 
   .about-text {

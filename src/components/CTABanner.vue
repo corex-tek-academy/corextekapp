@@ -1,7 +1,7 @@
 <template>
   <section class="cta-section bg-diagonal-grid divider-line-y">
     <div class="cta-banner container">
-      <div class="cta-card acrylic-card acrylic-card--flat" style="--card-accent: var(--accent-purple);" v-scroll-reveal.scale>
+      <div class="cta-card dark-accent-card" style="--card-accent: var(--accent-purple);" v-scroll-reveal.scale>
       <!-- Circular ring decorations -->
       <div class="cta-rings" aria-hidden="true"></div>
       <!-- Background Aurora Glow -->
@@ -54,6 +54,8 @@
   padding: var(--space-12) var(--space-8);
   overflow: hidden;
   z-index: 1;
+  background: var(--bg-dark);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Circular rings pattern — large left cluster */
@@ -230,4 +232,5 @@
     width: 100%;
   }
 }
+
 </style>

@@ -7,14 +7,14 @@
         <i class="bi bi-chat-heart-fill"></i>
         Success Stories
       </span>
-      <h1>Real Stories. <span class="highlight">Real Growth.</span></h1>
+      <h2>Real Stories. <span class="highlight">Real Growth.</span></h2>
       <p class="section-subtitle">
         Hear directly from our students about how Corex Tek-Academy helped them build confidence, master in-demand skills, and launch their tech careers.
       </p>
     </div>
 
     <div class="testify-wrapper">
-      <div class="testify acrylic-card box-3d-extruded" style="--card-accent: var(--primary);">
+      <div class="testify dark-accent-card box-3d-extruded" style="--card-accent: var(--primary);">
         <div class="quote-icon">
           <i class="bi bi-quote"></i>
         </div>
@@ -23,7 +23,12 @@
           <div class="testimonial_inner" :key="currentTestimonial.id" v-if="currentTestimonial">
             <div class="testimonial_img">
               <div class="avatar-ring">
-                <img :src="currentTestimonial.image" alt="Corex student portrait" />
+                <OptimizedImage
+                  :src="currentTestimonial.image"
+                  :webp="currentTestimonial.imageWebp"
+                  :avif="currentTestimonial.imageAvif"
+                  alt="Corex student portrait"
+                />
               </div>
             </div>
 
@@ -68,6 +73,13 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import Img1 from '/src/assets/image/progimg22.png'
 import Img2 from '/src/assets/image/progimg1.png'
 import Img3 from '/src/assets/image/proimg0.png'
+import Img1Webp from '/src/assets/image/progimg22.webp'
+import Img2Webp from '/src/assets/image/progimg1.webp'
+import Img3Webp from '/src/assets/image/proimg0.webp'
+import Img1Avif from '/src/assets/image/progimg22.avif'
+import Img2Avif from '/src/assets/image/progimg1.avif'
+import Img3Avif from '/src/assets/image/proimg0.avif'
+import OptimizedImage from '@/components/OptimizedImage.vue'
 
 const testimonials = ref([
   {
@@ -75,21 +87,27 @@ const testimonials = ref([
     name: 'Patrick Okoli',
     role: 'Full-Stack Developer Alumni',
     text: 'Corex Tek-Academy transformed my confidence as a software engineer. Working on real-world projects with structured mentorship exposed me to professional Git workflows, coding patterns, and team collaboration best practices.',
-    image: Img1
+    image: Img1,
+    imageWebp: Img1Webp,
+    imageAvif: Img1Avif
   },
   {
     id: 2,
     name: 'Sandra Collins',
     role: 'Frontend Developer Alumni',
     text: 'The hands-on projects and continuous mentor feedback gave me absolute clarity. I moved from struggling with basic JavaScript to confidently building production-ready responsive applications with modern frameworks.',
-    image: Img2
+    image: Img2,
+    imageWebp: Img2Webp,
+    imageAvif: Img2Avif
   },
   {
     id: 3,
     name: 'Michael Obi',
     role: 'Backend Developer Alumni',
     text: 'Corex provided the exact structure I needed. The learning environment was highly practical, collaborative, and industry-aligned. It fully prepared me to tackle real-world client requests and server deployments.',
-    image: Img3
+    image: Img3,
+    imageWebp: Img3Webp,
+    imageAvif: Img3Avif
   }
 ])
 
@@ -155,7 +173,7 @@ onUnmounted(() => {
   gap: 16px;
 }
 
-.header h1 {
+.header h2 {
   font-size: clamp(2rem, 3.5vw, 2.75rem);
   line-height: 1.2;
   font-weight: 800;
@@ -192,6 +210,9 @@ onUnmounted(() => {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  background: var(--bg-dark);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 /* Decorative background glow inside the dark card */
@@ -234,18 +255,28 @@ onUnmounted(() => {
   position: relative;
   width: 180px;
   height: 180px;
-  border-radius: 50%;
-  padding: 6px;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  padding: 4px;
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+  flex-shrink: 0;
 }
 
-.avatar-ring img {
+.avatar-ring :deep(picture) {
   width: 100%;
   height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid #090d16;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  display: block;
+}
+
+.avatar-ring :deep(img) {
+  width: 100%;
+  height: 100%;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  border: 3px solid var(--bg-dark);
   display: block;
 }
 
@@ -261,7 +292,7 @@ onUnmounted(() => {
   font-weight: 500;
   margin: 0;
   font-size: clamp(1.1rem, 2vw, 1.35rem);
-  color: #e2e8f0;
+  color: var(--text-dark-theme);
   font-family: var(--font-heading);
 }
 
@@ -353,6 +384,14 @@ onUnmounted(() => {
 }
 
 /* Responsive configurations */
+@media (max-width: 991px) {
+  .testify {
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .testimonial-section {
     padding: 60px 0;
@@ -364,7 +403,6 @@ onUnmounted(() => {
 
   .testify {
     padding: 40px 24px;
-    border-radius: var(--radius-lg);
   }
 
   .testimonial_inner {
@@ -404,4 +442,5 @@ onUnmounted(() => {
     height: 120px;
   }
 }
+
 </style>

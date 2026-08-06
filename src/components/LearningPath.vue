@@ -191,19 +191,21 @@ const steps = [
   text-align: left;
   position: relative;
   background: 
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.012) 0px, rgba(255, 255, 255, 0.012) 1px, transparent 1px, transparent 8px),
+    repeating-linear-gradient(135deg, var(--color-border-light) 0px, var(--color-border-light) 1px, transparent 1px, transparent 8px),
     var(--glass-bg-strong);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border);
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 var(--color-highlight-strong),
     var(--shadow-md);
   transition: all 0.4s var(--ease-out-expo);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .timeline-card:hover {
   border-color: var(--step-color) !important;
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 var(--color-inset-strong),
     0 12px 36px rgba(0, 0, 0, 0.4),
     0 0 20px var(--step-color);
   transform: translateY(-3px);
@@ -397,4 +399,14 @@ const steps = [
     opacity: 0;
   }
 }
+
+@media (max-width: 400px) {
+  .timeline-item {
+    padding-left: 44px;
+  }
+  .timeline-card {
+    padding: var(--space-5);
+  }
+}
+
 </style>

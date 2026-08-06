@@ -1,5 +1,8 @@
 <script setup>
 import img2 from '/src/assets/image/img2.png'
+import img2Webp from '/src/assets/image/img2.webp'
+import img2Avif from '/src/assets/image/img2.avif'
+import OptimizedImage from '@/components/OptimizedImage.vue'
 </script>
 
 <template>
@@ -45,7 +48,13 @@ import img2 from '/src/assets/image/img2.png'
     
       <div class="internship-img" v-scroll-reveal.right>
         <div class="img-frame" aria-hidden="true">
-          <img :src="img2" alt="Corex student working on frontend code" loading="lazy">
+          <OptimizedImage
+            :src="img2"
+            :webp="img2Webp"
+            :avif="img2Avif"
+            alt="Corex student working on frontend code"
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
         </div>
       </div>
     </div>
@@ -56,7 +65,7 @@ import img2 from '/src/assets/image/img2.png'
 .internship {
   padding: var(--space-12);
   background: var(--color-background-soft);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
 }
 
@@ -164,7 +173,7 @@ import img2 from '/src/assets/image/img2.png'
   position: relative;
 }
 
-.img-frame img {
+.img-frame :deep(img) {
   width: 100%;
   height: auto;
   display: block;
@@ -172,12 +181,18 @@ import img2 from '/src/assets/image/img2.png'
   transition: transform 0.7s var(--ease-out-expo);
 }
 
-.img-frame:hover img {
+.img-frame:hover :deep(img) {
   transform: scale(1.04);
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 991px) {
+  .internship {
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
   .internship-grid {
     grid-template-columns: 1fr;
     gap: var(--space-10);
@@ -189,6 +204,10 @@ import img2 from '/src/assets/image/img2.png'
 }
 
 @media (max-width: 576px) {
+  .internship {
+    padding: var(--space-6);
+  }
+
   .internship-text {
     align-items: center;
     text-align: center;
@@ -196,6 +215,12 @@ import img2 from '/src/assets/image/img2.png'
 
   .program-meta {
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .internship {
+    padding: var(--space-5);
   }
 }
 
