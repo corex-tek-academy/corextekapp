@@ -1,10 +1,42 @@
 <script setup>
+import { onMounted, onUnmounted } from 'vue'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
+import SpotlightCursor from './components/SpotlightCursor.vue'
+import Lenis from 'lenis'
+
+let lenis = null
+
+onMounted(() => {
+  // Respect prefers-reduced-motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 1.5
+  })
+
+  function raf(time) {
+    lenis?.raf(time)
+    requestAnimationFrame(raf)
+  }
+
+  requestAnimationFrame(raf)
+})
+
+onUnmounted(() => {
+  lenis?.destroy()
+})
 </script>
 
 <template>
   <div class="app-wrapper">
+    <SpotlightCursor />
     <Navbar />
     <router-view v-slot="{ Component }">
       <transition name="page-fade" mode="out-in">
@@ -16,6 +48,27 @@ import Footer from './components/Footer.vue'
 </template>
 
 <style>
+/* Global Lenis Smooth Scroll Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 /* Global Page Transition */
 .page-fade-enter-active,
 .page-fade-leave-active {
@@ -32,7 +85,7 @@ import Footer from './components/Footer.vue'
   transform: translateY(-10px);
 }
 
-/* Global smooth scrolling */
+/* Global smooth scrolling fallback */
 html {
   scroll-behavior: smooth;
 }

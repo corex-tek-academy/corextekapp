@@ -2,11 +2,11 @@
   <section class="learning-path container bg-dots" id="syllabus">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
-      <span class="badge-pill badge-pill--primary">
+      <span class="badge-pill badge-pill--orange">
         <i class="bi bi-bezier2"></i>
         Learning Roadmap
       </span>
-      <h2>Your Path to <span class="text-gradient">Tech Mastery</span></h2>
+      <h2>Your Path to <span class="text-gradient">Tech</span> <span class="text-gradient-orange">Mastery</span></h2>
       <p>
         We've designed a structured, project-first roadmap to take you from writing your first line of code to landing a professional software role.
       </p>
@@ -43,6 +43,12 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const steps = [
   {
     phase: 'Phase 01 — Weeks 1-2',
@@ -58,25 +64,48 @@ const steps = [
     desc: 'Learn logic flow, data structures, DOM manipulation, asynchronous programming, APIs, ES6+ syntax, and modular JavaScript architectures.',
     skills: ['JavaScript', 'DOM API', 'Fetch / Axios', 'ES6+', 'Async / Await'],
     icon: 'bi-braces',
+    color: '#34d399',
+  },
+  {
+    phase: 'Phase 03 — Weeks 6-9',
+    title: 'Modern Frontend Frameworks',
+    desc: 'Deep dive into Vue 3 / React ecosystems, component state management, SPA routing, lifecycle hooks, composables, and building performant Web apps.',
+    skills: ['Vue 3 / React', 'Pinia / Redux', 'Vue Router', 'Vite', 'Component Systems'],
+    icon: 'bi-layers',
     color: '#a78bfa',
   },
   {
-    phase: 'Phase 03 — Weeks 6-8',
-    title: 'Modern Single Page Applications',
-    desc: 'Adopt reactive frontend frameworks. Component structures, state management, client-side routing, hooks, and integration with backend APIs.',
-    skills: ['Vue.js / React', 'State Management', 'Vue Router', 'Component Lifecycle'],
-    icon: 'bi-window-sidebar',
-    color: '#2dd4bf',
+    phase: 'Phase 04 — Weeks 10-12',
+    title: 'Backend Services & Database Systems',
+    desc: 'Architect secure REST APIs, node server runtimes, database schema design, authentication JWT flows, and Cloud database connections with Supabase / Node.',
+    skills: ['Node.js', 'Express', 'Supabase / Postgres', 'REST APIs', 'Auth & Security'],
+    icon: 'bi-database-gear',
+    color: '#fb923c',
   },
   {
-    phase: 'Phase 04 — Weeks 9+',
-    title: 'Professional Git & Production Deployment',
-    desc: 'Learn version control, pull requests, collaborative merging, hosting configurations, Netlify/Vercel deployment, and SEO performance optimization.',
-    skills: ['Git / GitHub', 'Netlify / Vercel', 'Web Performance', 'SEO Best Practices'],
-    icon: 'bi-git',
-    color: '#22d3ee',
+    phase: 'Phase 05 — Weeks 13-16',
+    title: 'Capstone Capstone & Portfolio Delivery',
+    desc: 'Collaborate in agile team sprints to build, test, optimize, and deploy a production-grade full-stack Web product with CI/CD deployment.',
+    skills: ['Agile Sprints', 'Git & GitHub Flow', 'CI / CD Deployment', 'Vercel / Netlify', 'Career Mentorship'],
+    icon: 'bi-rocket-takeoff',
+    color: '#f43f5e',
   },
 ]
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  gsap.to('.timeline-line-glow', {
+    scrollTrigger: {
+      trigger: '.path-timeline',
+      start: 'top 70%',
+      end: 'bottom 80%',
+      scrub: 0.5
+    },
+    scaleY: 1,
+    ease: 'none'
+  })
+})
 </script>
 
 <style scoped>
@@ -111,19 +140,18 @@ const steps = [
   top: 0;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top center;
   width: 2px;
   background: linear-gradient(
     to bottom,
-    rgba(96, 165, 250, 0) 0%,
-    rgba(96, 165, 250, 0.8) 20%,
-    rgba(167, 139, 250, 0.8) 40%,
-    rgba(45, 212, 191, 0.8) 60%,
-    rgba(34, 211, 238, 0.8) 80%,
-    rgba(34, 211, 238, 0) 100%
+    rgba(96, 165, 250, 0.9) 0%,
+    rgba(167, 139, 250, 0.9) 40%,
+    rgba(251, 146, 60, 0.9) 70%,
+    rgba(244, 63, 94, 0.9) 100%
   );
   z-index: 2;
-  opacity: 0.6;
+  opacity: 0.95;
   overflow: hidden;
 }
 

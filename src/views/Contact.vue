@@ -1,15 +1,28 @@
 <template>
   <div class="contact-page">
-    <!-- Top Header Banner with Frosted Overlay -->
+    <!-- Top Header Banner with Frosted Editorial Overlay -->
     <section class="contact-hero" aria-labelledby="contact-heading">
-      <div class="hero-overlay"></div>
+      <!-- Ambient Environmental Background -->
+      <div class="ambient-environment" aria-hidden="true">
+        <div class="mesh-gradient-aurora"></div>
+        <div class="glow-orb orb-primary"></div>
+        <div class="glow-orb orb-secondary"></div>
+        <div class="perspective-grid-pattern"></div>
+      </div>
+
       <div class="container hero-inner animate-fade-in-up">
-        <span class="badge-pill badge-pill--primary">
-          <i class="bi bi-chat-right-text-fill"></i>
-          Connect With Us
+        <span class="editorial-badge">
+          <span class="pulse-ring pulse-orange"></span>
+          <span class="badge-text">Connect With Us • <span class="accent-orange-tag">24/7 Admissions Support</span></span>
+          <i class="bi bi-arrow-right-short badge-arrow"></i>
         </span>
-        <h1 id="contact-heading">Contact Our Admissions</h1>
-        <p class="hero-sub">
+
+        <h1 id="contact-heading" class="editorial-title">
+          Contact Our Admissions & <br />
+          <span class="text-orange-highlight">Career Advisors</span>
+        </h1>
+
+        <p class="editorial-lead">
           Have questions about our syllabus, tuition payments, schedules, or career placement? <br />
           We are here to guide you along every step of your digital learning journey.
         </p>
@@ -191,7 +204,6 @@ const contactSubmitted = ref(false)
 const isSubmittingNewsletter = ref(false)
 const newsletterSubmitted = ref(false)
 
-// Handle Contact form submit via AJAX POST for Netlify compatibility
 async function handleContactSubmit() {
   if (!contactData.name || !contactData.email || !contactData.phone || !contactData.message) return
   
@@ -227,7 +239,6 @@ async function handleContactSubmit() {
   }
 }
 
-// Handle Newsletter form submit via AJAX POST
 async function handleNewsletterSubmit() {
   if (!newsletterEmail.value) return
   
@@ -267,29 +278,64 @@ async function handleNewsletterSubmit() {
 
 /* Contact Hero Banner */
 .contact-hero {
-  margin-top: 80px;
   position: relative;
-  background-image: url('/src/assets/image/contact.jpg'); /* JPEG fallback for older browsers */
-  background-image: image-set(
-    url('/src/assets/image/contact.avif') type('image/avif'),
-    url('/src/assets/image/contact.webp') type('image/webp'),
-    url('/src/assets/image/contact.jpg') type('image/jpeg')
-  );
-  background-size: cover;
-  background-position: center;
-  padding: 100px 0;
+  margin-top: 70px;
+  padding: 110px 0 70px;
+  overflow: hidden;
+  background: var(--color-background);
   text-align: center;
-  color: var(--light);
 }
 
-.hero-overlay {
+/* Ambient Environmental Layer */
+.ambient-environment {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(9, 13, 22, 0.9) 0%, rgba(15, 23, 42, 0.85) 100%);
+  inset: 0;
+  pointer-events: none;
   z-index: 1;
+}
+
+.mesh-gradient-aurora {
+  position: absolute;
+  inset: -10%;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(249, 115, 22, 0.10) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(13, 148, 136, 0.08) 0%, transparent 50%);
+  filter: blur(60px);
+  opacity: 0.9;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.orb-primary {
+  width: 400px;
+  height: 400px;
+  top: 5%;
+  left: -5%;
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.orb-secondary {
+  width: 400px;
+  height: 400px;
+  bottom: -5%;
+  right: -5%;
+  background: rgba(249, 115, 22, 0.10);
+}
+
+.perspective-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 75%);
 }
 
 .hero-inner {
@@ -299,28 +345,74 @@ async function handleNewsletterSubmit() {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.contact-hero h1 {
-  font-size: clamp(2.25rem, 4vw, 3.25rem);
+.editorial-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.pulse-orange {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--secondary);
+  box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.6);
+  animation: pulseOrange 2s infinite;
+}
+
+@keyframes pulseOrange {
+  0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(249, 115, 22, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}
+
+.accent-orange-tag {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.text-orange-highlight {
+  color: var(--secondary) !important;
   font-weight: 800;
-  color: var(--light);
-  margin: 0;
-  letter-spacing: -0.02em;
 }
 
-.hero-sub {
+.badge-arrow {
+  font-size: 1.1rem;
+  color: var(--primary-text);
+}
+
+.editorial-title {
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0;
+}
+
+.editorial-lead {
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  line-height: 1.65;
+  color: var(--text-secondary);
   max-width: 650px;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: var(--text-dark-theme);
-  opacity: 0.9;
   margin: 0;
 }
 
 /* Form and Newsletter Grid */
 .form-news-section {
-  margin-top: -50px;
+  margin-top: -30px;
   position: relative;
   z-index: 20;
   padding: 0 24px;
@@ -336,9 +428,11 @@ async function handleNewsletterSubmit() {
 
 .contact-card-wrapper {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-2xl);
   padding: 40px;
   text-align: left;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .card-header {
@@ -390,7 +484,7 @@ async function handleNewsletterSubmit() {
   width: 100%;
   padding: 12px 16px;
   border-radius: 12px;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-light);
   background: var(--color-background-soft);
   font-family: inherit;
   font-size: 0.95rem;
@@ -407,7 +501,7 @@ async function handleNewsletterSubmit() {
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 .contact-form textarea {
@@ -430,14 +524,15 @@ async function handleNewsletterSubmit() {
 }
 
 .btn-submit-primary {
-  background: var(--primary-gradient);
-  color: var(--light);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+  background: var(--primary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
 
 .btn-submit-primary:hover:not(:disabled) {
+  background: var(--primary-hover) !important;
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.45);
 }
 
 .btn-submit-primary:disabled {
@@ -459,26 +554,28 @@ async function handleNewsletterSubmit() {
   margin-top: 8px;
 }
 
-/* Newsletter Column Card — styled as dark-accent-card pattern */
+/* Newsletter Column Card */
 .newsletter-card-wrapper {
-  background: var(--bg-dark);
-  border: 1px solid var(--glass-dark-border);
-  color: var(--light);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-2xl);
+  color: var(--text);
   padding: 40px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   text-align: left;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
 .newsletter-card-wrapper h2 {
   font-size: 1.65rem;
   font-weight: 800;
-  color: var(--light);
+  color: var(--text);
 }
 
 .newsletter-card-wrapper .card-header p {
-  color: var(--text-dark-muted);
+  color: var(--text-secondary);
   font-size: 0.925rem;
   line-height: 1.6;
 }
@@ -490,42 +587,27 @@ async function handleNewsletterSubmit() {
 }
 
 .newsletter-form input {
-  background: var(--dark-highlight-subtle);
-  border-color: var(--glass-dark-border);
-  color: var(--light);
-}
-
-.newsletter-form input::placeholder {
-  color: var(--text-dark-muted);
-}
-
-.newsletter-form input:focus {
-  border-color: var(--primary);
-  background: var(--dark-highlight-mid);
+  background: var(--color-background-soft);
+  border-color: var(--color-border-light);
+  color: var(--text);
 }
 
 .btn-submit-light {
-  background: var(--light);
-  color: var(--bg-dark);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+  background: var(--secondary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
 }
 
 .btn-submit-light:hover:not(:disabled) {
-  background: var(--primary);
-  color: var(--light);
+  background: var(--secondary-hover) !important;
+  color: #ffffff !important;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.45);
 }
 
 .btn-submit-light:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-}
-
-.alert-success-box.text-green {
-  color: #10b981;
-  background-color: rgba(16, 185, 129, 0.05);
-  border-color: rgba(16, 185, 129, 0.1);
 }
 
 /* Info Cards Section */
@@ -544,7 +626,8 @@ async function handleNewsletterSubmit() {
 
 .info-card {
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
   padding: 32px 24px;
   display: flex;
   align-items: center;
@@ -570,7 +653,7 @@ async function handleNewsletterSubmit() {
 
 .info-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
 .info-card:hover::before {
@@ -582,7 +665,7 @@ async function handleNewsletterSubmit() {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background-color: var(--primary-light);
+  background-color: rgba(59, 130, 246, 0.1);
   color: var(--primary-text);
   display: grid;
   place-items: center;
@@ -590,13 +673,12 @@ async function handleNewsletterSubmit() {
   flex-shrink: 0;
 }
 
-/* Customize colors of different info card details */
-.card-call .icon-circle { background-color: var(--accent-purple-50); color: var(--accent-purple-text); }
-.card-call::before { background-color: var(--accent-purple-text); }
-.card-email .icon-circle { background-color: var(--primary-light); color: var(--primary-text); }
-.card-email::before { background-color: var(--primary-text); }
-.card-location .icon-circle { background-color: var(--accent-green-50); color: var(--accent-green-text); }
-.card-location::before { background-color: var(--accent-green-text); }
+.card-call .icon-circle { background-color: rgba(249, 115, 22, 0.12); color: var(--secondary); }
+.card-call::before { background-color: var(--secondary); }
+.card-email .icon-circle { background-color: rgba(59, 130, 246, 0.12); color: var(--primary); }
+.card-email::before { background-color: var(--primary); }
+.card-location .icon-circle { background-color: rgba(16, 185, 129, 0.12); color: #34d399; }
+.card-location::before { background-color: #34d399; }
 
 .info-card .card-body {
   display: flex;
@@ -633,19 +715,11 @@ async function handleNewsletterSubmit() {
   margin: 0;
 }
 
-/* Spinner Rotate Keyframe */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-spin {
-  display: inline-block;
-  animation: spin 1s linear infinite;
-}
-
-/* Responsive configurations */
 @media (max-width: 991px) {
+  .contact-hero {
+    padding-top: 130px;
+  }
+
   .form-news-grid {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -655,67 +729,19 @@ async function handleNewsletterSubmit() {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-
-  /* Let the last card span full width if odd count */
-  .info-grid .info-card:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-  }
 }
 
-@media (max-width: 768px) {
-  .contact-hero {
-    padding: 80px 0;
-  }
-  
-  .contact-card-wrapper,
-  .newsletter-card-wrapper {
-    padding: 32px 24px;
-    border-radius: 20px;
-  }
-
-  .form-row-split {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-hero {
-    padding: 60px 0;
-  }
-  
-  .form-news-section {
-    margin-top: -30px;
-    padding: 0 16px;
-  }
-  
-  .info-cards-section {
-    padding: 0 16px;
-  }
-
-  .contact-card-wrapper,
-  .newsletter-card-wrapper {
-    padding: 24px 16px;
-  }
-  
-  .info-card {
-    padding: 24px 16px;
-  }
-}
-
-/* Accessibility settings */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
 @media (max-width: 576px) {
+  .contact-hero {
+    padding-top: 110px;
+    padding-bottom: 50px;
+  }
+
+  .contact-card-wrapper,
+  .newsletter-card-wrapper {
+    padding: 24px 18px;
+  }
+
   .info-grid {
     grid-template-columns: 1fr;
   }

@@ -217,6 +217,26 @@ onBeforeUnmount(() => {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
+@media (max-width: 991px) {
+  .navbar-wrapper {
+    position: sticky;
+    background: rgba(12, 12, 14, 0.94) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .desktop-nav,
+  .desktop-cta,
+  .cta-btn {
+    display: none !important;
+  }
+
+  .hamburger-btn {
+    display: flex;
+  }
+}
+
 /* ── Container Layout ── */
 .navbar-container {
   display: flex;
@@ -325,19 +345,20 @@ onBeforeUnmount(() => {
   padding: 10px 22px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--text-on-primary);
-  background: var(--primary-gradient);
+  color: #ffffff !important;
+  background: var(--primary) !important;
   border: none;
   border-radius: var(--radius-full);
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
 .cta-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
-  color: var(--text-on-primary);
+  background: var(--primary-hover) !important;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
+  color: #ffffff !important;
 }
 
 .cta-icon {
@@ -576,12 +597,10 @@ onBeforeUnmount(() => {
    ═══════════════════════════════════════════════════════════════ */
 
 @media (max-width: 991px) {
-  .desktop-nav {
-    display: none;
-  }
-
-  .cta-desktop {
-    display: none;
+  .desktop-nav,
+  .desktop-cta,
+  .cta-btn {
+    display: none !important;
   }
 
   .hamburger-btn {

@@ -76,17 +76,30 @@ const paginatedPrograms = computed(() => {
 function setPage(n) { currentPage.value = Math.min(Math.max(1, n), totalPages.value) }
 function nextPage() { if (currentPage.value < totalPages.value) { currentPage.value++ } }
 function prevPage() { if (currentPage.value > 1) { currentPage.value-- } }
+function goToPage(p) {
+  if (p >= 1 && p <= totalPages.value) {
+    currentPage.value = p
+  }
+}
+
+function onCardMouseMove(e) {
+  if (window.matchMedia('(hover: none)').matches) return
+  const card = e.currentTarget
+  const rect = card.getBoundingClientRect()
+  card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
+  card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
+}
 </script>
 
 <template>
   <section class="programs container bg-lines" data-component="programs">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
-      <span class="badge-pill badge-pill--primary">
+      <span class="badge-pill badge-pill--orange">
         <i class="bi bi-mortarboard-fill"></i>
         Academy Curriculum
       </span>
-      <h2>Our <span class="text-gradient">Programs</span></h2>
+      <h2>Our <span class="text-gradient">Programs</span> & <span class="text-gradient-orange">Tracks</span></h2>
       <p>
         Explore our diverse range of tech programs designed to equip you with the practical skills 
         and professional mindset needed for a high-paying career in technology.
@@ -100,7 +113,7 @@ function prevPage() { if (currentPage.value > 1) { currentPage.value-- } }
         v-for="(program, index) in paginatedPrograms" 
         :key="program.id"
         :style="{ '--card-accent': program.color }"
-        v-scroll-reveal="index + 1"
+        @mousemove="onCardMouseMove"
       >
         <!-- Gradient border effect on hover -->
         <div class="card-border-glow" aria-hidden="true"></div>
@@ -192,7 +205,13 @@ function prevPage() { if (currentPage.value > 1) { currentPage.value-- } }
 
 .program-card {
   position: relative;
-  background: var(--color-surface);
+  background: 
+    radial-gradient(
+      500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(59, 130, 246, 0.10),
+      transparent 60%
+    ),
+    var(--color-surface);
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
   padding: var(--space-8);
@@ -201,7 +220,6 @@ function prevPage() { if (currentPage.value > 1) { currentPage.value-- } }
   gap: var(--space-6);
   height: 100%;
   overflow: hidden;
-  /* 3D tilt perspective settings */
   transform-style: preserve-3d;
   perspective: 1000px;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
