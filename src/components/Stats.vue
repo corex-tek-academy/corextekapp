@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import { gsap } from 'gsap'
 
 const stats = ref([
   { value: 0, target: 500, suffix: '+', label: 'Students Trained', icon: 'bi-people-fill', color: 'rgba(59, 130, 246, 0.4)' },
@@ -28,7 +29,17 @@ function animateCounters() {
       const progress = Math.min(elapsed / duration, 1)
       const eased = 1 - Math.pow(1 - progress, 3)
       stat.value = Math.round(eased * stat.target)
-      if (progress < 1) requestAnimationFrame(animate)
+      if (progress < 1) {
+        requestAnimationFrame(animate)
+      } else if (index === stats.value.length - 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.to('.stat-card', {
+          boxShadow: '0 0 25px rgba(59, 130, 246, 0.25)',
+          duration: 0.4,
+          yoyo: true,
+          repeat: 1,
+          stagger: 0.1
+        })
+      }
     }
     requestAnimationFrame(animate)
   })

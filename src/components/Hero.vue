@@ -1,5 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { gsap } from 'gsap'
+
+const heroRef = ref(null)
 
 // Animated counter logic
 const stats = ref([
@@ -8,7 +11,32 @@ const stats = ref([
   { value: 0, target: 95, suffix: '%', label: 'Completion Rate' },
 ])
 
+function onCardMouseMove(e) {
+  if (window.matchMedia('(hover: none)').matches) return
+  const card = e.currentTarget
+  const rect = card.getBoundingClientRect()
+  const x = e.clientX - rect.left - rect.width / 2
+  const y = e.clientY - rect.top - rect.height / 2
+  card.style.transform = `perspective(600px) rotateX(${-y / 8}deg) rotateY(${x / 8}deg) scale3d(1.05, 1.05, 1.05)`
+}
+
+function onCardMouseLeave(e) {
+  const card = e.currentTarget
+  card.style.transform = `perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`
+}
+
 onMounted(() => {
+  // GSAP hero stagger sequence
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.8 } })
+    tl.from('.badge-wrapper', { y: 20, opacity: 0, delay: 0.1 })
+      .from('.hero-title', { y: 30, opacity: 0 }, '-=0.5')
+      .from('.hero-lead', { y: 20, opacity: 0 }, '-=0.6')
+      .from('.hero-actions', { y: 20, opacity: 0 }, '-=0.6')
+      .from('.stat-item', { y: 15, opacity: 0, stagger: 0.1 }, '-=0.4')
+      .from('.float-card', { scale: 0.8, opacity: 0, stagger: 0.15, ease: 'back.out(1.7)' }, '-=0.6')
+  }
+
   // Animate counters
   stats.value.forEach((stat, index) => {
     const duration = 2000
@@ -21,7 +49,6 @@ onMounted(() => {
         return
       }
       const progress = Math.min(elapsed / duration, 1)
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3)
       stat.value = Math.round(eased * stat.target)
       
@@ -109,23 +136,36 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Floating Tech Cards -->
-      <div class="floating-cards" aria-hidden="true" v-scroll-reveal.scale="5">
-        <div class="float-card card-code animate-float">
+      <!-- Floating Tech Cards with Hardware 3D Tilt -->
+      <div class="floating-cards" aria-hidden="true">
+        <div 
+          class="float-card card-code animate-float"
+          @mousemove="onCardMouseMove"
+          @mouseleave="onCardMouseLeave"
+        >
           <div class="float-card-icon">
             <i class="bi bi-code-slash"></i>
           </div>
           <span>Full-Stack Dev</span>
         </div>
 
-        <div class="float-card card-ai animate-float-delayed">
+        <div 
+          class="float-card card-ai animate-float-delayed"
+          @mousemove="onCardMouseMove"
+          @mouseleave="onCardMouseLeave"
+        >
           <div class="float-card-icon icon-purple">
             <i class="bi bi-cpu"></i>
           </div>
           <span>AI & ML</span>
         </div>
 
-        <div class="float-card card-cloud animate-float" style="animation-delay: 0.5s;">
+        <div 
+          class="float-card card-cloud animate-float" 
+          style="animation-delay: 0.5s;"
+          @mousemove="onCardMouseMove"
+          @mouseleave="onCardMouseLeave"
+        >
           <div class="float-card-icon icon-cyan">
             <i class="bi bi-cloud-check"></i>
           </div>
