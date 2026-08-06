@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const stats = ref([
   { value: 0, target: 500, suffix: '+', label: 'Students Trained', icon: 'bi-people-fill', color: 'rgba(59, 130, 246, 0.4)' },
@@ -9,6 +9,7 @@ const stats = ref([
 ])
 
 const hasAnimated = ref(false)
+let observer = null
 
 function animateCounters() {
   if (hasAnimated.value) return
@@ -36,15 +37,22 @@ function animateCounters() {
 onMounted(() => {
   const el = document.querySelector('.stats-section')
   if (!el) return
-  const io = new IntersectionObserver((entries) => {
+  observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         animateCounters()
-        io.unobserve(entry.target)
+        observer?.unobserve(entry.target)
       }
     })
   }, { threshold: 0.3 })
-  io.observe(el)
+  observer.observe(el)
+})
+
+onUnmounted(() => {
+  if (observer) {
+    observer.disconnect()
+    observer = null
+  }
 })
 </script>
 
@@ -133,4 +141,5 @@ onMounted(() => {
     grid-template-columns: 1fr;
   }
 }
+
 </style>

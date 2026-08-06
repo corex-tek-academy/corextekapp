@@ -44,13 +44,22 @@ const router = createRouter({
   }
 })
 
-// Update meta tags on route change
+// Update meta tags and reset scroll reveal on route change
 router.afterEach((to) => {
   document.title = to.meta.title || 'Corex Tek-Academy'
   const metaDescription = document.querySelector('meta[name="description"]')
   if (metaDescription && to.meta.description) {
     metaDescription.setAttribute('content', to.meta.description)
   }
+
+  // Ensure scroll is at top and trigger window scroll event to wake observers on new view
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  setTimeout(() => {
+    window.dispatchEvent(new Event('scroll'))
+  }, 100)
+  setTimeout(() => {
+    window.dispatchEvent(new Event('scroll'))
+  }, 400)
 })
 
 export default router

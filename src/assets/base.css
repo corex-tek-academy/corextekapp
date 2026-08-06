@@ -3,8 +3,7 @@
    A world-class design foundation for education technology
    ═══════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
+/* Fonts are preloaded via index.html <link preload> — no @import needed */
 :root {
   /* ── Typography ── */
   --font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
@@ -76,6 +75,18 @@
   --light: #ffffff;
   --white: #ffffff;
 
+  /* ── Theme-adaptive card / shadow colors (replaces hardcoded rgba(255,255,255,X)) ── */
+  --color-inset-light: rgba(255, 255, 255, 0.08);
+  --color-inset-mid: rgba(255, 255, 255, 0.12);
+  --color-inset-strong: rgba(255, 255, 255, 0.18);
+  --color-highlight-subtle: rgba(255, 255, 255, 0.04);
+  --color-highlight-mid: rgba(255, 255, 255, 0.06);
+  --color-highlight-strong: rgba(255, 255, 255, 0.10);
+  --color-glass-noise: 0.02;
+  --color-card-noise: 0.025;
+  --color-3d-extrude-light: rgba(255, 255, 255, 0.05);
+  --color-3d-extrude-mid: rgba(255, 255, 255, 0.10);
+
   /* ── Glassmorphism Tokens (Figma Dark) ── */
   --glass-bg: rgba(24, 25, 32, 0.65);
   --glass-bg-strong: rgba(24, 25, 32, 0.85);
@@ -93,6 +104,13 @@
   --text-dark-muted: #94a3b8;
   --glass-dark-bg: rgba(15, 23, 42, 0.60);
   --glass-dark-border: rgba(255, 255, 255, 0.08);
+
+  /* ── Dark-accent section inset/highlight tokens (always light-on-dark, both modes) ── */
+  --dark-inset-light: rgba(255, 255, 255, 0.06);
+  --dark-inset-mid: rgba(255, 255, 255, 0.10);
+  --dark-highlight-subtle: rgba(255, 255, 255, 0.04);
+  --dark-highlight-mid: rgba(255, 255, 255, 0.06);
+  --dark-highlight-strong: rgba(255, 255, 255, 0.10);
 
   /* ── Border Radius (Rounded, Premium) ── */
   --radius-xs: 8px;
@@ -150,8 +168,55 @@
   --shadow-glow-primary: 0 0 40px rgba(59, 130, 246, 0.20);
   --shadow-glow-purple: 0 0 40px rgba(139, 92, 246, 0.20);
 
-  /* ── Backward-compat alias ── */
+    /* ── Backward-compat alias ── */
   --small--text: var(--text-secondary);
+
+  /* Smooth theme transitions for key layout elements */
+  --theme-transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK ACCENT SECTIONS (Testimonial, CTA Banner, Contact, Footer)
+   ═══════════════════════════════════════════════════════════════ */
+
+.dark-accent-card {
+  background: var(--bg-dark);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Text colors inside dark-accent-card are always light */
+.dark-accent-card h1,
+.dark-accent-card h2,
+.dark-accent-card h3,
+.dark-accent-card h4 {
+  color: var(--light);
+}
+
+.dark-accent-card p,
+.dark-accent-card .desc {
+  color: var(--text-dark-muted);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BOOTSTRAP COMPATIBILITY UTILITIES (replaces removed Bootstrap CSS)
+   ═══════════════════════════════════════════════════════════════ */
+
+.text-primary {
+  color: var(--primary) !important;
+}
+
+.text-success {
+  color: var(--accent-green) !important;
+}
+
+.text-white {
+  color: var(--white) !important;
 }
 
 
@@ -184,6 +249,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   position: relative;
+  /* Smooth theme transition */
+  transition: var(--theme-transition);
 }
 
 /* Subtle noise texture overlay for depth */
@@ -401,14 +468,14 @@ a {
 
 /* Flat acrylic card variant without shadow or hover lifting */
 .acrylic-card--flat {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 1px 0 var(--color-inset-light) !important;
 }
 
 .acrylic-card--flat:hover {
   transform: none !important;
   background: linear-gradient(135deg, rgba(24, 25, 32, 0.55), rgba(12, 12, 14, 0.45)) !important;
   border-color: rgba(255, 255, 255, 0.08) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  box-shadow: inset 0 1px 0 var(--color-inset-light) !important;
 }
 
 /* 3D Extruded Box Shadow Effect with custom or fallback accent color */
@@ -417,7 +484,7 @@ a {
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
   box-shadow: 
-    1px 1px 0px rgba(255, 255, 255, 0.05),
+    1px 1px 0px var(--color-3d-extrude-light),
     2px 2px 0px var(--card-accent, rgba(59, 130, 246, 0.15)),
     3px 3px 0px var(--card-accent, rgba(59, 130, 246, 0.20)),
     4px 4px 0px var(--card-accent, rgba(59, 130, 246, 0.20)),
@@ -428,7 +495,7 @@ a {
 .box-3d-extruded:hover {
   transform: translate3d(-4px, -4px, 12px);
   box-shadow: 
-    1px 1px 0px rgba(255, 255, 255, 0.1),
+    1px 1px 0px var(--color-3d-extrude-mid),
     2px 2px 0px var(--card-accent, rgba(59, 130, 246, 0.25)),
     4px 4px 0px var(--card-accent, rgba(59, 130, 246, 0.30)),
     6px 6px 0px var(--card-accent, rgba(59, 130, 246, 0.35)),
@@ -665,29 +732,6 @@ a {
   max-width: 600px;
 }
 
-
-/* ═══════════════════════════════════════════════════════════════
-   SCROLLBAR
-   ═══════════════════════════════════════════════════════════════ */
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-border);
-  border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-border-hover);
-}
-
-
 /* ═══════════════════════════════════════════════════════════════
    FOCUS & ACCESSIBILITY
    ═══════════════════════════════════════════════════════════════ */
@@ -872,48 +916,13 @@ textarea:focus-visible {
 }
 
 /* ── Scroll-Reveal Utility Classes ── */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-}
-
-.reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal-left {
-  opacity: 0;
-  transform: translateX(-40px);
-  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-}
-
-.reveal-left.revealed {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.reveal-right {
-  opacity: 0;
-  transform: translateX(40px);
-  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-}
-
-.reveal-right.revealed {
-  opacity: 1;
-  transform: translateX(0);
-}
-
+/* ═══ Reveal Utilities — Default to visible so content is never hidden ═══ */
+.reveal,
+.reveal-left,
+.reveal-right,
 .reveal-scale {
-  opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
-}
-
-.reveal-scale.revealed {
-  opacity: 1;
-  transform: scale(1);
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Stagger delays for child elements */
@@ -953,6 +962,23 @@ textarea:focus-visible {
    RESPONSIVE ADJUSTMENTS
    ═══════════════════════════════════════════════════════════════ */
 
+/* ── Prevent grid/flex overflow on small screens ── */
+img,
+video,
+canvas,
+svg,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Ensure grid children don't overflow ── */
+* {
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 @media (max-width: 768px) {
   :root {
     --section-padding-y: 4.5rem;
@@ -970,3 +996,20 @@ textarea:focus-visible {
     --container-padding-x: var(--space-4);
   }
 }
+
+@media (max-width: 360px) {
+  :root {
+    --section-padding-y: 2.5rem;
+    --card-padding: var(--space-4);
+    --card-padding-lg: var(--space-5);
+    --container-padding-x: 12px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+}
+
+/* ── SCROLLBAR ── */
+
+/* Remove the duplicate scrollbar block that was below SCROLLBAR heading */

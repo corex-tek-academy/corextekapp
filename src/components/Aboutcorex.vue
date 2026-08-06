@@ -237,7 +237,7 @@
     grid-template-columns: 1fr;
   }
   .values-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -250,6 +250,9 @@
   }
   .value-card {
     padding: var(--space-6);
+  }
+  .values-grid {
+    grid-template-columns: 1fr;
   }
 }
 

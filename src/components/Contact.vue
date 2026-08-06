@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import img from '/src/assets/image/img1.png'
+import imgWebp from '/src/assets/image/img1.webp'
+import imgAvif from '/src/assets/image/img1.avif'
+import OptimizedImage from '@/components/OptimizedImage.vue'
 
 const email = ref('')
 const submitted = ref(false)
@@ -37,7 +40,7 @@ async function handleSubmit(e) {
 <template>
   <section class="contact-section bg-diagonal-grid divider-line-y">
     <div class="contact container">
-      <div class="contact_inner acrylic-card acrylic-card--flat" style="--card-accent: var(--accent-teal);">
+      <div class="contact_inner dark-accent-card" style="--card-accent: var(--accent-teal);">
       <div class="contact_text">
         <span class="badge-pill badge-pill-dark">
           <i class="bi bi-envelope-open-fill"></i>
@@ -80,7 +83,12 @@ async function handleSubmit(e) {
       
       <div class="contact_img" aria-hidden="true">
         <div class="image-wrapper">
-          <img :src="img" alt="Corex Tek-Academy tech workspace illustration">
+          <OptimizedImage
+            :src="img"
+            :webp="imgWebp"
+            :avif="imgAvif"
+            alt="Corex Tek-Academy tech workspace illustration"
+          />
         </div>
       </div>
       </div>
@@ -107,6 +115,8 @@ async function handleSubmit(e) {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  background: var(--bg-dark);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Decorative glowing radial blob */

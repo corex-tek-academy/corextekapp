@@ -11,12 +11,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "optimize-images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.90.1",
-    "@vueuse/head": "^2.0.0",
-    "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.11.3",
     "vue": "^3.5.26",
     "vue-router": "^4.6.4"
@@ -27,7 +26,10 @@
     "eslint-plugin-vue": "^9.28.0",
     "gh-pages": "^6.3.0",
     "prettier": "^3.3.3",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "sharp": "^0.35.3",
     "vite": "^7.3.0",
+    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-vue-devtools": "^8.0.5"
   }
 }

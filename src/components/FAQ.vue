@@ -170,9 +170,40 @@ function toggleFAQ(index) {
 }
 
 .faq-inner-text p {
-  font-size: 0.95rem;
+  font-size: clamp(0.875rem, 2.5vw, 0.95rem);
   line-height: 1.65;
   color: var(--text-secondary);
   margin: 0;
 }
+
+@media (max-width: 576px) {
+  .faq-trigger {
+    padding: var(--space-4) var(--space-4);
+    font-size: 0.925rem;
+    gap: var(--space-3);
+  }
+  .faq-inner-text {
+    padding: 0 var(--space-4) var(--space-4) var(--space-4);
+  }
+  .faq-trigger span {
+    max-width: 85%;
+    line-height: 1.4;
+  }
+  .faq-icon-wrap {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .faq-trigger {
+    padding: var(--space-3) var(--space-3);
+    font-size: 0.85rem;
+  }
+  .faq-trigger span {
+    max-width: 80%;
+  }
+}
+
 </style>

@@ -330,14 +330,14 @@ onMounted(() => {
   font-weight: 600;
   border-radius: var(--radius-full);
   color: var(--primary);
-  background: rgba(59, 130, 246, 0.06);
-  border: 1px solid rgba(59, 130, 246, 0.12);
+  background: var(--primary-50);
+  border: 1px solid var(--primary-100);
   transition: all 0.3s var(--ease-out-expo);
   cursor: pointer;
 }
 
 .hero-badge:hover {
-  background: rgba(59, 130, 246, 0.10);
+  background: var(--primary-light);
   transform: translateY(-1px);
 }
 
@@ -491,11 +491,11 @@ onMounted(() => {
   background: linear-gradient(135deg, rgba(24, 25, 32, 0.65), rgba(12, 12, 14, 0.45));
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.12),
-    1px 1px 0px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 var(--color-inset-mid),
+    1px 1px 0px var(--color-3d-extrude-light),
     2px 2px 0px var(--card-accent, rgba(59, 130, 246, 0.2)),
     3px 3px 0px var(--card-accent, rgba(59, 130, 246, 0.2)),
     4px 4px 12px rgba(0, 0, 0, 0.4);
@@ -512,17 +512,17 @@ onMounted(() => {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: var(--color-card-noise);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   z-index: 1;
 }
 
 .float-card:hover {
   transform: translateY(-6px) translate3d(-3px, -3px, 10px) !important;
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--color-border-hover);
   box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    1px 1px 0px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 var(--color-inset-strong),
+    1px 1px 0px var(--color-3d-extrude-mid),
     2px 2px 0px var(--card-accent),
     4px 4px 0px var(--card-accent),
     6px 6px 0px var(--card-accent),
@@ -626,6 +626,12 @@ onMounted(() => {
 }
 
 /* ═══ Responsive ═══ */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
     padding: 120px 0 80px;

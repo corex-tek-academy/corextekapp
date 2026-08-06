@@ -1,17 +1,22 @@
 <script setup>
+import { defineAsyncComponent } from 'vue'
+
+// ── Above the fold (static import for instant render) ──
 import Hero from '@/components/Hero.vue'
 import Partnership from '@/components/Partnership.vue'
 import Stats from '@/components/Stats.vue'
 import About from '@/components/About.vue'
-import Aboutcorex from '@/components/Aboutcorex.vue'
-import WhyChoose from '@/components/WhyChoose.vue'
-import LearningPath from '@/components/LearningPath.vue'
-import Internship from '@/components/Internship.vue'
-import Programs from '@/components/Programs.vue'
-import FAQ from '@/components/FAQ.vue'
-import Testimonial from '@/components/Testimonial.vue'
-import CTABanner from '@/components/CTABanner.vue'
-import Contact from '@/components/Contact.vue'
+
+// ── Below the fold (lazy-loaded, split into separate JS chunks) ──
+const Aboutcorex = defineAsyncComponent(() => import('@/components/Aboutcorex.vue'))
+const WhyChoose = defineAsyncComponent(() => import('@/components/WhyChoose.vue'))
+const LearningPath = defineAsyncComponent(() => import('@/components/LearningPath.vue'))
+const Internship = defineAsyncComponent(() => import('@/components/Internship.vue'))
+const Programs = defineAsyncComponent(() => import('@/components/Programs.vue'))
+const FAQ = defineAsyncComponent(() => import('@/components/FAQ.vue'))
+const Testimonial = defineAsyncComponent(() => import('@/components/Testimonial.vue'))
+const CTABanner = defineAsyncComponent(() => import('@/components/CTABanner.vue'))
+const Contact = defineAsyncComponent(() => import('@/components/Contact.vue'))
 </script>
 
 <template>

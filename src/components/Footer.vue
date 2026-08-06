@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import logo from '/src/assets/image/logo.png'
+import logoWebp from '/src/assets/image/logo.webp'
+import logoAvif from '/src/assets/image/logo.avif'
+import OptimizedImage from '@/components/OptimizedImage.vue'
 
 const email = ref('')
 const sent = ref(false)
@@ -19,7 +22,14 @@ function subscribe(e) {
     <div class="container site-footer__inner">
       <div class="footer-brand">
         <a href="/" class="logo-link" aria-label="Corex Tek-Academy Home">
-          <img :src="logo" alt="Corex logo" />
+          <OptimizedImage
+            :src="logo"
+            :webp="logoWebp"
+            :avif="logoAvif"
+            alt="Corex logo"
+            class="footer-logo-img"
+            loading="eager"
+          />
         </a>
         <p class="brand-desc">
           Corex Tek-Academy delivers hands-on tech training, dedicated mentorship, and career support to launch beginner and aspiring professionals into tech.
@@ -50,10 +60,10 @@ function subscribe(e) {
         <div class="nav-col">
           <h4>Resources</h4>
           <ul>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Partners</a></li>
+            <li><a href="/blog" aria-disabled="true" tabindex="-1">Blog</a></li>
+            <li><a href="/events" aria-disabled="true" tabindex="-1">Events</a></li>
+            <li><a href="/faq" aria-disabled="true" tabindex="-1">FAQ</a></li>
+            <li><a href="/partners" aria-disabled="true" tabindex="-1">Partners</a></li>
           </ul>
         </div>
       </nav>
@@ -104,9 +114,9 @@ function subscribe(e) {
       <div class="container bottom-inner">
         <p>© 2026 Corex Tek-Academy. All rights reserved.</p>
         <div class="legal-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Accessibility</a>
+          <a href="/privacy" aria-disabled="true" tabindex="-1">Privacy Policy</a>
+          <a href="/terms" aria-disabled="true" tabindex="-1">Terms of Service</a>
+          <a href="/accessibility" aria-disabled="true" tabindex="-1">Accessibility</a>
         </div>
       </div>
     </div>
@@ -147,7 +157,7 @@ function subscribe(e) {
   gap: 20px;
 }
 
-.logo-link img {
+.logo-link :deep(img) {
   height: 48px;
   width: auto;
   display: block;
@@ -174,8 +184,8 @@ function subscribe(e) {
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--dark-highlight-subtle);
+  border: 1px solid var(--dark-inset-light);
   border-radius: 10px;
   font-size: 1.1rem;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -299,8 +309,8 @@ function subscribe(e) {
   flex: 1;
   padding: 12px 16px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-dark-border);
+  background: var(--dark-highlight-subtle);
   color: var(--light);
   font-family: inherit;
   font-size: 0.9rem;
@@ -314,7 +324,7 @@ function subscribe(e) {
 .subscribe-row input:focus {
   outline: none;
   border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--dark-highlight-mid);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
@@ -361,7 +371,7 @@ function subscribe(e) {
 /* Footer Bottom */
 .site-footer__bottom {
   margin-top: 60px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid var(--dark-inset-light);
   padding: 24px 0;
 }
 
@@ -427,6 +437,10 @@ function subscribe(e) {
     flex-direction: column;
     gap: 30px;
   }
+  .social-btn {
+    width: 44px;
+    height: 44px;
+  }
   .bottom-inner {
     flex-direction: column;
     gap: 12px;
@@ -436,6 +450,32 @@ function subscribe(e) {
     justify-content: center;
     flex-wrap: wrap;
     gap: 16px;
+  }
+  .legal-links a {
+    padding: 8px 4px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .subscribe-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .subscribe-row input {
+    width: 100%;
+  }
+
+  .btn-subscribe {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-nav {
+    gap: 24px;
   }
 }
 
