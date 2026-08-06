@@ -95,11 +95,11 @@ function onCardMouseMove(e) {
   <section class="programs container bg-lines" data-component="programs">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
-      <span class="badge-pill badge-pill--primary">
+      <span class="badge-pill badge-pill--orange">
         <i class="bi bi-mortarboard-fill"></i>
         Academy Curriculum
       </span>
-      <h2>Our <span class="text-gradient">Programs</span></h2>
+      <h2>Our <span class="text-gradient">Programs</span> & <span class="text-gradient-orange">Tracks</span></h2>
       <p>
         Explore our diverse range of tech programs designed to equip you with the practical skills 
         and professional mindset needed for a high-paying career in technology.

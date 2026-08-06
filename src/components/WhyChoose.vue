@@ -1,11 +1,11 @@
 <template>
   <section class="why-choose container bg-dots">
     <div class="section-header" v-scroll-reveal>
-      <span class="badge-pill badge-pill--purple">
+      <span class="badge-pill badge-pill--orange">
         <i class="bi bi-stars"></i>
         Why Corex
       </span>
-      <h2>Why Choose <span class="text-gradient">Corex Tek-Academy?</span></h2>
+      <h2>Why Choose <span class="text-gradient">Corex</span> <span class="text-gradient-orange">Tek-Academy?</span></h2>
       <p>
         We're not just another training program. Here's what makes the Corex experience different.
       </p>

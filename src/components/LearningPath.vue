@@ -2,11 +2,11 @@
   <section class="learning-path container bg-dots" id="syllabus">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
-      <span class="badge-pill badge-pill--primary">
+      <span class="badge-pill badge-pill--orange">
         <i class="bi bi-bezier2"></i>
         Learning Roadmap
       </span>
-      <h2>Your Path to <span class="text-gradient">Tech Mastery</span></h2>
+      <h2>Your Path to <span class="text-gradient">Tech</span> <span class="text-gradient-orange">Mastery</span></h2>
       <p>
         We've designed a structured, project-first roadmap to take you from writing your first line of code to landing a professional software role.
       </p>

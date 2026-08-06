@@ -15,9 +15,8 @@
   --primary-dark: #1d4ed8;
   --primary-light: rgba(59, 130, 246, 0.10);
   --primary-50: rgba(59, 130, 246, 0.06);
-  --primary-100: rgba(59, 130, 246, 0.12);
-  --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  --primary-gradient-vibrant: linear-gradient(135deg, #3b82f6 0%, #6366f1 40%, #8b5cf6 100%);
+  --primary-gradient: #3b82f6;
+  --primary-gradient-vibrant: #3b82f6;
 
   /* ── Accent Palette ── */
   --accent-purple: #8b5cf6;
@@ -36,8 +35,9 @@
   --accent-rose: #f43f5e;
   --accent-rose-50: rgba(244, 63, 94, 0.08);
 
-  --secondary: #fb923c;
-  --secondary-gradient: linear-gradient(135deg, #fb923c 0%, #ea580c 100%);
+  --secondary: #f97316;
+  --secondary-hover: #ea580c;
+  --secondary-gradient: #f97316;
 
   /* ── Premium Figma Dark Theme Surface Colors ── */
   --color-background: #0c0c0e;
@@ -181,10 +181,10 @@
    ═══════════════════════════════════════════════════════════════ */
 
 .dark-accent-card {
-  background: var(--bg-dark);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
   border-radius: var(--radius-lg);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   position: relative;
   overflow: hidden;
 }
@@ -614,30 +614,20 @@ a {
 
 
 /* ═══════════════════════════════════════════════════════════════
-   TEXT EFFECTS
+   TEXT HIGHLIGHTS (Solid Signature Blue & Signature Orange)
    ═══════════════════════════════════════════════════════════════ */
 
-.text-gradient {
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
-}
-
+.text-gradient,
 .text-gradient-vibrant {
-  background: var(--primary-gradient-vibrant);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary) !important;
+  -webkit-text-fill-color: var(--primary) !important;
   font-weight: 700;
 }
 
-.text-gradient-secondary {
-  background: var(--secondary-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.text-gradient-secondary,
+.text-gradient-orange {
+  color: var(--secondary) !important;
+  -webkit-text-fill-color: var(--secondary) !important;
   font-weight: 700;
 }
 

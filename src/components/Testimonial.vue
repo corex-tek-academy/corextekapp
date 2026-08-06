@@ -210,9 +210,9 @@ onUnmounted(() => {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  background: var(--bg-dark);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* Decorative background glow inside the dark card */
