@@ -92,7 +92,7 @@ function onCardMouseMove(e) {
 </script>
 
 <template>
-  <section class="programs container bg-lines" data-component="programs">
+  <section class="programs container bg-lines" id="programs" data-component="programs">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
       <span class="badge-pill badge-pill--orange">

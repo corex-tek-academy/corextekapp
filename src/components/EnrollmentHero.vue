@@ -90,8 +90,7 @@ import img5Avif from '/src/assets/image/img5.avif'
 /* Hero Section */
 .enrollment-hero {
   position: relative;
-  margin-top: 70px;
-  padding: 110px 0 70px;
+  padding: 110px 0 60px;
   overflow: hidden;
   background: var(--color-background);
 }

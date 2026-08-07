@@ -390,7 +390,7 @@ onUnmounted(() => {
           </div>
 
           <!-- Central Hardware Specular Surface Base -->
-          <div class="scene-base-glow" aria-hidden="true"></div>
+          <!-- <div class="scene-base-glow" aria-hidden="true"></div> -->
         </div>
       </div>
 
@@ -423,7 +423,7 @@ onUnmounted(() => {
 .hero-section {
   position: relative;
   min-height: 100vh;
-  padding-top: 130px;
+  padding-top: 110px;
   padding-bottom: 80px;
   display: flex;
   align-items: center;

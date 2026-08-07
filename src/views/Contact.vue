@@ -279,8 +279,7 @@ async function handleNewsletterSubmit() {
 /* Contact Hero Banner */
 .contact-hero {
   position: relative;
-  margin-top: 70px;
-  padding: 110px 0 70px;
+  padding: 110px 0 60px;
   overflow: hidden;
   background: var(--color-background);
   text-align: center;
