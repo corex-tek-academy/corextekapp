@@ -1,0 +1,36 @@
+{
+  "name": "Corex Tek-Academy",
+  "short_name": "CorexTek",
+  "description": "Build real tech skills with Corex Tek-Academy. Mentor-led, project-based training for beginners.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7c6bff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logomark.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "technology"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "View Programs",
+      "short_name": "Programs",
+      "description": "View our available tech programs",
+      "url": "/#programs",
+      "icons": [{ "src": "/logomark.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with our team",
+      "url": "/contact",
+      "icons": [{ "src": "/logomark.png", "sizes": "96x96" }]
+    }
+  ]
+}

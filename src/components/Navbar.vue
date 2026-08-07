@@ -185,33 +185,39 @@ onUnmounted(() => {
 
 
 .floating-nav-wrapper {
+  display: grid;
+  place-items: center;
   position: fixed;
-  top: 20px;
+  top: 20px; 
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
-  width: calc(100% - 32px);
-  max-width: 1040px;
+  width: 100%;
+  padding: 14px;
+  /* width: calc(100% - 32px);
+  max-width: 1040px; */
 
+  box-sizing: border-box;
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), top 0.35s ease;
 }
 
 /* Scrolled state subtle elevation */
-.floating-nav-wrapper.is-scrolled {
+/* .floating-nav-wrapper.is-scrolled {
   top: 14px;
-}
+} */
 
 .pill-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* height: 52px; */
   padding:10px;
   background: rgba(13, 14, 20, 0.78);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 9999px;
+  box-sizing: border-box;
+  /* width: 65%; */
   box-shadow: 
     0 16px 40px rgba(0, 0, 0, 0.5),
     0 0 0 1px rgba(255, 255, 255, 0.05),
@@ -233,6 +239,7 @@ onUnmounted(() => {
   align-items: center;
   text-decoration: none;
   padding-left: 4px;
+  flex-shrink: 0;
   transition: transform 0.25s ease;
 }
 
@@ -288,16 +295,16 @@ onUnmounted(() => {
   font-weight: 700;
 }
 
-/* Active Glowing Indicator Bar (Exact Cyan-Purple Accent from Image) */
+/* Active Glowing Indicator Bar (Blue System) */
 .active-indicator {
   position: absolute;
   bottom: 0;
   left: 18%;
   width: 64%;
   height: 2px;
-  background: linear-gradient(90deg, #2ee6ff 0%, #7c6bff 100%);
+  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
   border-radius: 2px;
-  box-shadow: 0 0 10px rgba(46, 230, 255, 0.7), 0 0 18px rgba(124, 107, 255, 0.5);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
   animation: indicatorFadeIn 0.25s ease forwards;
 }
 
@@ -311,30 +318,32 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
-/* White Pill Apply Button (Exact match to target image) */
+/* Primary Orange CTA Apply Button */
 .apply-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 9px 20px;
-  background: #ffffff;
-  color: #0b0c10 !important;
+  background: var(--secondary);
+  color: #ffffff !important;
   font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 700;
   border-radius: 9999px;
   text-decoration: none;
-  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(249, 115, 22, 0.35);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .apply-btn:hover {
   transform: translateY(-1px) scale(1.02);
-  background: #f4f5f8;
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.35);
-  color: #000000 !important;
+  background: var(--secondary-hover);
+  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.5);
+  color: #ffffff !important;
 }
 
 .arrow-icon {
@@ -360,6 +369,7 @@ onUnmounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .hamburger-bar {
@@ -468,21 +478,66 @@ onUnmounted(() => {
   .mobile-toggle-btn {
     display: flex;
   }
-}
-
-@media (max-width: 480px) {
   .floating-nav-wrapper {
-    width: calc(100% - 20px);
-    top: 12px;
+    width: 100%;
+    padding: 12px;
+    /* top: 12px; */
   }
 
-  .brand-tag, .brand-divider {
-    display: none;
+}
+
+@media (max-width: 600px) {
+
+  
+  .pill-navbar {
+    padding: 6px 10px;
+  }
+
+  .brand-group {
+    padding-left: 2px;
+  }
+
+  .brand-logo-img,
+  .brand-logo-img :deep(img) {
+    width: 108px;
+    height: 26px;
+  }
+
+  .nav-right-actions {
+    gap: 6px;
   }
 
   .apply-btn {
-    padding: 8px 14px;
-    font-size: 0.825rem;
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
+
+  .mobile-toggle-btn {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 380px) {
+  
+
+  .pill-navbar {
+    padding: 6px 8px;
+  }
+
+  .brand-logo-img,
+  .brand-logo-img :deep(img) {
+    width: 96px;
+    height: 24px;
+  }
+
+  .apply-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .apply-btn .arrow-icon {
+    display: none;
   }
 }
 </style>

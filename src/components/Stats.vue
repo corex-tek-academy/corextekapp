@@ -3,10 +3,10 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { gsap } from 'gsap'
 
 const stats = ref([
-  { value: 0, target: 500, suffix: '+', label: 'Students Trained', icon: 'bi-people-fill', color: 'rgba(59, 130, 246, 0.4)' },
-  { value: 0, target: 95, suffix: '%', label: 'Completion Rate', icon: 'bi-check-circle-fill', color: 'rgba(16, 185, 129, 0.4)' },
-  { value: 0, target: 10, suffix: '+', label: 'Tech Programs', icon: 'bi-mortarboard-fill', color: 'rgba(139, 92, 246, 0.4)' },
-  { value: 0, target: 50, suffix: '+', label: 'Projects Built', icon: 'bi-code-slash', color: 'rgba(249, 115, 22, 0.4)' },
+  { value: 0, target: 500, suffix: '+', label: 'Students Trained', icon: 'bi-people-fill', color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)' },
+  { value: 0, target: 95, suffix: '%', label: 'Completion Rate', icon: 'bi-check-circle-fill', color: '#10b981', bgColor: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)' },
+  { value: 0, target: 10, suffix: '+', label: 'Tech Programs', icon: 'bi-mortarboard-fill', color: '#8b5cf6', bgColor: 'rgba(139, 92, 246, 0.12)', borderColor: 'rgba(139, 92, 246, 0.25)' },
+  { value: 0, target: 50, suffix: '+', label: 'Projects Built', icon: 'bi-code-slash', color: '#f97316', bgColor: 'rgba(249, 115, 22, 0.12)', borderColor: 'rgba(249, 115, 22, 0.25)' },
 ])
 
 const hasAnimated = ref(false)
@@ -71,13 +71,13 @@ onUnmounted(() => {
   <section class="stats-section container">
     <div class="stats-grid">
       <div 
-        class="stat-card box-3d-extruded" 
+        class="stat-card glass-panel-dark" 
         v-for="(stat, i) in stats" 
         :key="i"
-        :style="{ '--card-accent': stat.color }"
         v-scroll-reveal="i + 1"
+        :style="{ '--stat-color': stat.color, '--stat-bg': stat.bgColor, '--stat-border': stat.borderColor }"
       >
-        <div class="stat-icon">
+        <div class="stat-icon" :style="{ background: stat.bgColor, color: stat.color, borderColor: stat.borderColor }">
           <i class="bi" :class="stat.icon"></i>
         </div>
         <div class="stat-content">
@@ -106,18 +106,32 @@ onUnmounted(() => {
   gap: var(--space-4);
   padding: var(--space-6) var(--space-6);
   background: var(--color-surface);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--stat-border) !important;
+  box-shadow: 0 12px 32px var(--stat-bg);
 }
 
 .stat-icon {
   width: 48px;
   height: 48px;
-  border-radius: var(--radius-sm);
-  background: rgba(59, 130, 246, 0.06);
-  color: var(--primary-text);
+  border-radius: 12px;
+  border: 1px solid transparent;
   display: grid;
   place-items: center;
   font-size: 1.25rem;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 16px var(--stat-bg);
+}
+
+.stat-card:hover .stat-icon {
+  transform: scale(1.08) rotate(3deg);
 }
 
 .stat-content {

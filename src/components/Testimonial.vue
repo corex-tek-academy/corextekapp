@@ -250,16 +250,14 @@ onUnmounted(() => {
   align-items: center;
 }
 
-/* Floating avatar with glowing rings */
+/* Avatar - simplified without gradient ring */
 .avatar-ring {
   position: relative;
   width: 180px;
   height: 180px;
   border-radius: 50% !important;
   overflow: hidden !important;
-  padding: 4px;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+  border: 3px solid var(--color-border);
   flex-shrink: 0;
 }
 

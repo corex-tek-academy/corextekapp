@@ -13,8 +13,76 @@ const isTouchDevice = ref(false)
 // Cursor trail state
 let trailParticles = []
 let trailAnimFrame = null
-let trailLastSpawn = 0
-const trailColors = ['#7c6bff', '#2ee6ff', '#ff3ec8']
+let handleTrailMouseMove = null
+const trailColors = ['#3b82f6', '#60a5fa', '#8b5cf6', '#93c5fd']
+
+function initTrailCanvas() {
+  const canvas = trailCanvasRef.value
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+
+  function resize() {
+    if (!canvas) return
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+  }
+  resize()
+  window.addEventListener('resize', resize)
+
+  function spawnParticle(x, y) {
+    for (let i = 0; i < 2; i++) {
+      trailParticles.push({
+        x: x + (Math.random() - 0.5) * 10,
+        y: y + (Math.random() - 0.5) * 10,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: (Math.random() - 0.5) * 1.2 - 0.4,
+        radius: Math.random() * 3.5 + 1.5,
+        color: trailColors[Math.floor(Math.random() * trailColors.length)],
+        alpha: 0.9,
+        decay: Math.random() * 0.02 + 0.015
+      })
+    }
+  }
+
+  function renderTrail() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    for (let i = trailParticles.length - 1; i >= 0; i--) {
+      const p = trailParticles[i]
+      p.x += p.vx
+      p.y += p.vy
+      p.alpha -= p.decay
+      p.radius *= 0.96
+
+      if (p.alpha <= 0 || p.radius <= 0.5) {
+        trailParticles.splice(i, 1)
+        continue
+      }
+
+      ctx.save()
+      ctx.globalAlpha = p.alpha
+      ctx.shadowBlur = 10
+      ctx.shadowColor = p.color
+      ctx.fillStyle = p.color
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+    }
+
+    trailAnimFrame = requestAnimationFrame(renderTrail)
+  }
+
+  renderTrail()
+
+  handleTrailMouseMove = (e) => {
+    if (isTouchDevice.value) return
+    const rect = canvas.getBoundingClientRect()
+    spawnParticle(e.clientX - rect.left, e.clientY - rect.top)
+  }
+
+  window.addEventListener('mousemove', handleTrailMouseMove)
+}
 
 // Animated Trust Statistics
 const stats = ref([
@@ -26,7 +94,7 @@ const stats = ref([
 
 const hasAnimatedStats = ref(false)
 
-// Hardware 3D Perspective Tilt Physics
+// Hardware 3D Perspective Tilt Physics - simplified
 function onMouseMove(e) {
   if (isTouchDevice.value || !sceneRef.value) return
   const rect = sceneRef.value.getBoundingClientRect()
@@ -36,9 +104,9 @@ function onMouseMove(e) {
   const mouseX = e.clientX - centerX
   const mouseY = e.clientY - centerY
   
-  // Constrain max rotation between -4deg and +4deg for elegant Apple-like depth
-  const rotateX = (-mouseY / (rect.height / 2)) * 4
-  const rotateY = (mouseX / (rect.width / 2)) * 4
+  // Subtle tilt only - reduced from 4deg to 2deg for cleaner effect
+  const rotateX = (-mouseY / (rect.height / 2)) * 2
+  const rotateY = (mouseX / (rect.width / 2)) * 2
   
   gsap.to('.scene-3d-inner', {
     rotateX: rotateX,
@@ -47,12 +115,12 @@ function onMouseMove(e) {
     ease: 'power2.out'
   })
 
-  // Multi-plane parallax offset for internal floating panels
-  gsap.to('.panel-code', { x: mouseX * 0.02, y: mouseY * 0.02, duration: 0.8, ease: 'power2.out' })
-  gsap.to('.panel-ai', { x: -mouseX * 0.03, y: -mouseY * 0.03, duration: 0.8, ease: 'power2.out' })
-  gsap.to('.panel-analytics', { x: mouseX * 0.04, y: -mouseY * 0.03, duration: 0.8, ease: 'power2.out' })
-  gsap.to('.card-left', { x: -mouseX * 0.025, y: -mouseY * 0.02, duration: 0.8, ease: 'power2.out' })
-  gsap.to('.card-right', { x: mouseX * 0.025, y: mouseY * 0.02, duration: 0.8, ease: 'power2.out' })
+  // Simplified parallax - reduced effect
+  gsap.to('.panel-code', { x: mouseX * 0.01, y: mouseY * 0.01, duration: 0.8, ease: 'power2.out' })
+  gsap.to('.panel-ai', { x: -mouseX * 0.015, y: -mouseY * 0.015, duration: 0.8, ease: 'power2.out' })
+  gsap.to('.panel-analytics', { x: mouseX * 0.02, y: -mouseY * 0.015, duration: 0.8, ease: 'power2.out' })
+  gsap.to('.card-left', { x: -mouseX * 0.01, y: -mouseY * 0.01, duration: 0.8, ease: 'power2.out' })
+  gsap.to('.card-right', { x: mouseX * 0.01, y: mouseY * 0.01, duration: 0.8, ease: 'power2.out' })
 }
 
 function onMouseLeave() {
@@ -99,79 +167,6 @@ function animateStats() {
   })
 }
 
-// Cursor trail — mouse handler (scoped to hero section)
-function onTrailMouseMove(e) {
-  const now = performance.now()
-  if (now - trailLastSpawn < 18) return
-  trailLastSpawn = now
-
-  // Get position relative to the hero section (canvas fills the section)
-  const heroEl = heroRef.value
-  if (!heroEl) return
-  const rect = heroEl.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-
-  trailParticles.push({
-    x,
-    y,
-    vx: (Math.random() - 0.5) * 0.6,
-    vy: (Math.random() - 0.5) * 0.6,
-    r: 2 + Math.random() * 2.5,
-    life: 1,
-    color: trailColors[Math.floor(Math.random() * trailColors.length)]
-  })
-
-  if (trailParticles.length > 60) trailParticles.shift()
-}
-
-function initTrailCanvas() {
-  const canvas = trailCanvasRef.value
-  if (!canvas) return
-  const ctx = canvas.getContext('2d')
-  const dpr = window.devicePixelRatio || 1
-
-  function resizeCanvas() {
-    const heroEl = heroRef.value
-    if (!heroEl) return
-    const w = heroEl.offsetWidth
-    const h = heroEl.offsetHeight
-    canvas.width = w * dpr
-    canvas.height = h * dpr
-    canvas.style.width = w + 'px'
-    canvas.style.height = h + 'px'
-    ctx.setTransform(1, 0, 0, 1, 0, 0)
-    ctx.scale(dpr, dpr)
-  }
-  resizeCanvas()
-  window.addEventListener('resize', resizeCanvas, { passive: true })
-
-  function draw() {
-    const heroEl = heroRef.value
-    if (!heroEl) { trailAnimFrame = requestAnimationFrame(draw); return }
-    ctx.clearRect(0, 0, heroEl.offsetWidth, heroEl.offsetHeight)
-
-    trailParticles.forEach(p => {
-      p.x += p.vx
-      p.y += p.vy
-      p.life -= 0.02
-
-      ctx.beginPath()
-      ctx.arc(p.x, p.y, p.r * Math.max(p.life, 0), 0, Math.PI * 2)
-      ctx.fillStyle = p.color
-      ctx.globalAlpha = Math.max(p.life, 0) * 0.7
-      ctx.shadowBlur = 12
-      ctx.shadowColor = p.color
-      ctx.fill()
-    })
-
-    ctx.globalAlpha = 1
-    trailParticles = trailParticles.filter(p => p.life > 0)
-    trailAnimFrame = requestAnimationFrame(draw)
-  }
-  trailAnimFrame = requestAnimationFrame(draw)
-}
-
 onMounted(() => {
   if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
     isTouchDevice.value = true
@@ -180,7 +175,6 @@ onMounted(() => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const isFinePointer = window.matchMedia('(pointer: fine)').matches
 
-  // Initialize cursor trail for desktop users who don't mind motion
   if (!prefersReduced && isFinePointer) {
     initTrailCanvas()
   }
@@ -238,11 +232,15 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (trailAnimFrame) cancelAnimationFrame(trailAnimFrame)
+  if (handleTrailMouseMove) window.removeEventListener('mousemove', handleTrailMouseMove)
 })
 </script>
 
 <template>
-  <section ref="heroRef" class="hero-section" aria-labelledby="hero-main-heading" @mousemove="onTrailMouseMove">
+  <section ref="heroRef" class="hero-section" aria-labelledby="hero-main-heading">
+    <!-- Interactive Canvas Mouse Trail -->
+    <canvas ref="trailCanvasRef" class="hero-trail-canvas" aria-hidden="true"></canvas>
+
     <!-- Ambient Floating Bubbles Background -->
     <div class="hero-bubbles" aria-hidden="true">
       <div class="hero-bubble hero-bubble-1"></div>
@@ -250,9 +248,6 @@ onUnmounted(() => {
       <div class="hero-bubble hero-bubble-3"></div>
       <div class="hero-bubble hero-bubble-4"></div>
     </div>
-
-    <!-- Cursor Trail Canvas -->
-    <canvas ref="trailCanvasRef" class="hero-trail-canvas" aria-hidden="true"></canvas>
 
     <!-- Ambient Environmental Background -->
     <div class="ambient-environment" aria-hidden="true">
@@ -280,26 +275,26 @@ onUnmounted(() => {
 
         <!-- Right Floating Feature Card (Desktop) -->
         <div class="hero-side-card card-right glass-panel-dark animate-float-delayed" aria-hidden="true">
-          <div class="side-card-icon icon-orange-glow">
+          <div class="side-card-icon icon-blue-glow">
             <i class="bi bi-cpu-fill"></i>
           </div>
           <div class="side-card-info">
             <span class="side-card-title">AI & Cloud Architecture</span>
             <span class="side-card-sub">Python • AWS • Neural Nets</span>
-            <span class="side-card-tag tag-orange">Capstone Ready</span>
+            <span class="side-card-tag tag-blue">Capstone Ready</span>
           </div>
         </div>
 
-        <!-- Live Enrollment Badge with Orange Pulse Accent -->
+        <!-- Live Enrollment Badge with Blue Pulse Accent -->
         <div class="hero-badge-container">
           <span class="editorial-badge">
-            <span class="pulse-ring pulse-orange"></span>
-            <span class="badge-text">Cohort 1 Enrolling • <span class="accent-orange-tag">Feb 2026 Batch</span></span>
+            <span class="pulse-ring pulse-blue"></span>
+            <span class="badge-text">Cohort 1 Enrolling • <span class="accent-blue-tag">Feb 2026 Batch</span></span>
             <i class="bi bi-arrow-right-short badge-arrow"></i>
           </span>
         </div>
 
-        <!-- Short, Punchy Editorial Headline -->
+        <!-- Short, Punchy Editorial Headline (Single Orange Highlight) -->
         <h1 id="hero-main-heading" class="editorial-title">
           <span class="title-line-1">Build the Future.</span>
           <span class="title-line-2 text-orange-highlight">Master Technology That Matters.</span>
@@ -310,11 +305,11 @@ onUnmounted(() => {
           Mentor-led, project-first training engineered to transform aspiring developers into job-ready tech leaders.
         </p>
 
-        <!-- Magnetic Call-to-Action Group -->
+        <!-- Magnetic Call-to-Action Group (Single Orange Primary CTA) -->
         <div class="editorial-actions">
           <router-link 
             to="/enrollment" 
-            class="cta-magnetic cta-primary"
+            class="cta-magnetic cta-primary-orange"
             @mousemove="onMagneticMove"
             @mouseleave="onMagneticLeave"
           >
@@ -325,7 +320,7 @@ onUnmounted(() => {
 
           <router-link 
             to="/enrollment" 
-            class="cta-magnetic cta-secondary cta-secondary-orange"
+            class="cta-magnetic cta-secondary"
             @mousemove="onMagneticMove"
             @mouseleave="onMagneticLeave"
           >
@@ -366,7 +361,7 @@ onUnmounted(() => {
 
           <!-- AI Assistant Floating Pill (Layer 4) -->
           <div class="floating-panel panel-ai glass-panel-dark">
-            <div class="ai-icon-wrap icon-orange-glow">
+            <div class="ai-icon-wrap icon-blue-glow">
               <i class="bi bi-cpu-fill"></i>
             </div>
             <div class="ai-info">
@@ -375,17 +370,17 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <!-- Analytics Dashboard Card with Touch of Orange (Layer 5) -->
+          <!-- Analytics Dashboard Card (Layer 5) -->
           <div class="floating-panel panel-analytics glass-panel-dark">
             <div class="analytics-header">
               <span class="analytics-title">Graduate Placement</span>
-              <span class="analytics-badge badge-orange">+95% Placed</span>
+              <span class="analytics-badge badge-blue">+95% Placed</span>
             </div>
             <div class="analytics-graph">
               <div class="bar bar-1" style="height: 45%;"></div>
               <div class="bar bar-2" style="height: 65%;"></div>
               <div class="bar bar-3" style="height: 85%;"></div>
-              <div class="bar bar-4 bar-orange" style="height: 100%;"></div>
+              <div class="bar bar-4 bar-blue" style="height: 100%;"></div>
             </div>
           </div>
 
@@ -423,7 +418,7 @@ onUnmounted(() => {
 .hero-section {
   position: relative;
   min-height: 100vh;
-  padding-top: 110px;
+  padding-top: 160px;
   padding-bottom: 80px;
   display: flex;
   align-items: center;
@@ -821,6 +816,45 @@ onUnmounted(() => {
   color: var(--text-on-primary) !important;
 }
 
+.cta-primary-orange {
+  color: #ffffff !important;
+  background: var(--secondary) !important;
+  box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);
+  overflow: hidden;
+}
+
+.cta-primary-orange:hover {
+  background: var(--secondary-hover) !important;
+  box-shadow: 0 12px 40px rgba(249, 115, 22, 0.5);
+  color: #ffffff !important;
+}
+
+.pulse-blue {
+  background: var(--primary) !important;
+  box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6) !important;
+  animation: pulseBlue 2s infinite !important;
+}
+
+@keyframes pulseBlue {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.accent-blue-tag {
+  color: var(--primary-text);
+  font-weight: 700;
+}
+
+.badge-blue {
+  color: var(--primary-text) !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+}
+
+.bar-blue {
+  background: linear-gradient(to top, rgba(59, 130, 246, 0.3), var(--primary)) !important;
+}
+
 .cta-secondary {
   color: var(--text);
   background: rgba(255, 255, 255, 0.04);
@@ -921,6 +955,7 @@ onUnmounted(() => {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   line-height: 1.6;
+  overflow: auto;
 }
 
 .code-body pre { margin: 0; }

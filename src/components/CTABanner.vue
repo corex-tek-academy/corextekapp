@@ -1,14 +1,7 @@
 <template>
   <section class="cta-section bg-diagonal-grid divider-line-y">
     <div class="cta-banner container">
-      <div class="cta-card dark-accent-card" style="--card-accent: var(--accent-purple);" v-scroll-reveal.scale>
-      <!-- Circular ring decorations -->
-      <div class="cta-rings" aria-hidden="true"></div>
-      <!-- Background Aurora Glow -->
-      <div class="cta-bg-glow" aria-hidden="true">
-        <div class="orb orb-primary"></div>
-        <div class="orb orb-purple"></div>
-      </div>
+      <div class="cta-card dark-accent-card" style="--card-accent: var(--primary);" v-scroll-reveal.scale>
 
       <div class="cta-content">
         <span class="badge-pill badge-pill-dark">
@@ -25,7 +18,7 @@
             <i class="bi bi-arrow-right" aria-hidden="true"></i>
           </router-link>
           
-          <router-link to="/contact" class="btn btn-secondary-dark" role="button">
+          <router-link to="/contact" class="btn btn-secondary--neutral" role="button">
             <span>Talk to Admissions</span>
             <i class="bi bi-chat-dots" aria-hidden="true"></i>
           </router-link>
@@ -57,70 +50,6 @@
   background: var(--color-surface);
   border: 1px solid var(--color-border-light);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-}
-
-/* Circular rings pattern — large left cluster */
-.cta-card::before {
-  content: '';
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  top: 50%;
-  left: -180px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Ccircle cx='250' cy='250' r='240' fill='none' stroke='%23fb923c' stroke-width='1'/%3E%3Ccircle cx='250' cy='250' r='200' fill='none' stroke='%23fb923c' stroke-width='0.8' stroke-dasharray='8 6'/%3E%3Ccircle cx='250' cy='250' r='160' fill='none' stroke='%23fb923c' stroke-width='1'/%3E%3Ccircle cx='250' cy='250' r='120' fill='none' stroke='%23fb923c' stroke-width='0.6' stroke-dasharray='3 8'/%3E%3Ccircle cx='250' cy='250' r='80' fill='none' stroke='%23fb923c' stroke-width='0.8' stroke-dasharray='1.5 6'/%3E%3Ccircle cx='250' cy='250' r='40' fill='none' stroke='%23fb923c' stroke-width='1'/%3E%3C/svg%3E");
-  background-size: 500px 500px;
-  background-repeat: no-repeat;
-}
-
-/* Circular rings pattern — large right cluster */
-.cta-rings {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  top: 50%;
-  right: -180px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Ccircle cx='250' cy='250' r='240' fill='none' stroke='%23fb923c' stroke-width='0.8' stroke-dasharray='4 8'/%3E%3Ccircle cx='250' cy='250' r='200' fill='none' stroke='%23fb923c' stroke-width='1'/%3E%3Ccircle cx='250' cy='250' r='160' fill='none' stroke='%23fb923c' stroke-width='0.6' stroke-dasharray='1.5 6'/%3E%3Ccircle cx='250' cy='250' r='120' fill='none' stroke='%23fb923c' stroke-width='1' stroke-dasharray='8 4'/%3E%3Ccircle cx='250' cy='250' r='80' fill='none' stroke='%23fb923c' stroke-width='0.8'/%3E%3Ccircle cx='250' cy='250' r='40' fill='none' stroke='%23fb923c' stroke-width='0.6' stroke-dasharray='2 5'/%3E%3C/svg%3E");
-  background-size: 500px 500px;
-  background-repeat: no-repeat;
-}
-
-/* Background glows */
-.cta-bg-glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.2;
-}
-
-.orb-primary {
-  width: 400px;
-  height: 400px;
-  top: -50%;
-  left: -20%;
-  background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
-}
-
-.orb-purple {
-  width: 400px;
-  height: 400px;
-  bottom: -50%;
-  right: -20%;
-  background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
 }
 
 /* Content Layout */
@@ -171,52 +100,6 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: var(--space-2);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 14px 28px;
-  border-radius: var(--radius-full);
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-out-expo);
-  border: none;
-}
-
-.btn-primary {
-  background: var(--primary) !important;
-  color: var(--text-on-primary) !important;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  background: var(--primary-hover) !important;
-  color: var(--text-on-primary) !important;
-}
-
-.btn-primary i {
-  transition: transform 0.25s var(--ease-out-expo);
-}
-
-.btn-primary:hover i {
-  transform: translateX(4px);
-}
-
-.btn-secondary-dark {
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--light);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.btn-secondary-dark:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  color: var(--light);
 }
 
 @media (max-width: 576px) {

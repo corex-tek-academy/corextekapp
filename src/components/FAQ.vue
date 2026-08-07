@@ -2,11 +2,11 @@
   <section class="faq container" id="faq">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
-      <span class="badge-pill badge-pill--orange">
+      <span class="badge-pill badge-pill--primary">
         <i class="bi bi-patch-question-fill"></i>
         Common Questions
       </span>
-      <h2>Frequently Asked <span class="text-gradient">Questions</span></h2>
+      <h2>Frequently Asked Questions</h2>
       <p>
         Got questions about Corex Tek-Academy? We have answers. If you don't find what you need, contact admissions.
       </p>
@@ -100,17 +100,13 @@ function toggleFAQ(index) {
 .faq-item {
   border-radius: var(--radius-md);
   padding: 0;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--color-border);
   overflow: hidden;
   transition: all 0.35s var(--ease-out-expo);
 }
 
-.faq-item:hover {
-  border-color: rgba(59, 130, 246, 0.15);
-}
-
 .faq-item--active {
-  border-color: rgba(59, 130, 246, 0.2);
+  border-color: var(--primary);
   box-shadow: var(--shadow-md);
 }
 
@@ -144,12 +140,7 @@ function toggleFAQ(index) {
   display: grid;
   place-items: center;
   color: var(--text-secondary);
-  transition: transform 0.35s var(--ease-out-expo), background-color 0.3s ease;
-}
-
-.faq-trigger:hover .faq-icon-wrap {
-  background-color: var(--primary-light);
-  color: var(--primary-text);
+  transition: transform 0.35s var(--ease-out-expo);
 }
 
 .faq-item--active .faq-icon-wrap {
