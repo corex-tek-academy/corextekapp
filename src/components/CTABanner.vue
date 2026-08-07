@@ -189,13 +189,13 @@
 
 .btn-primary {
   background: var(--primary) !important;
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
   background: var(--primary-hover) !important;
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
 }
 
 .btn-primary i {

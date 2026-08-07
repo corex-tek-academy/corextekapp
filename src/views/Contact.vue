@@ -495,7 +495,7 @@ async function handleNewsletterSubmit() {
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-  color: #94a3b8;
+  color: var(--text-tertiary);
 }
 
 .contact-form input:focus,
@@ -525,7 +525,7 @@ async function handleNewsletterSubmit() {
 
 .btn-submit-primary {
   background: var(--primary) !important;
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
   box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
 
@@ -548,7 +548,7 @@ async function handleNewsletterSubmit() {
   border-radius: 10px;
   background-color: rgba(16, 185, 129, 0.08);
   border: 1px solid rgba(16, 185, 129, 0.2);
-  color: #10b981;
+  color: var(--accent-green);
   font-size: 0.85rem;
   font-weight: 600;
   margin-top: 8px;
@@ -594,13 +594,13 @@ async function handleNewsletterSubmit() {
 
 .btn-submit-light {
   background: var(--secondary) !important;
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
   box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
 }
 
 .btn-submit-light:hover:not(:disabled) {
   background: var(--secondary-hover) !important;
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(249, 115, 22, 0.45);
 }
@@ -677,8 +677,8 @@ async function handleNewsletterSubmit() {
 .card-call::before { background-color: var(--secondary); }
 .card-email .icon-circle { background-color: rgba(59, 130, 246, 0.12); color: var(--primary); }
 .card-email::before { background-color: var(--primary); }
-.card-location .icon-circle { background-color: rgba(16, 185, 129, 0.12); color: #34d399; }
-.card-location::before { background-color: #34d399; }
+.card-location .icon-circle { background-color: rgba(16, 185, 129, 0.12); color: var(--accent-green-text); }
+.card-location::before { background-color: var(--accent-green-text); }
 
 .info-card .card-body {
   display: flex;

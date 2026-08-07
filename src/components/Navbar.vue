@@ -192,9 +192,7 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-/* ═══════════════════════════════════════════════════════════════
-   $20k PROFESSIONAL NAVIGATION HEADER
-   ═══════════════════════════════════════════════════════════════ */
+
 
 .navbar-wrapper {
   position: fixed;
@@ -345,7 +343,7 @@ onBeforeUnmount(() => {
   padding: 10px 22px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
   background: var(--primary) !important;
   border: none;
   border-radius: var(--radius-full);
@@ -358,7 +356,7 @@ onBeforeUnmount(() => {
   transform: translateY(-2px);
   background: var(--primary-hover) !important;
   box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
 }
 
 .cta-icon {
@@ -505,7 +503,7 @@ onBeforeUnmount(() => {
   border-radius: var(--radius-full);
   font-size: 0.78rem;
   font-weight: 600;
-  color: #34d399;
+  color: var(--accent-green-text);
 }
 
 .badge-pulse {

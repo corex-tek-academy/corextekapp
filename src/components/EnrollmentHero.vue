@@ -262,7 +262,7 @@ import img5Avif from '/src/assets/image/img5.avif'
   top: 20px;
   left: 20px;
   background: var(--secondary);
-  color: #ffffff;
+  color: var(--text-on-primary);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   font-size: 0.825rem;

@@ -47,12 +47,12 @@ onUnmounted(() => {
   z-index: 9999;
   opacity: 0;
   transition: opacity 0.4s ease;
-  background: radial-gradient(
+  /* background: radial-gradient(
     650px circle at var(--cursor-x, -10px) var(--cursor-y, -10px),
     rgba(59, 130, 246, 0.08),
     rgba(139, 92, 246, 0.04) 40%,
     transparent 80%
-  );
+  ); */
   mix-blend-mode: screen;
 }
 

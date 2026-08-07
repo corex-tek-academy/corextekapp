@@ -7,7 +7,14 @@ gsap.registerPlugin(ScrollTrigger)
 
 const heroRef = ref(null)
 const sceneRef = ref(null)
+const trailCanvasRef = ref(null)
 const isTouchDevice = ref(false)
+
+// Cursor trail state
+let trailParticles = []
+let trailAnimFrame = null
+let trailLastSpawn = 0
+const trailColors = ['#7c6bff', '#2ee6ff', '#ff3ec8']
 
 // Animated Trust Statistics
 const stats = ref([
@@ -92,12 +99,91 @@ function animateStats() {
   })
 }
 
+// Cursor trail — mouse handler (scoped to hero section)
+function onTrailMouseMove(e) {
+  const now = performance.now()
+  if (now - trailLastSpawn < 18) return
+  trailLastSpawn = now
+
+  // Get position relative to the hero section (canvas fills the section)
+  const heroEl = heroRef.value
+  if (!heroEl) return
+  const rect = heroEl.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+
+  trailParticles.push({
+    x,
+    y,
+    vx: (Math.random() - 0.5) * 0.6,
+    vy: (Math.random() - 0.5) * 0.6,
+    r: 2 + Math.random() * 2.5,
+    life: 1,
+    color: trailColors[Math.floor(Math.random() * trailColors.length)]
+  })
+
+  if (trailParticles.length > 60) trailParticles.shift()
+}
+
+function initTrailCanvas() {
+  const canvas = trailCanvasRef.value
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+  const dpr = window.devicePixelRatio || 1
+
+  function resizeCanvas() {
+    const heroEl = heroRef.value
+    if (!heroEl) return
+    const w = heroEl.offsetWidth
+    const h = heroEl.offsetHeight
+    canvas.width = w * dpr
+    canvas.height = h * dpr
+    canvas.style.width = w + 'px'
+    canvas.style.height = h + 'px'
+    ctx.setTransform(1, 0, 0, 1, 0, 0)
+    ctx.scale(dpr, dpr)
+  }
+  resizeCanvas()
+  window.addEventListener('resize', resizeCanvas, { passive: true })
+
+  function draw() {
+    const heroEl = heroRef.value
+    if (!heroEl) { trailAnimFrame = requestAnimationFrame(draw); return }
+    ctx.clearRect(0, 0, heroEl.offsetWidth, heroEl.offsetHeight)
+
+    trailParticles.forEach(p => {
+      p.x += p.vx
+      p.y += p.vy
+      p.life -= 0.02
+
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.r * Math.max(p.life, 0), 0, Math.PI * 2)
+      ctx.fillStyle = p.color
+      ctx.globalAlpha = Math.max(p.life, 0) * 0.7
+      ctx.shadowBlur = 12
+      ctx.shadowColor = p.color
+      ctx.fill()
+    })
+
+    ctx.globalAlpha = 1
+    trailParticles = trailParticles.filter(p => p.life > 0)
+    trailAnimFrame = requestAnimationFrame(draw)
+  }
+  trailAnimFrame = requestAnimationFrame(draw)
+}
+
 onMounted(() => {
   if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
     isTouchDevice.value = true
   }
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches
+
+  // Initialize cursor trail for desktop users who don't mind motion
+  if (!prefersReduced && isFinePointer) {
+    initTrailCanvas()
+  }
 
   if (!prefersReduced) {
     // 1. Initial Master Entrance Timeline
@@ -149,10 +235,25 @@ onMounted(() => {
     observer.observe(statsEl)
   }
 })
+
+onUnmounted(() => {
+  if (trailAnimFrame) cancelAnimationFrame(trailAnimFrame)
+})
 </script>
 
 <template>
-  <section ref="heroRef" class="hero-section" aria-labelledby="hero-main-heading">
+  <section ref="heroRef" class="hero-section" aria-labelledby="hero-main-heading" @mousemove="onTrailMouseMove">
+    <!-- Ambient Floating Bubbles Background -->
+    <div class="hero-bubbles" aria-hidden="true">
+      <div class="hero-bubble hero-bubble-1"></div>
+      <div class="hero-bubble hero-bubble-2"></div>
+      <div class="hero-bubble hero-bubble-3"></div>
+      <div class="hero-bubble hero-bubble-4"></div>
+    </div>
+
+    <!-- Cursor Trail Canvas -->
+    <canvas ref="trailCanvasRef" class="hero-trail-canvas" aria-hidden="true"></canvas>
+
     <!-- Ambient Environmental Background -->
     <div class="ambient-environment" aria-hidden="true">
       <div class="mesh-gradient-aurora"></div>
@@ -255,11 +356,11 @@ onMounted(() => {
             <div class="code-body">
               <pre><code><span class="kwd">import</span> { <span class="vrb">useEngineer</span> } <span class="kwd">from</span> <span class="str">'@corex/tek'</span>
 
-<span class="kwd">const</span> { <span class="vrb">skills</span>, <span class="vrb">deploy</span> } = <span class="fnc">useEngineer</span>({
-  <span class="prop">track</span>: <span class="str">'Full-Stack Architecture'</span>,
-  <span class="prop">mentorship</span>: <span class="kwd">true</span>,
-  <span class="prop">status</span>: <span class="str">'Ready to Hire 🚀'</span>
-})</code></pre>
+              <span class="kwd">const</span> { <span class="vrb">skills</span>, <span class="vrb">deploy</span> } = <span class="fnc">useEngineer</span>({
+                <span class="prop">track</span>: <span class="str">'Full-Stack Architecture'</span>,
+                <span class="prop">mentorship</span>: <span class="kwd">true</span>,
+                <span class="prop">status</span>: <span class="str">'Ready to Hire 🚀'</span>
+              })</code></pre>
             </div>
           </div>
 
@@ -318,9 +419,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* ═══════════════════════════════════════════════════════════════
-   CINEMATIC EDITORIAL HERO SECTION ($20k benchmark)
-   ═══════════════════════════════════════════════════════════════ */
 
 .hero-section {
   position: relative;
@@ -331,6 +429,70 @@ onMounted(() => {
   align-items: center;
   overflow: hidden;
   background: var(--color-background);
+}
+
+/* ── Ambient Floating Bubbles ── */
+.hero-bubbles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-bubble {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  will-change: transform, filter;
+}
+
+.hero-bubble-1 {
+  width: 54vw; height: 54vw;
+  top: -18vw; left: -12vw;
+  background: radial-gradient(circle, rgba(124, 107, 255, 0.65), transparent 68%);
+  animation: heroDrift1 18s ease-in-out infinite alternate, heroHueShift 12s linear infinite;
+}
+
+.hero-bubble-2 {
+  width: 44vw; height: 44vw;
+  top: 2vw; right: -14vw;
+  background: radial-gradient(circle, rgba(46, 230, 255, 0.5), transparent 68%);
+  animation: heroDrift2 15s ease-in-out infinite alternate, heroHueShift 16s linear infinite reverse;
+}
+
+.hero-bubble-3 {
+  width: 38vw; height: 38vw;
+  bottom: -16vw; left: 26vw;
+  background: radial-gradient(circle, rgba(255, 62, 200, 0.35), transparent 70%);
+  animation: heroDrift3 20s ease-in-out infinite alternate, heroHueShift 20s linear infinite;
+}
+
+.hero-bubble-4 {
+  width: 26vw; height: 26vw;
+  bottom: 6vw; right: 8vw;
+  background: radial-gradient(circle, rgba(255, 180, 84, 0.3), transparent 70%);
+  animation: heroDrift4 13s ease-in-out infinite alternate;
+}
+
+@keyframes heroDrift1 { to { transform: translate(7vw, 8vw) scale(1.18); } }
+@keyframes heroDrift2 { to { transform: translate(-8vw, 6vw) scale(1.22); } }
+@keyframes heroDrift3 { to { transform: translate(5vw, -7vw) scale(1.12); } }
+@keyframes heroDrift4 { to { transform: translate(-4vw, -5vw) scale(1.15); } }
+@keyframes heroHueShift { to { filter: blur(80px) hue-rotate(45deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bubble { animation: none !important; }
+}
+
+/* ── Cursor Trail Canvas ── */
+.hero-trail-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
 }
 
 /* ── Ambient Environmental Layer ── */
@@ -369,15 +531,15 @@ onMounted(() => {
   height: 450px;
   top: 10%;
   left: -5%;
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(59, 130, 246, 0.01);
 }
 
 .orb-secondary {
-  width: 500px;
-  height: 500px;
+  width: 200px;
+  height: 100px;
   bottom: -10%;
   right: -5%;
-  background: rgba(139, 92, 246, 0.12);
+  background: rgba(139, 92, 246, 0.001);
 }
 
 .perspective-grid-pattern {
@@ -505,7 +667,7 @@ onMounted(() => {
 
 .tag-blue {
   background: rgba(59, 130, 246, 0.12);
-  color: #38bdf8;
+  color: var(--accent-sky-text);
 }
 
 .tag-orange {
@@ -647,7 +809,7 @@ onMounted(() => {
 }
 
 .cta-primary {
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
   background: var(--primary) !important;
   box-shadow: 0 8px 30px rgba(59, 130, 246, 0.35);
   overflow: hidden;
@@ -656,7 +818,7 @@ onMounted(() => {
 .cta-primary:hover {
   background: var(--primary-hover) !important;
   box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5);
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
 }
 
 .cta-secondary {
@@ -787,7 +949,7 @@ onMounted(() => {
   border: 1px solid rgba(139, 92, 246, 0.3);
   display: grid;
   place-items: center;
-  color: #a78bfa;
+  color: var(--accent-purple-text);
   font-size: 1.1rem;
 }
 
@@ -806,7 +968,7 @@ onMounted(() => {
 
 .ai-status {
   font-size: 0.75rem;
-  color: #34d399;
+  color: var(--accent-green-text);
 }
 
 /* Analytics Panel */
@@ -836,7 +998,7 @@ onMounted(() => {
 .analytics-badge {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #34d399;
+  color: var(--accent-green-text);
   background: rgba(52, 211, 153, 0.1);
   padding: 2px 8px;
   border-radius: var(--radius-full);
