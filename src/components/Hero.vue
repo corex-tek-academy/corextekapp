@@ -819,7 +819,7 @@ onUnmounted(() => {
 .cta-primary-orange {
   color: #ffffff !important;
   background: var(--secondary) !important;
-  box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);
+  /* box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35); */
   overflow: hidden;
 }
 
@@ -1008,7 +1008,7 @@ onUnmounted(() => {
 
 /* Analytics Panel */
 .panel-analytics {
-  width: 240px;
+  /* width: 240px; */
   padding: 18px;
   bottom: 10px;
   right: 4%;
@@ -1022,6 +1022,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
 }
 
 .analytics-title {
@@ -1189,10 +1190,12 @@ onUnmounted(() => {
 
 @media (max-width: 576px) {
   .hero-section {
-    padding-top: 100px;
-    padding-bottom: 40px;
+    padding-top: 130px;
+    padding-bottom: 20px;
   }
-
+  .hero-container{
+    gap: 20px;
+  }
   .editorial-actions {
     flex-direction: column;
     width: 100%;
