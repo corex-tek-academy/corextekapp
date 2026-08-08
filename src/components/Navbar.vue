@@ -14,9 +14,9 @@ const mobileOpen = ref(false)
 const activeSection = ref('programs')
 
 const navItems = [
-  { name: 'Home', sectionId: 'programs', path: '/' },
-  { name: 'Mentors', sectionId: 'about', path: '/' },
-  { name: 'Outcomes', sectionId: 'testimonials', path: '/' },
+  { name: 'Programs', sectionId: 'programs', path: '/' },
+  { name: 'About', sectionId: 'about', path: '/' },
+  { name: 'Testimonials', sectionId: 'testimonials', path: '/' },
   { name: 'Cohorts', path: '/enrollment' },
   { name: 'Contact', path: '/contact' }
 ]
