@@ -525,7 +525,7 @@ async function handleNewsletterSubmit() {
 .btn-submit-primary {
   background: var(--secondary) !important;
   color: var(--text-on-primary) !important;
-  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
+  /* box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35); */
 }
 
 .btn-submit-primary:hover:not(:disabled) {
@@ -594,7 +594,6 @@ async function handleNewsletterSubmit() {
 .btn-submit-light {
   background: var(--secondary) !important;
   color: var(--text-on-primary) !important;
-  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
 }
 
 .btn-submit-light:hover:not(:disabled) {

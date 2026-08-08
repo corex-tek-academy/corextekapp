@@ -14,11 +14,8 @@
         <p class="video-sub">Watch this short introductory video to learn more about our student experience and cohort structure.</p>
         <div class="iframe-container">
           <iframe
-            width="100%"
-            height="100%"
             src="https://www.youtube.com/embed/ScMzIvxBSi4"
             title="Corex Tek-Academy Video Player"
-            frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
           ></iframe>
@@ -97,6 +94,7 @@ function closeModal() {
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  margin: 0 auto;
 }
 
 .video-heading {
@@ -113,6 +111,7 @@ function closeModal() {
 }
 
 .iframe-container {
+  position: relative;
   width: 100%;
   aspect-ratio: 16/9;
   max-width: 800px;
@@ -120,6 +119,16 @@ function closeModal() {
   overflow: hidden;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--color-border);
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
 
 .testimonials-dock {

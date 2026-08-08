@@ -1,7 +1,3 @@
-/* ═══════════════════════════════════════════════════════════════
-   COREX TEK-ACADEMY — Premium Design System v2.0
-   A world-class design foundation for education technology
-   ═══════════════════════════════════════════════════════════════ */
 
 /* Fonts are preloaded via index.html <link preload> — no @import needed */
 :root {
@@ -201,7 +197,7 @@
   font-size: 0.95rem;
   cursor: pointer;
   transition: all 0.3s var(--ease-out-expo);
-  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
+  /* box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35); */
 }
 
 .btn-primary:hover {

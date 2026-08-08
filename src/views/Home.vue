@@ -20,31 +20,39 @@ const Contact = defineAsyncComponent(() => import('@/components/Contact.vue'))
 </script>
 
 <template>
-  <header>
-    <Hero />
-  </header>
-  
-  <Partnership />
-  
-  <Stats />
-  
-  <About />
-  
-  <Aboutcorex />
-  
-  <WhyChoose />
-  
-  <LearningPath />
-  
-  <Internship />
-  
-  <Programs />
-  
-  <FAQ />
-  
-  <Testimonial />
-  
-  <CTABanner />
-  
-  <Contact />
+  <div class="home-page">
+    <header>
+      <Hero />
+    </header>
+    
+    <Partnership />
+    
+    <Stats />
+    
+    <About />
+    
+    <Aboutcorex />
+    
+    <WhyChoose />
+    
+    <LearningPath />
+    
+    <Internship />
+    
+    <Programs />
+    
+    <FAQ />
+    
+    <Testimonial />
+    
+    <CTABanner />
+    
+    <Contact />
+  </div>
 </template>
+
+<style scoped>
+.home-page {
+  overflow-x: hidden;
+}
+</style>

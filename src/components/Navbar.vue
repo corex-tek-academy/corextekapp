@@ -15,8 +15,8 @@ const activeSection = ref('programs')
 
 const navItems = [
   { name: 'Programs', sectionId: 'programs', path: '/' },
-  { name: 'Mentors', sectionId: 'about', path: '/' },
-  { name: 'Outcomes', sectionId: 'testimonials', path: '/' },
+  { name: 'About', sectionId: 'about', path: '/' },
+  { name: 'Testimonials', sectionId: 'testimonials', path: '/' },
   { name: 'Cohorts', path: '/enrollment' },
   { name: 'Contact', path: '/contact' }
 ]
@@ -192,7 +192,7 @@ onUnmounted(() => {
   /* left: 50%; */
   /* transform: translateX(-50%); */
   z-index: 1000;
-  width:   90%;
+  width:   100%;
   padding: 14px;
   /* width: calc(100% - 32px);
   max-width: 1040px; */
@@ -335,7 +335,6 @@ onUnmounted(() => {
   border-radius: 9999px;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 4px 18px rgba(249, 115, 22, 0.35);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease;
 }
 
@@ -401,6 +400,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 
 .mobile-nav-list {
@@ -483,16 +483,15 @@ onUnmounted(() => {
     padding: 12px;
     /* top: 12px; */
   }
+  .pill-navbar {
+    padding: 10px;
+    width:100%;
+  }
 
 }
 
 @media (max-width: 600px) {
 
-  
-  .pill-navbar {
-    padding: 6px 10px;
-    width:100%;
-  }
   .apply-btn{
     display: none;
   }
@@ -520,9 +519,7 @@ onUnmounted(() => {
     width: 34px;
     height: 34px;
   }
-  .hero-section{
-    padding-top: 190px;
-  }
+
 }
 
 @media (max-width: 380px) {

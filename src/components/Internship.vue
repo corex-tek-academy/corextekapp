@@ -149,7 +149,7 @@ import OptimizedImage from '@/components/OptimizedImage.vue'
 .btn-primary-orange {
   background: var(--secondary) !important;
   color: #ffffff !important;
-  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
+  /* box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35); */
 }
 
 .btn-primary-orange:hover {
