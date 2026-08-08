@@ -188,11 +188,11 @@ onUnmounted(() => {
   display: grid;
   place-items: center;
   position: fixed;
-  top: 20px; 
-  left: 50%;
-  transform: translateX(-50%);
+  /* top: 20px;  */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
   z-index: 1000;
-  width: 100%;
+  width:   90%;
   padding: 14px;
   /* width: calc(100% - 32px);
   max-width: 1040px; */
@@ -217,7 +217,7 @@ onUnmounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 9999px;
   box-sizing: border-box;
-  /* width: 65%; */
+  width: 65%;
   box-shadow: 
     0 16px 40px rgba(0, 0, 0, 0.5),
     0 0 0 1px rgba(255, 255, 255, 0.05),
@@ -491,6 +491,10 @@ onUnmounted(() => {
   
   .pill-navbar {
     padding: 6px 10px;
+    width:100%;
+  }
+  .apply-btn{
+    display: none;
   }
 
   .brand-group {
@@ -515,6 +519,9 @@ onUnmounted(() => {
   .mobile-toggle-btn {
     width: 34px;
     height: 34px;
+  }
+  .hero-section{
+    padding-top: 190px;
   }
 }
 
