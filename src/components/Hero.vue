@@ -7,7 +7,82 @@ gsap.registerPlugin(ScrollTrigger)
 
 const heroRef = ref(null)
 const sceneRef = ref(null)
+const trailCanvasRef = ref(null)
 const isTouchDevice = ref(false)
+
+// Cursor trail state
+let trailParticles = []
+let trailAnimFrame = null
+let handleTrailMouseMove = null
+const trailColors = ['#3b82f6', '#60a5fa', '#8b5cf6', '#93c5fd']
+
+function initTrailCanvas() {
+  const canvas = trailCanvasRef.value
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+
+  function resize() {
+    if (!canvas) return
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+  }
+  resize()
+  window.addEventListener('resize', resize)
+
+  function spawnParticle(x, y) {
+    for (let i = 0; i < 2; i++) {
+      trailParticles.push({
+        x: x + (Math.random() - 0.5) * 10,
+        y: y + (Math.random() - 0.5) * 10,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: (Math.random() - 0.5) * 1.2 - 0.4,
+        radius: Math.random() * 3.5 + 1.5,
+        color: trailColors[Math.floor(Math.random() * trailColors.length)],
+        alpha: 0.9,
+        decay: Math.random() * 0.02 + 0.015
+      })
+    }
+  }
+
+  function renderTrail() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    for (let i = trailParticles.length - 1; i >= 0; i--) {
+      const p = trailParticles[i]
+      p.x += p.vx
+      p.y += p.vy
+      p.alpha -= p.decay
+      p.radius *= 0.96
+
+      if (p.alpha <= 0 || p.radius <= 0.5) {
+        trailParticles.splice(i, 1)
+        continue
+      }
+
+      ctx.save()
+      ctx.globalAlpha = p.alpha
+      ctx.shadowBlur = 10
+      ctx.shadowColor = p.color
+      ctx.fillStyle = p.color
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
+      ctx.fill()
+      ctx.restore()
+    }
+
+    trailAnimFrame = requestAnimationFrame(renderTrail)
+  }
+
+  renderTrail()
+
+  handleTrailMouseMove = (e) => {
+    if (isTouchDevice.value) return
+    const rect = canvas.getBoundingClientRect()
+    spawnParticle(e.clientX - rect.left, e.clientY - rect.top)
+  }
+
+  window.addEventListener('mousemove', handleTrailMouseMove)
+}
 
 // Animated Trust Statistics
 const stats = ref([
@@ -19,7 +94,7 @@ const stats = ref([
 
 const hasAnimatedStats = ref(false)
 
-// Hardware 3D Perspective Tilt Physics
+// Hardware 3D Perspective Tilt Physics - simplified
 function onMouseMove(e) {
   if (isTouchDevice.value || !sceneRef.value) return
   const rect = sceneRef.value.getBoundingClientRect()
@@ -29,9 +104,9 @@ function onMouseMove(e) {
   const mouseX = e.clientX - centerX
   const mouseY = e.clientY - centerY
   
-  // Constrain max rotation between -4deg and +4deg for elegant Apple-like depth
-  const rotateX = (-mouseY / (rect.height / 2)) * 4
-  const rotateY = (mouseX / (rect.width / 2)) * 4
+  // Subtle tilt only - reduced from 4deg to 2deg for cleaner effect
+  const rotateX = (-mouseY / (rect.height / 2)) * 2
+  const rotateY = (mouseX / (rect.width / 2)) * 2
   
   gsap.to('.scene-3d-inner', {
     rotateX: rotateX,
@@ -40,12 +115,12 @@ function onMouseMove(e) {
     ease: 'power2.out'
   })
 
-  // Multi-plane parallax offset for internal floating panels
-  gsap.to('.panel-code', { x: mouseX * 0.02, y: mouseY * 0.02, duration: 0.8, ease: 'power2.out' })
-  gsap.to('.panel-ai', { x: -mouseX * 0.03, y: -mouseY * 0.03, duration: 0.8, ease: 'power2.out' })
-  gsap.to('.panel-analytics', { x: mouseX * 0.04, y: -mouseY * 0.03, duration: 0.8, ease: 'power2.out' })
-  gsap.to('.card-left', { x: -mouseX * 0.025, y: -mouseY * 0.02, duration: 0.8, ease: 'power2.out' })
-  gsap.to('.card-right', { x: mouseX * 0.025, y: mouseY * 0.02, duration: 0.8, ease: 'power2.out' })
+  // Simplified parallax - reduced effect
+  gsap.to('.panel-code', { x: mouseX * 0.01, y: mouseY * 0.01, duration: 0.8, ease: 'power2.out' })
+  gsap.to('.panel-ai', { x: -mouseX * 0.015, y: -mouseY * 0.015, duration: 0.8, ease: 'power2.out' })
+  gsap.to('.panel-analytics', { x: mouseX * 0.02, y: -mouseY * 0.015, duration: 0.8, ease: 'power2.out' })
+  gsap.to('.card-left', { x: -mouseX * 0.01, y: -mouseY * 0.01, duration: 0.8, ease: 'power2.out' })
+  gsap.to('.card-right', { x: mouseX * 0.01, y: mouseY * 0.01, duration: 0.8, ease: 'power2.out' })
 }
 
 function onMouseLeave() {
@@ -98,6 +173,11 @@ onMounted(() => {
   }
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches
+
+  if (!prefersReduced && isFinePointer) {
+    initTrailCanvas()
+  }
 
   if (!prefersReduced) {
     // 1. Initial Master Entrance Timeline
@@ -149,10 +229,26 @@ onMounted(() => {
     observer.observe(statsEl)
   }
 })
+
+onUnmounted(() => {
+  if (trailAnimFrame) cancelAnimationFrame(trailAnimFrame)
+  if (handleTrailMouseMove) window.removeEventListener('mousemove', handleTrailMouseMove)
+})
 </script>
 
 <template>
   <section ref="heroRef" class="hero-section" aria-labelledby="hero-main-heading">
+    <!-- Interactive Canvas Mouse Trail -->
+    <canvas ref="trailCanvasRef" class="hero-trail-canvas" aria-hidden="true"></canvas>
+
+    <!-- Ambient Floating Bubbles Background -->
+    <div class="hero-bubbles" aria-hidden="true">
+      <div class="hero-bubble hero-bubble-1"></div>
+      <div class="hero-bubble hero-bubble-2"></div>
+      <div class="hero-bubble hero-bubble-3"></div>
+      <div class="hero-bubble hero-bubble-4"></div>
+    </div>
+
     <!-- Ambient Environmental Background -->
     <div class="ambient-environment" aria-hidden="true">
       <div class="mesh-gradient-aurora"></div>
@@ -179,26 +275,26 @@ onMounted(() => {
 
         <!-- Right Floating Feature Card (Desktop) -->
         <div class="hero-side-card card-right glass-panel-dark animate-float-delayed" aria-hidden="true">
-          <div class="side-card-icon icon-orange-glow">
+          <div class="side-card-icon icon-blue-glow">
             <i class="bi bi-cpu-fill"></i>
           </div>
           <div class="side-card-info">
             <span class="side-card-title">AI & Cloud Architecture</span>
             <span class="side-card-sub">Python • AWS • Neural Nets</span>
-            <span class="side-card-tag tag-orange">Capstone Ready</span>
+            <span class="side-card-tag tag-blue">Capstone Ready</span>
           </div>
         </div>
 
-        <!-- Live Enrollment Badge with Orange Pulse Accent -->
+        <!-- Live Enrollment Badge with Blue Pulse Accent -->
         <div class="hero-badge-container">
           <span class="editorial-badge">
-            <span class="pulse-ring pulse-orange"></span>
-            <span class="badge-text">Cohort 1 Enrolling • <span class="accent-orange-tag">Feb 2026 Batch</span></span>
+            <span class="pulse-ring pulse-blue"></span>
+            <span class="badge-text">Cohort 1 Enrolling • <span class="accent-blue-tag">Feb 2026 Batch</span></span>
             <i class="bi bi-arrow-right-short badge-arrow"></i>
           </span>
         </div>
 
-        <!-- Short, Punchy Editorial Headline -->
+        <!-- Short, Punchy Editorial Headline (Single Orange Highlight) -->
         <h1 id="hero-main-heading" class="editorial-title">
           <span class="title-line-1">Build the Future.</span>
           <span class="title-line-2 text-orange-highlight">Master Technology That Matters.</span>
@@ -209,11 +305,11 @@ onMounted(() => {
           Mentor-led, project-first training engineered to transform aspiring developers into job-ready tech leaders.
         </p>
 
-        <!-- Magnetic Call-to-Action Group -->
+        <!-- Magnetic Call-to-Action Group (Single Orange Primary CTA) -->
         <div class="editorial-actions">
           <router-link 
             to="/enrollment" 
-            class="cta-magnetic cta-primary"
+            class="cta-magnetic cta-primary-orange"
             @mousemove="onMagneticMove"
             @mouseleave="onMagneticLeave"
           >
@@ -224,7 +320,7 @@ onMounted(() => {
 
           <router-link 
             to="/enrollment" 
-            class="cta-magnetic cta-secondary cta-secondary-orange"
+            class="cta-magnetic cta-secondary"
             @mousemove="onMagneticMove"
             @mouseleave="onMagneticLeave"
           >
@@ -255,17 +351,17 @@ onMounted(() => {
             <div class="code-body">
               <pre><code><span class="kwd">import</span> { <span class="vrb">useEngineer</span> } <span class="kwd">from</span> <span class="str">'@corex/tek'</span>
 
-<span class="kwd">const</span> { <span class="vrb">skills</span>, <span class="vrb">deploy</span> } = <span class="fnc">useEngineer</span>({
-  <span class="prop">track</span>: <span class="str">'Full-Stack Architecture'</span>,
-  <span class="prop">mentorship</span>: <span class="kwd">true</span>,
-  <span class="prop">status</span>: <span class="str">'Ready to Hire 🚀'</span>
-})</code></pre>
+              <span class="kwd">const</span> { <span class="vrb">skills</span>, <span class="vrb">deploy</span> } = <span class="fnc">useEngineer</span>({
+                <span class="prop">track</span>: <span class="str">'Full-Stack Architecture'</span>,
+                <span class="prop">mentorship</span>: <span class="kwd">true</span>,
+                <span class="prop">status</span>: <span class="str">'Ready to Hire 🚀'</span>
+              })</code></pre>
             </div>
           </div>
 
           <!-- AI Assistant Floating Pill (Layer 4) -->
           <div class="floating-panel panel-ai glass-panel-dark">
-            <div class="ai-icon-wrap icon-orange-glow">
+            <div class="ai-icon-wrap icon-blue-glow">
               <i class="bi bi-cpu-fill"></i>
             </div>
             <div class="ai-info">
@@ -274,22 +370,22 @@ onMounted(() => {
             </div>
           </div>
 
-          <!-- Analytics Dashboard Card with Touch of Orange (Layer 5) -->
+          <!-- Analytics Dashboard Card (Layer 5) -->
           <div class="floating-panel panel-analytics glass-panel-dark">
             <div class="analytics-header">
               <span class="analytics-title">Graduate Placement</span>
-              <span class="analytics-badge badge-orange">+95% Placed</span>
+              <span class="analytics-badge badge-blue">+95% Placed</span>
             </div>
             <div class="analytics-graph">
               <div class="bar bar-1" style="height: 45%;"></div>
               <div class="bar bar-2" style="height: 65%;"></div>
               <div class="bar bar-3" style="height: 85%;"></div>
-              <div class="bar bar-4 bar-orange" style="height: 100%;"></div>
+              <div class="bar bar-4 bar-blue" style="height: 100%;"></div>
             </div>
           </div>
 
           <!-- Central Hardware Specular Surface Base -->
-          <div class="scene-base-glow" aria-hidden="true"></div>
+          <!-- <div class="scene-base-glow" aria-hidden="true"></div> -->
         </div>
       </div>
 
@@ -318,19 +414,80 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* ═══════════════════════════════════════════════════════════════
-   CINEMATIC EDITORIAL HERO SECTION ($20k benchmark)
-   ═══════════════════════════════════════════════════════════════ */
 
 .hero-section {
   position: relative;
   min-height: 100vh;
-  padding-top: 130px;
+  padding-top: 160px;
   padding-bottom: 80px;
   display: flex;
   align-items: center;
   overflow: hidden;
   background: var(--color-background);
+}
+
+/* ── Ambient Floating Bubbles ── */
+.hero-bubbles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-bubble {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.55;
+  will-change: transform, filter;
+}
+
+.hero-bubble-1 {
+  width: 54vw; height: 54vw;
+  top: -18vw; left: -12vw;
+  background: radial-gradient(circle, rgba(124, 107, 255, 0.65), transparent 68%);
+  animation: heroDrift1 18s ease-in-out infinite alternate, heroHueShift 12s linear infinite;
+}
+
+.hero-bubble-2 {
+  width: 44vw; height: 44vw;
+  top: 2vw; right: -14vw;
+  background: radial-gradient(circle, rgba(46, 230, 255, 0.5), transparent 68%);
+  animation: heroDrift2 15s ease-in-out infinite alternate, heroHueShift 16s linear infinite reverse;
+}
+
+.hero-bubble-3 {
+  width: 38vw; height: 38vw;
+  bottom: -16vw; left: 26vw;
+  background: radial-gradient(circle, rgba(255, 62, 200, 0.35), transparent 70%);
+  animation: heroDrift3 20s ease-in-out infinite alternate, heroHueShift 20s linear infinite;
+}
+
+.hero-bubble-4 {
+  width: 26vw; height: 26vw;
+  bottom: 6vw; right: 8vw;
+  background: radial-gradient(circle, rgba(255, 180, 84, 0.3), transparent 70%);
+  animation: heroDrift4 13s ease-in-out infinite alternate;
+}
+
+@keyframes heroDrift1 { to { transform: translate(7vw, 8vw) scale(1.18); } }
+@keyframes heroDrift2 { to { transform: translate(-8vw, 6vw) scale(1.22); } }
+@keyframes heroDrift3 { to { transform: translate(5vw, -7vw) scale(1.12); } }
+@keyframes heroDrift4 { to { transform: translate(-4vw, -5vw) scale(1.15); } }
+@keyframes heroHueShift { to { filter: blur(80px) hue-rotate(45deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bubble { animation: none !important; }
+}
+
+/* ── Cursor Trail Canvas ── */
+.hero-trail-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
 }
 
 /* ── Ambient Environmental Layer ── */
@@ -369,15 +526,15 @@ onMounted(() => {
   height: 450px;
   top: 10%;
   left: -5%;
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(59, 130, 246, 0.01);
 }
 
 .orb-secondary {
-  width: 500px;
-  height: 500px;
+  width: 200px;
+  height: 100px;
   bottom: -10%;
   right: -5%;
-  background: rgba(139, 92, 246, 0.12);
+  background: rgba(139, 92, 246, 0.001);
 }
 
 .perspective-grid-pattern {
@@ -505,7 +662,7 @@ onMounted(() => {
 
 .tag-blue {
   background: rgba(59, 130, 246, 0.12);
-  color: #38bdf8;
+  color: var(--accent-sky-text);
 }
 
 .tag-orange {
@@ -647,7 +804,7 @@ onMounted(() => {
 }
 
 .cta-primary {
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
   background: var(--primary) !important;
   box-shadow: 0 8px 30px rgba(59, 130, 246, 0.35);
   overflow: hidden;
@@ -656,7 +813,46 @@ onMounted(() => {
 .cta-primary:hover {
   background: var(--primary-hover) !important;
   box-shadow: 0 12px 40px rgba(59, 130, 246, 0.5);
+  color: var(--text-on-primary) !important;
+}
+
+.cta-primary-orange {
   color: #ffffff !important;
+  background: var(--secondary) !important;
+  box-shadow: 0 8px 30px rgba(249, 115, 22, 0.35);
+  overflow: hidden;
+}
+
+.cta-primary-orange:hover {
+  background: var(--secondary-hover) !important;
+  box-shadow: 0 12px 40px rgba(249, 115, 22, 0.5);
+  color: #ffffff !important;
+}
+
+.pulse-blue {
+  background: var(--primary) !important;
+  box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6) !important;
+  animation: pulseBlue 2s infinite !important;
+}
+
+@keyframes pulseBlue {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.accent-blue-tag {
+  color: var(--primary-text);
+  font-weight: 700;
+}
+
+.badge-blue {
+  color: var(--primary-text) !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+}
+
+.bar-blue {
+  background: linear-gradient(to top, rgba(59, 130, 246, 0.3), var(--primary)) !important;
 }
 
 .cta-secondary {
@@ -759,6 +955,7 @@ onMounted(() => {
   font-family: var(--font-mono);
   font-size: 0.85rem;
   line-height: 1.6;
+  overflow: auto;
 }
 
 .code-body pre { margin: 0; }
@@ -787,7 +984,7 @@ onMounted(() => {
   border: 1px solid rgba(139, 92, 246, 0.3);
   display: grid;
   place-items: center;
-  color: #a78bfa;
+  color: var(--accent-purple-text);
   font-size: 1.1rem;
 }
 
@@ -806,7 +1003,7 @@ onMounted(() => {
 
 .ai-status {
   font-size: 0.75rem;
-  color: #34d399;
+  color: var(--accent-green-text);
 }
 
 /* Analytics Panel */
@@ -836,7 +1033,7 @@ onMounted(() => {
 .analytics-badge {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #34d399;
+  color: var(--accent-green-text);
   background: rgba(52, 211, 153, 0.1);
   padding: 2px 8px;
   border-radius: var(--radius-full);

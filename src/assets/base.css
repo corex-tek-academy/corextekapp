@@ -18,22 +18,9 @@
   --primary-gradient: #3b82f6;
   --primary-gradient-vibrant: #3b82f6;
 
-  /* ── Accent Palette ── */
-  --accent-purple: #8b5cf6;
-  --accent-purple-50: rgba(139, 92, 246, 0.08);
-  --accent-purple-100: rgba(139, 92, 246, 0.12);
-  --accent-cyan: #06b6d4;
-  --accent-cyan-50: rgba(6, 182, 212, 0.08);
-  --accent-teal: #0d9488;
-  --accent-teal-50: rgba(13, 148, 136, 0.08);
-  --accent-green: #10b981;
-  --accent-green-50: rgba(16, 185, 129, 0.08);
+  /* ── Accent Palette (Standardized - Blue 70%, Orange 10%, Neutrals 20%) ── */
   --accent-orange: #f97316;
   --accent-orange-50: rgba(249, 115, 22, 0.08);
-  --accent-sky: #0ea5e9;
-  --accent-sky-50: rgba(14, 165, 233, 0.08);
-  --accent-rose: #f43f5e;
-  --accent-rose-50: rgba(244, 63, 94, 0.08);
 
   --secondary: #f97316;
   --secondary-hover: #ea580c;
@@ -58,18 +45,12 @@
   --text-secondary: #cbd5e1; /* slate-300: L=0.64, contrast >6:1 on dark surfaces */
   --text-tertiary: #94a3b8;  /* slate-400: L=0.35, contrast >6:1 on background */
   --text-on-primary: #ffffff;
-  --text-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  --text-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%); /* Simplified blue gradient */
 
   /* ── High-Contrast Interactive & Text Accent Variables (WCAG AA Compliant) ── */
   --primary-text: #4da1ff; /* Premium vibrant brand-blue, L=0.30, >5:1 contrast ratio */
   --primary-text-hover: #93c5fd; /* Blue-300 */
-  --accent-purple-text: #a78bfa; /* Vibrant purple, L=0.40, >7:1 contrast ratio */
-  --accent-teal-text: #2dd4bf; /* Bright teal, L=0.74, >12:1 contrast ratio */
-  --accent-green-text: #34d399; /* Bright green, L=0.58, >9:1 contrast ratio */
   --accent-orange-text: #fb923c; /* Bright orange, L=0.52, >8:1 contrast ratio */
-  --accent-cyan-text: #22d3ee; /* Bright cyan, L=0.69, >11:1 contrast ratio */
-  --accent-sky-text: #38bdf8; /* Bright sky blue, L=0.63, >10:1 contrast ratio */
-  --accent-rose-text: #fb7185; /* Bright rose red, L=0.42, >7:1 contrast ratio */
 
   /* ── Light / White ── */
   --light: #ffffff;
@@ -166,7 +147,6 @@
   --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.35);
   --shadow-xl: 0 24px 80px rgba(0, 0, 0, 0.45);
   --shadow-glow-primary: 0 0 40px rgba(59, 130, 246, 0.20);
-  --shadow-glow-purple: 0 0 40px rgba(139, 92, 246, 0.20);
 
     /* ── Backward-compat alias ── */
   --small--text: var(--text-secondary);
@@ -175,6 +155,152 @@
   --theme-transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
+
+/* ═══════════════════════════════════════════════════════════════
+   UNIFIED CARD COMPONENT SYSTEM
+   Single card style across entire application for consistency
+   ═══════════════════════════════════════════════════════════════ */
+
+.unified-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
+}
+
+.unified-card:hover {
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Dark variant for testimonials, CTA, footer */
+.unified-card--dark {
+  background: var(--bg-dark-soft);
+  border: 1px solid var(--glass-dark-border);
+}
+
+.unified-card--dark:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UNIFIED BUTTON SYSTEM
+   Two button styles only: Primary (Orange) and Secondary (Blue/Neutral)
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-primary {
+  background: var(--secondary);
+  color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
+}
+
+.btn-primary:hover {
+  background: var(--secondary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(249, 115, 22, 0.5);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary-text);
+  border: 1px solid var(--primary);
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.btn-secondary:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.btn-secondary--neutral {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--color-border);
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.btn-secondary--neutral:hover {
+  background: var(--color-background-soft);
+  border-color: var(--color-border-hover);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UNIFIED ICON SYSTEM
+   All icons use blue color with consistent sizing and background
+   ═══════════════════════════════════════════════════════════════ */
+
+.icon-standard {
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+.icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--primary-light);
+  color: var(--primary);
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.icon-wrapper--orange {
+  background: var(--accent-orange-50);
+  color: var(--accent-orange);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UNIFIED BADGE SYSTEM
+   Consistent badge styling across all sections
+   ═══════════════════════════════════════════════════════════════ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  background: var(--primary-light);
+  color: var(--primary);
+  border: 1px solid var(--color-border);
+}
+
+.badge--orange {
+  background: var(--accent-orange-50);
+  color: var(--accent-orange);
+  border-color: var(--accent-orange-50);
+}
+
+.badge--dark {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--light);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
 
 /* ═══════════════════════════════════════════════════════════════
    DARK ACCENT SECTIONS (Testimonial, CTA Banner, Contact, Footer)
@@ -614,20 +740,14 @@ a {
 
 
 /* ═══════════════════════════════════════════════════════════════
-   TEXT HIGHLIGHTS (Solid Signature Blue & Signature Orange)
+   TEXT HIGHLIGHTS (Unified Blue Gradient Only)
    ═══════════════════════════════════════════════════════════════ */
 
-.text-gradient,
-.text-gradient-vibrant {
-  color: var(--primary) !important;
-  -webkit-text-fill-color: var(--primary) !important;
-  font-weight: 700;
-}
-
-.text-gradient-secondary,
-.text-gradient-orange {
-  color: var(--secondary) !important;
-  -webkit-text-fill-color: var(--secondary) !important;
+.text-gradient {
+  background: var(--text-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: 700;
 }
 
@@ -1002,4 +1122,43 @@ iframe {
 
 /* ── SCROLLBAR ── */
 
-/* Remove the duplicate scrollbar block that was below SCROLLBAR heading */
+/* ═══════════════════════════════════════════════════════════════
+   SCROLL REVEAL ANIMATIONS (IntersectionObserver Directive)
+   ═══════════════════════════════════════════════════════════════ */
+
+.v-scroll-reveal-base {
+  opacity: 0;
+  will-change: opacity, transform;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.v-scroll-reveal-up {
+  transform: translateY(36px);
+}
+
+.v-scroll-reveal-left {
+  transform: translateX(-40px);
+}
+
+.v-scroll-reveal-right {
+  transform: translateX(40px);
+}
+
+.v-scroll-reveal-scale {
+  transform: scale(0.92) translateY(20px);
+}
+
+/* Revealed active state */
+.v-scroll-revealed {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-scroll-reveal-base {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -31,12 +31,12 @@ import OptimizedImage from '@/components/OptimizedImage.vue'
         
         <h2 class="section-title">
           Become Job-Ready. Add a 
-          <span class="text-gradient">Competitive Edge</span> 
+          <span class="text-orange-highlight">Competitive Edge</span> 
           to Your Skills.
         </h2>
         
         <p class="section-desc">
-          You don't need to have it all figured out to start — you just need the right guidance and environment to grow. At Corex Tek-Academy, we provide structured learning, hands-on projects, and mentorship that help you develop in-demand skills and build confidence at every stage.
+          You don't need to have it all figured out to start you just need the right guidance and environment to grow. At Corex Tek-Academy, we provide structured learning, hands-on projects, and mentorship that help you develop in-demand skills and build confidence at every stage.
         </p>
 
         <div class="feature-pills">
@@ -55,7 +55,7 @@ import OptimizedImage from '@/components/OptimizedImage.vue'
         </div>
 
         <div class="cta-wrapper">
-          <router-link to="/enrollment" class="btn btn-primary" role="button">
+          <router-link to="/enrollment" class="btn btn-primary-orange" role="button">
             <span>Start Learning</span>
             <i class="bi bi-arrow-right" aria-hidden="true"></i>
           </router-link>
@@ -158,7 +158,7 @@ import OptimizedImage from '@/components/OptimizedImage.vue'
 }
 
 .feature-pill i {
-  color: var(--accent-green);
+  color: var(--primary);
   font-size: 1rem;
   flex-shrink: 0;
 }
@@ -184,21 +184,24 @@ import OptimizedImage from '@/components/OptimizedImage.vue'
   overflow: hidden;
 }
 
-.btn-primary {
-  background: var(--primary-gradient);
-  color: var(--text-on-primary);
+.btn-primary-orange {
+  background: var(--secondary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
 }
 
-.btn-primary:hover {
+.btn-primary-orange:hover {
   transform: translateY(-2px);
-  color: var(--text-on-primary);
+  background: var(--secondary-hover) !important;
+  box-shadow: 0 10px 28px rgba(249, 115, 22, 0.5);
+  color: #ffffff !important;
 }
 
-.btn-primary i {
+.btn-primary-orange i {
   transition: transform 0.25s var(--ease-out-expo);
 }
 
-.btn-primary:hover i {
+.btn-primary-orange:hover i {
   transform: translateX(4px);
 }
 

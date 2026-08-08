@@ -128,7 +128,6 @@ function subscribe(e) {
   background: var(--bg-dark);
   color: var(--text-dark-theme);
   padding: 80px 0 0 0;
-  margin-top: 100px;
   position: relative;
 }
 
@@ -196,22 +195,11 @@ function subscribe(e) {
   color: var(--light);
 }
 
-.social-btn.twitter:hover {
-  background: #1da1f2;
-  border-color: #1da1f2;
-  box-shadow: 0 8px 20px rgba(29, 161, 242, 0.3);
-}
-
-.social-btn.linkedin:hover {
-  background: #0077b5;
-  border-color: #0077b5;
-  box-shadow: 0 8px 20px rgba(0, 119, 181, 0.3);
-}
-
-.social-btn.facebook:hover {
-  background: #1877f2;
-  border-color: #1877f2;
-  box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3);
+.social-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--light);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
 }
 
 /* Footer Navigation */

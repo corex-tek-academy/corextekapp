@@ -5,6 +5,7 @@ body {
   background-color: var(--color-background);
   color: var(--text);
   margin: 0;
+  box-sizing: border-box;
 }
 
 /* Base link behavior */
@@ -16,4 +17,10 @@ a {
 
 a:hover {
   color: var(--primary-text-hover);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

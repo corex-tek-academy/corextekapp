@@ -2,11 +2,11 @@
   <section class="learning-path container bg-dots" id="syllabus">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
-      <span class="badge-pill badge-pill--orange">
+      <span class="badge-pill badge-pill--primary">
         <i class="bi bi-bezier2"></i>
         Learning Roadmap
       </span>
-      <h2>Your Path to <span class="text-gradient">Tech</span> <span class="text-gradient-orange">Mastery</span></h2>
+      <h2>Your Path to Tech Mastery</h2>
       <p>
         We've designed a structured, project-first roadmap to take you from writing your first line of code to landing a professional software role.
       </p>
@@ -30,6 +30,7 @@
         </div>
 
         <div class="timeline-card glass-card">
+          <div class="card-accent" :style="{ background: step.color }"></div>
           <div class="card-phase" :style="{ color: step.color }">{{ step.phase }}</div>
           <h4>{{ step.title }}</h4>
           <p>{{ step.desc }}</p>
@@ -56,7 +57,7 @@ const steps = [
     desc: 'Master the building blocks of the web: HTML5 structure, semantic elements, CSS3 styling foundations, flexbox, grid layouts, and clean responsive design systems.',
     skills: ['HTML5', 'CSS3', 'Responsive Design', 'Flexbox & Grid', 'Semantic markup'],
     icon: 'bi-bricks',
-    color: '#60a5fa',
+    color: '#38bdf8',
   },
   {
     phase: 'Phase 02 — Weeks 3-5',
@@ -84,7 +85,7 @@ const steps = [
   },
   {
     phase: 'Phase 05 — Weeks 13-16',
-    title: 'Capstone Capstone & Portfolio Delivery',
+    title: 'Capstone Portfolio & Career Delivery',
     desc: 'Collaborate in agile team sprints to build, test, optimize, and deploy a production-grade full-stack Web product with CI/CD deployment.',
     skills: ['Agile Sprints', 'Git & GitHub Flow', 'CI / CD Deployment', 'Vercel / Netlify', 'Career Mentorship'],
     icon: 'bi-rocket-takeoff',
@@ -134,7 +135,7 @@ onMounted(() => {
   z-index: 1;
 }
 
-/* Center timeline animated vertical line glow */
+/* Center timeline animated vertical line glow - simplified */
 .timeline-line-glow {
   position: absolute;
   top: 0;
@@ -143,44 +144,10 @@ onMounted(() => {
   transform: translateX(-50%) scaleY(0);
   transform-origin: top center;
   width: 2px;
-  background: linear-gradient(
-    to bottom,
-    rgba(96, 165, 250, 0.9) 0%,
-    rgba(167, 139, 250, 0.9) 40%,
-    rgba(251, 146, 60, 0.9) 70%,
-    rgba(244, 63, 94, 0.9) 100%
-  );
+  background: var(--primary);
   z-index: 2;
-  opacity: 0.95;
+  opacity: 0.6;
   overflow: hidden;
-}
-
-.timeline-line-glow::after {
-  content: '';
-  position: absolute;
-  top: -120px;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, var(--primary-text), transparent);
-  animation: scrollGlow 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-@keyframes scrollGlow {
-  0% {
-    top: -120px;
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
 }
 
 .timeline-item {
@@ -192,7 +159,7 @@ onMounted(() => {
   align-items: center;
 }
 
-/* Marker / Circle on the line */
+/* Marker / Circle on the line - simplified */
 .timeline-marker {
   position: absolute;
   left: 50%;
@@ -206,11 +173,20 @@ onMounted(() => {
   place-items: center;
   color: var(--white);
   font-size: 1.1rem;
-  box-shadow: var(--shadow-md);
+  background: var(--step-color);
+  box-shadow: var(--shadow-sm);
   z-index: 10;
 }
 
-/* Card configuration */
+.card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
 .timeline-card {
   padding: var(--space-8);
   display: flex;
@@ -218,51 +194,32 @@ onMounted(() => {
   gap: var(--space-3);
   text-align: left;
   position: relative;
+  overflow: hidden;
   background: 
-    repeating-linear-gradient(135deg, var(--color-border-light) 0px, var(--color-border-light) 1px, transparent 1px, transparent 8px),
-    var(--glass-bg-strong);
+    linear-gradient(135deg, var(--color-surface) 0%, rgba(20, 21, 26, 0.96) 100%),
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.025) 0, rgba(255, 255, 255, 0.025) 12px, transparent 12px, transparent 24px);
   border: 1px solid var(--color-border);
-  box-shadow: 
-    inset 0 1px 0 var(--color-highlight-strong),
-    var(--shadow-md);
-  transition: all 0.4s var(--ease-out-expo);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s var(--ease-out-expo);
 }
 
 .timeline-card:hover {
-  border-color: var(--step-color) !important;
-  box-shadow: 
-    inset 0 1px 0 var(--color-inset-strong),
-    0 12px 36px rgba(0, 0, 0, 0.4),
-    0 0 20px var(--step-color);
+  border-color: var(--step-color);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(59, 130, 246, 0.15);
   transform: translateY(-3px);
 }
 
-/* Horizontal connecting threads */
+/* Horizontal connecting threads - simplified */
 .timeline-card::after {
   content: '';
   position: absolute;
   top: 50%;
   width: 48px;
   height: 1px;
-  background: linear-gradient(to right, var(--color-border), var(--step-color), var(--color-border));
+  background: var(--color-border);
   z-index: 1;
-  opacity: 0.7;
-}
-
-/* Glowing dot traveler */
-.timeline-card::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--step-color);
-  box-shadow: 0 0 8px var(--step-color), 0 0 16px var(--step-color);
-  z-index: 2;
-  opacity: 0;
+  opacity: 0.5;
 }
 
 /* Card phase label */

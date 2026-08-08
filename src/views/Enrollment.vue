@@ -41,11 +41,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, defineAsyncComponent } from 'vue'
+
+// Critical components - statically imported for instant render
 import EnrollmentHero from '@/components/EnrollmentHero.vue'
-import RegistrationForm from '@/components/RegistrationForm.vue'
-import Testimonial from '@/components/Testimonial.vue'
-import SuccessModal from '@/components/SuccessModal.vue'
+
+// Non-critical components - lazy loaded for better performance
+const RegistrationForm = defineAsyncComponent(() => import('@/components/RegistrationForm.vue'))
+const Testimonial = defineAsyncComponent(() => import('@/components/Testimonial.vue'))
+const SuccessModal = defineAsyncComponent(() => import('@/components/SuccessModal.vue'))
 
 const showModal = ref(false)
 const modalType = ref('success')

@@ -129,7 +129,7 @@ function copyAccountNumber() {
 
 .detail-item .fee-highlight {
   font-size: 1.15rem;
-  color: #10b981;
+  color: var(--accent-green-text);
   font-weight: 800;
 }
 
@@ -172,7 +172,7 @@ function copyAccountNumber() {
   transform: translateX(-50%);
   margin-bottom: 8px;
   background: #10b981;
-  color: white;
+  color: var(--text-on-primary);
   padding: 4px 8px;
   font-size: 0.75rem;
   border-radius: 4px;

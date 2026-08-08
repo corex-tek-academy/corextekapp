@@ -4,10 +4,10 @@ import { defineAsyncComponent } from 'vue'
 // ── Above the fold (static import for instant render) ──
 import Hero from '@/components/Hero.vue'
 import Partnership from '@/components/Partnership.vue'
-import Stats from '@/components/Stats.vue'
-import About from '@/components/About.vue'
 
 // ── Below the fold (lazy-loaded, split into separate JS chunks) ──
+const Stats = defineAsyncComponent(() => import('@/components/Stats.vue'))
+const About = defineAsyncComponent(() => import('@/components/About.vue'))
 const Aboutcorex = defineAsyncComponent(() => import('@/components/Aboutcorex.vue'))
 const WhyChoose = defineAsyncComponent(() => import('@/components/WhyChoose.vue'))
 const LearningPath = defineAsyncComponent(() => import('@/components/LearningPath.vue'))
@@ -47,4 +47,4 @@ const Contact = defineAsyncComponent(() => import('@/components/Contact.vue'))
   <CTABanner />
   
   <Contact />
-</template>
+</template>

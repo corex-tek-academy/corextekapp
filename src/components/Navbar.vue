@@ -1,625 +1,543 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import logo from '/src/assets/image/logo.png'
 import logoWebp from '/src/assets/image/logo.webp'
 import logoAvif from '/src/assets/image/logo.avif'
 import OptimizedImage from '@/components/OptimizedImage.vue'
 
 const route = useRoute()
-const isOpen = ref(false)
+const router = useRouter()
+
 const isScrolled = ref(false)
+const mobileOpen = ref(false)
+const activeSection = ref('programs')
 
-function toggleMenu() {
-  isOpen.value = !isOpen.value
-  document.body.style.overflow = isOpen.value ? 'hidden' : ''
-}
+const navItems = [
+  { name: 'Programs', sectionId: 'programs', path: '/' },
+  { name: 'Mentors', sectionId: 'about', path: '/' },
+  { name: 'Outcomes', sectionId: 'testimonials', path: '/' },
+  { name: 'Cohorts', path: '/enrollment' },
+  { name: 'Contact', path: '/contact' }
+]
 
-function closeMenu() {
-  isOpen.value = false
-  document.body.style.overflow = ''
-}
-
-function onKey(e) {
-  if (e.key === 'Escape') closeMenu()
-}
-
-let ticking = false
 function handleScroll() {
-  if (!ticking) {
-    window.requestAnimationFrame(() => {
-      isScrolled.value = window.scrollY > 20
-      ticking = false
-    })
-    ticking = true
+  isScrolled.value = window.scrollY > 30
+
+  // Track active section when on Home page
+  if (route.path === '/') {
+    const sections = ['programs', 'about', 'testimonials']
+    const scrollPos = window.scrollY + 200
+
+    for (const sec of sections) {
+      const el = document.getElementById(sec)
+      if (el) {
+        const top = el.offsetTop
+        const height = el.offsetHeight
+        if (scrollPos >= top && scrollPos < top + height) {
+          activeSection.value = sec
+          break
+        }
+      }
+    }
   }
 }
 
-// Automatically close mobile menu when navigating routes
-watch(() => route.path, () => {
-  closeMenu()
+function navigateTo(item) {
+  mobileOpen.value = false
+
+  if (item.path === '/enrollment' || item.path === '/contact') {
+    activeSection.value = ''
+    router.push(item.path)
+    return
+  }
+
+  if (route.path !== '/') {
+    router.push('/').then(() => {
+      setTimeout(() => scrollToSection(item.sectionId), 150)
+    })
+  } else {
+    scrollToSection(item.sectionId)
+  }
+}
+
+function scrollToSection(id) {
+  if (!id) return
+  activeSection.value = id
+  const el = document.getElementById(id)
+  if (el) {
+    const yOffset = -100
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset
+    window.scrollTo({ top: y, behavior: 'smooth' })
+  }
+}
+
+function toggleMobile() {
+  mobileOpen.value = !mobileOpen.value
+}
+
+function isActive(item) {
+  if (item.path === '/enrollment' && route.path === '/enrollment') return true
+  if (item.path === '/contact' && route.path === '/contact') return true
+  if (route.path === '/' && item.sectionId === activeSection.value) return true
+  return false
+}
+
+watch(() => route.path, (newPath) => {
+  mobileOpen.value = false
+  if (newPath !== '/') {
+    activeSection.value = ''
+  }
 })
 
 onMounted(() => {
-  document.addEventListener('keydown', onKey)
   window.addEventListener('scroll', handleScroll, { passive: true })
   handleScroll()
 })
 
-onBeforeUnmount(() => {
-  document.removeEventListener('keydown', onKey)
+onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
-  document.body.style.overflow = ''
 })
 </script>
 
 <template>
-  <header 
-    class="navbar-wrapper" 
-    :class="{ 'is-scrolled': isScrolled, 'is-open': isOpen }"
-  >
-    <!-- Click-to-dismiss Mobile Backdrop -->
-    <div 
-      class="nav-backdrop" 
-      :class="{ active: isOpen }" 
-      @click="closeMenu"
-      aria-hidden="true"
-    ></div>
-
-    <div class="container navbar-container">
-      <!-- Brand Logo -->
-      <router-link to="/" class="brand-link" aria-label="Corex Tek-Academy Home" @click="closeMenu">
-        <div class="logo-box">
-          <OptimizedImage
-            :src="logo"
-            :webp="logoWebp"
-            :avif="logoAvif"
-            alt="Corex Tek-Academy logo"
-            class="brand-logo"
-            loading="eager"
-          />
-        </div>
+  <header class="floating-nav-wrapper" :class="{ 'is-scrolled': isScrolled }">
+    <div class="pill-navbar">
+      <!-- Left: Logo & Brand -->
+      <router-link to="/" class="brand-group" aria-label="Corex Tek-Academy Home">
+        <OptimizedImage
+          :src="logo"
+          :webp="logoWebp"
+          :avif="logoAvif"
+          alt="Corex Tek-Academy logo"
+          width="100"
+          height="32"
+          class="brand-logo-img"
+          loading="eager"
+        />
       </router-link>
 
-      <!-- Desktop Navigation Pill Menu -->
-      <nav class="desktop-nav" aria-label="Primary Navigation">
+      <!-- Center: Navigation Links (Desktop) -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
         <ul class="nav-links">
-          <li>
-            <router-link to="/" exact-active-class="active">
-              <i class="bi bi-house-door-fill nav-icon"></i>
-              <span>Home</span>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/enrollment" active-class="active">
-              <i class="bi bi-mortarboard-fill nav-icon"></i>
-              <span>Enrollment</span>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/contact" active-class="active">
-              <i class="bi bi-chat-left-text-fill nav-icon"></i>
-              <span>Contact</span>
-            </router-link>
+          <li v-for="item in navItems" :key="item.name">
+            <button 
+              type="button" 
+              class="nav-link-btn" 
+              :class="{ 'is-active': isActive(item) }"
+              @click="navigateTo(item)"
+            >
+              <span>{{ item.name }}</span>
+              <span v-if="isActive(item)" class="active-indicator"></span>
+            </button>
           </li>
         </ul>
       </nav>
 
-      <!-- Action Cluster: CTA + Hamburger Toggle -->
-      <div class="header-actions">
-        <router-link to="/enrollment" class="cta-btn desktop-cta">
-          <span class="cta-glow"></span>
-          <span class="cta-text">Join Cohort 1</span>
-          <i class="bi bi-arrow-right-short cta-icon" aria-hidden="true"></i>
+      <!-- Right: CTA Button & Mobile Toggle -->
+      <div class="nav-right-actions">
+        <router-link to="/enrollment" class="apply-btn">
+          <span>Apply Now</span>
+          <i class="bi bi-arrow-right arrow-icon" aria-hidden="true"></i>
         </router-link>
 
         <button 
-          class="hamburger-btn"
-          @click="toggleMenu"
-          :aria-expanded="String(isOpen)"
-          aria-label="Toggle Navigation Menu"
+          type="button" 
+          class="mobile-toggle-btn"
+          :class="{ 'is-open': mobileOpen }"
+          @click="toggleMobile"
+          aria-label="Toggle Menu"
         >
-          <span class="bar bar-1"></span>
-          <span class="bar bar-2"></span>
-          <span class="bar bar-3"></span>
+          <span class="hamburger-bar bar-1"></span>
+          <span class="hamburger-bar bar-2"></span>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Navigation Drawer (100% Opaque Surface) -->
-    <aside class="mobile-drawer" :class="{ open: isOpen }">
-      <div class="drawer-header">
-        <div class="drawer-brand">
-          <OptimizedImage
-            :src="logo"
-            :webp="logoWebp"
-            :avif="logoAvif"
-            alt="Corex logo"
-            class="drawer-logo"
-          />
-        </div>
-        <button class="drawer-close" @click="closeMenu" aria-label="Close menu">
-          <i class="bi bi-x-lg"></i>
-        </button>
-      </div>
-
-      <!-- Cohort Trust Status Box -->
-      <div class="drawer-badge">
-        <span class="badge-pulse"></span>
-        <span>Cohort 1 Enrolling • Starts Feb 2026</span>
-      </div>
-
-      <nav class="drawer-nav" aria-label="Mobile Navigation">
-        <ul class="drawer-links">
-          <li>
-            <router-link to="/" exact-active-class="active" @click="closeMenu">
-              <div class="link-left">
-                <i class="bi bi-house-door-fill"></i>
-                <span>Home</span>
-              </div>
-              <i class="bi bi-chevron-right arrow-indicator"></i>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/enrollment" active-class="active" @click="closeMenu">
-              <div class="link-left">
-                <i class="bi bi-mortarboard-fill"></i>
-                <span>Enrollment</span>
-              </div>
-              <i class="bi bi-chevron-right arrow-indicator"></i>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/contact" active-class="active" @click="closeMenu">
-              <div class="link-left">
-                <i class="bi bi-chat-left-text-fill"></i>
-                <span>Contact</span>
-              </div>
-              <i class="bi bi-chevron-right arrow-indicator"></i>
-            </router-link>
+    <!-- Mobile Drawer Menu -->
+    <transition name="mobile-slide">
+      <div v-if="mobileOpen" class="mobile-menu-drawer">
+        <ul class="mobile-nav-list">
+          <li v-for="item in navItems" :key="item.name">
+            <button 
+              type="button" 
+              class="mobile-nav-link"
+              :class="{ 'is-active': isActive(item) }"
+              @click="navigateTo(item)"
+            >
+              <span>{{ item.name }}</span>
+              <i class="bi bi-chevron-right mobile-arrow"></i>
+            </button>
           </li>
         </ul>
-      </nav>
-
-      <div class="drawer-footer">
-        <router-link to="/enrollment" class="cta-btn drawer-cta" @click="closeMenu">
-          <span>Join Cohort 1 Now</span>
-          <i class="bi bi-arrow-right-short cta-icon" aria-hidden="true"></i>
-        </router-link>
+        <div class="mobile-drawer-footer">
+          <router-link to="/enrollment" class="mobile-apply-btn" @click="mobileOpen = false">
+            <span>Apply Now</span>
+            <i class="bi bi-arrow-right"></i>
+          </router-link>
+        </div>
       </div>
-    </aside>
+    </transition>
   </header>
 </template>
 
 <style scoped>
-/* ═══════════════════════════════════════════════════════════════
-   $20k PROFESSIONAL NAVIGATION HEADER
-   ═══════════════════════════════════════════════════════════════ */
 
-.navbar-wrapper {
+
+.floating-nav-wrapper {
+  display: grid;
+  place-items: center;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 20px; 
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
-  padding: 18px 0;
-  transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  padding: 14px;
+  /* width: calc(100% - 32px);
+  max-width: 1040px; */
+
+  box-sizing: border-box;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), top 0.35s ease;
 }
 
-.navbar-wrapper.is-scrolled {
-  padding: 10px 0;
-  background: rgba(12, 12, 14, 0.85);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-}
+/* Scrolled state subtle elevation */
+/* .floating-nav-wrapper.is-scrolled {
+  top: 14px;
+} */
 
-@media (max-width: 991px) {
-  .navbar-wrapper {
-    position: sticky;
-    background: rgba(12, 12, 14, 0.94) !important;
-    backdrop-filter: blur(20px) saturate(180%) !important;
-    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-  }
-
-  .desktop-nav,
-  .desktop-cta,
-  .cta-btn {
-    display: none !important;
-  }
-
-  .hamburger-btn {
-    display: flex;
-  }
-}
-
-/* ── Container Layout ── */
-.navbar-container {
+.pill-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: var(--container-max-width);
-  margin: 0 auto;
-  padding: 0 var(--container-padding-x);
+  padding:10px;
+  background: rgba(13, 14, 20, 0.78);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  box-sizing: border-box;
+  /* width: 65%; */
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ── Brand Logo ── */
-.brand-link {
+.floating-nav-wrapper.is-scrolled .pill-navbar {
+  background: rgba(10, 11, 16, 0.90);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* ── Brand Logo Group ── */
+.brand-group {
   display: inline-flex;
   align-items: center;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 10;
+  text-decoration: none;
+  padding-left: 4px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
 }
 
-.brand-link:hover {
+.brand-group:hover {
   transform: scale(1.03);
 }
 
-.logo-box :deep(img) {
-  height: 36px;
-  width: auto;
+.brand-logo-img,
+.brand-logo-img :deep(img) {
+  width: 135px;
+  height: 32px;
   display: block;
-  transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  object-fit: contain;
 }
 
-.navbar-wrapper.is-scrolled .logo-box :deep(img) {
-  height: 30px;
-}
-
-/* ── Desktop Navigation Pill Menu ── */
+/* ── Desktop Navigation Links ── */
 .desktop-nav {
   display: flex;
   align-items: center;
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 6px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-full);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links a {
+.nav-link-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.58);
+  font-family: var(--font-body);
+  font-size: 0.925rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: color 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-link-btn:hover {
+  color: #ffffff;
+}
+
+.nav-link-btn.is-active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Active Glowing Indicator Bar (Blue System) */
+.active-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 18%;
+  width: 64%;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+  animation: indicatorFadeIn 0.25s ease forwards;
+}
+
+@keyframes indicatorFadeIn {
+  from { opacity: 0; transform: scaleX(0.4); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+/* ── Right Action Controls ── */
+.nav-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Primary Orange CTA Apply Button */
+.apply-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 18px;
+  padding: 9px 20px;
+  background: var(--secondary);
+  color: #ffffff !important;
+  font-family: var(--font-body);
   font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  border-radius: var(--radius-full);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 700;
+  border-radius: 9999px;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 18px rgba(249, 115, 22, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background 0.25s ease;
 }
 
-.nav-icon {
+.apply-btn:hover {
+  transform: translateY(-1px) scale(1.02);
+  background: var(--secondary-hover);
+  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.5);
+  color: #ffffff !important;
+}
+
+.arrow-icon {
   font-size: 0.95rem;
-  opacity: 0.7;
-  transition: opacity 0.25s ease, color 0.25s ease;
-}
-
-.nav-links a:hover {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.nav-links a:hover .nav-icon {
-  opacity: 1;
-  color: var(--primary-text);
-}
-
-.nav-links a.active {
-  color: var(--text) !important;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(139, 92, 246, 0.18)) !important;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  font-weight: 600 !important;
-}
-
-.nav-links a.active .nav-icon {
-  color: var(--primary-text) !important;
-  opacity: 1 !important;
-}
-
-/* ── Actions Cluster ── */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Primary CTA Button */
-.cta-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 22px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #ffffff !important;
-  background: var(--primary) !important;
-  border: none;
-  border-radius: var(--radius-full);
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  overflow: hidden;
-}
-
-.cta-btn:hover {
-  transform: translateY(-2px);
-  background: var(--primary-hover) !important;
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
-  color: #ffffff !important;
-}
-
-.cta-icon {
-  font-size: 1.1rem;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.cta-btn:hover .cta-icon {
+.apply-btn:hover .arrow-icon {
   transform: translateX(4px);
 }
 
-/* ── Custom Animated Hamburger Toggle ── */
-.hamburger-btn {
+/* Mobile Toggle Hamburger */
+.mobile-toggle-btn {
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 42px;
-  height: 42px;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
   padding: 0;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 50%;
   cursor: pointer;
-  z-index: 2100;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
+  flex-shrink: 0;
 }
 
-.hamburger-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-.bar {
-  width: 18px;
+.hamburger-bar {
+  width: 16px;
   height: 2px;
-  background-color: var(--text);
+  background: #ffffff;
   border-radius: 2px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.3s ease,
-              width 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.bar-1 { transform: translateY(-4px); }
-.bar-2 { transform: translateY(0); }
-.bar-3 { transform: translateY(4px); }
-
-/* Hamburger Open Morph (X) */
-.navbar-wrapper.is-open .bar-1 {
-  transform: translateY(2px) rotate(45deg);
+.mobile-toggle-btn.is-open .bar-1 {
+  transform: translateY(3.5px) rotate(45deg);
 }
 
-.navbar-wrapper.is-open .bar-2 {
-  opacity: 0;
-  transform: scaleX(0);
+.mobile-toggle-btn.is-open .bar-2 {
+  transform: translateY(-3.5px) rotate(-45deg);
 }
 
-.navbar-wrapper.is-open .bar-3 {
-  transform: translateY(-2px) rotate(-45deg);
-}
-
-/* ── Mobile Click-to-dismiss Backdrop ── */
-.nav-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s ease;
-  z-index: 1500;
-}
-
-.nav-backdrop.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ── Mobile Navigation Drawer (100% Solid Opaque Panel) ── */
-.mobile-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 320px;
-  max-width: 85vw;
-  background: #0d0e12 !important; /* 100% Solid Opaque Dark Surface — ZERO transparency bleed */
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 24px;
+/* ── Mobile Drawer ── */
+.mobile-menu-drawer {
+  margin-top: 10px;
+  padding: 16px 20px;
+  background: rgba(13, 14, 20, 0.94);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  transform: translateX(100%);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 2000;
-  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.7);
+  gap: 16px;
 }
 
-.mobile-drawer.open {
-  transform: translateX(0);
-}
-
-.drawer-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.drawer-logo :deep(img) {
-  height: 28px;
-  width: auto;
-  display: block;
-}
-
-.drawer-close {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.drawer-close:hover {
-  background: rgba(255, 255, 255, 0.12);
-}
-
-/* Trust status badge */
-.drawer-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: rgba(16, 185, 129, 0.08);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: var(--radius-full);
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: #34d399;
-}
-
-.badge-pulse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
-  70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-}
-
-/* Drawer links list */
-.drawer-nav {
-  flex-grow: 1;
-}
-
-.drawer-links {
+.mobile-nav-list {
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.drawer-links a {
+.mobile-nav-link {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: var(--text);
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: all 0.25s ease;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.975rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
-.link-left {
+.mobile-nav-link:hover,
+.mobile-nav-link.is-active {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.mobile-arrow {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.mobile-drawer-footer {
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-apply-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
-}
-
-.link-left i {
-  color: var(--primary-text);
-  font-size: 1.1rem;
-}
-
-.arrow-indicator {
-  font-size: 0.85rem;
-  color: var(--text-tertiary);
-  transition: transform 0.25s ease;
-}
-
-.drawer-links a:hover,
-.drawer-links a.active {
-  background: rgba(59, 130, 246, 0.1);
-  border-color: rgba(59, 130, 246, 0.25);
-  color: var(--primary-text);
-}
-
-.drawer-links a:hover .arrow-indicator,
-.drawer-links a.active .arrow-indicator {
-  transform: translateX(4px);
-  color: var(--primary-text);
-}
-
-.drawer-footer {
-  margin-top: auto;
-}
-
-.drawer-cta {
-  width: 100%;
   justify-content: center;
-  padding: 14px;
-  font-size: 0.95rem;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background: #ffffff;
+  color: #0b0c10 !important;
+  font-weight: 700;
+  border-radius: 9999px;
+  text-decoration: none;
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-   ═══════════════════════════════════════════════════════════════ */
+.mobile-slide-enter-active,
+.mobile-slide-leave-active {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-@media (max-width: 991px) {
-  .desktop-nav,
-  .desktop-cta,
-  .cta-btn {
-    display: none !important;
+.mobile-slide-enter-from,
+.mobile-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+/* ── Responsive Breakpoints ── */
+@media (max-width: 860px) {
+  .desktop-nav {
+    display: none;
   }
 
-  .hamburger-btn {
+  .mobile-toggle-btn {
     display: flex;
   }
+  .floating-nav-wrapper {
+    width: 100%;
+    padding: 12px;
+    /* top: 12px; */
+  }
+
 }
 
-@media (max-width: 480px) {
-  .navbar-wrapper {
-    padding: 14px 0;
+@media (max-width: 600px) {
+
+  
+  .pill-navbar {
+    padding: 6px 10px;
   }
 
-  .navbar-wrapper.is-scrolled {
-    padding: 10px 0;
+  .brand-group {
+    padding-left: 2px;
   }
 
-  .mobile-drawer {
-    width: 100%;
-    max-width: 100vw;
+  .brand-logo-img,
+  .brand-logo-img :deep(img) {
+    width: 108px;
+    height: 26px;
+  }
+
+  .nav-right-actions {
+    gap: 6px;
+  }
+
+  .apply-btn {
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
+
+  .mobile-toggle-btn {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@media (max-width: 380px) {
+  
+
+  .pill-navbar {
+    padding: 6px 8px;
+  }
+
+  .brand-logo-img,
+  .brand-logo-img :deep(img) {
+    width: 96px;
+    height: 24px;
+  }
+
+  .apply-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .apply-btn .arrow-icon {
+    display: none;
   }
 }
 </style>

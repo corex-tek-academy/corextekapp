@@ -18,8 +18,8 @@ import img5Avif from '/src/assets/image/img5.avif'
     <div class="container hero-inner">
       <div class="hero-content">
         <span class="editorial-badge">
-          <span class="pulse-ring pulse-orange"></span>
-          <span class="badge-text">Cohort 1 Registration • <span class="accent-orange-tag">Feb 2026 Batch</span></span>
+          <span class="pulse-ring pulse-blue"></span>
+          <span class="badge-text">Cohort 1 Registration • <span class="accent-blue-tag">Feb 2026 Batch</span></span>
           <i class="bi bi-arrow-right-short badge-arrow"></i>
         </span>
 
@@ -39,7 +39,7 @@ import img5Avif from '/src/assets/image/img5.avif'
     <div class="cohort-card glass-panel-dark">
       <div class="cohort-grid">
         <div class="cohort-visual">
-          <span class="status-badge badge-orange-status">
+          <span class="status-badge badge-blue-status">
             <i class="bi bi-calendar-event-fill"></i>
             Starts Feb 9, 2026
           </span>
@@ -66,7 +66,7 @@ import img5Avif from '/src/assets/image/img5.avif'
               </div>
             </div>
             <div class="why-join-item">
-              <div class="icon-circle icon-orange"><i class="bi bi-folder-check"></i></div>
+              <div class="icon-circle icon-blue"><i class="bi bi-folder-check"></i></div>
               <div>
                 <h4>Production-Grade Projects</h4>
                 <p>Work on actual apps and build a portfolio that commands recruiter attention.</p>
@@ -90,8 +90,7 @@ import img5Avif from '/src/assets/image/img5.avif'
 /* Hero Section */
 .enrollment-hero {
   position: relative;
-  margin-top: 70px;
-  padding: 110px 0 70px;
+  padding: 160px 0 100px;
   overflow: hidden;
   background: var(--color-background);
 }
@@ -257,12 +256,12 @@ import img5Avif from '/src/assets/image/img5.avif'
   position: relative;
 }
 
-.badge-orange-status {
+.badge-blue-status {
   position: absolute;
   top: 20px;
   left: 20px;
-  background: var(--secondary);
-  color: #ffffff;
+  background: var(--primary);
+  color: var(--text-on-primary);
   padding: 6px 14px;
   border-radius: var(--radius-full);
   font-size: 0.825rem;
@@ -271,7 +270,7 @@ import img5Avif from '/src/assets/image/img5.avif'
   align-items: center;
   gap: 6px;
   z-index: 2;
-  box-shadow: 0 4px 16px rgba(249, 115, 22, 0.35);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
 }
 
 .img-wrapper {

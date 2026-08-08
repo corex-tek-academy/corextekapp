@@ -7,61 +7,61 @@ const programs = ref([
     id: 1, title: 'Front-End Development', slug: 'frontend',
     desc: 'Master the art of crafting modern, responsive, and highly interactive user interfaces using HTML, CSS, JavaScript, and Vue.js.', 
     duration: '8 Weeks', price: '₦65,000',
-    color: '#2dd4bf', icon: 'bi-window-sidebar'
+    icon: 'bi-window-sidebar', color: '#06b6d4', bgColor: 'rgba(6, 182, 212, 0.12)', borderColor: 'rgba(6, 182, 212, 0.25)'
   },
   { 
     id: 2, title: 'Back-End Development', slug: 'backend',
     desc: 'Build robust, scalable APIs, handle databases, and architect server-side logic using Node.js, Express, and database systems.', 
     duration: '12 Weeks', price: '₦75,000',
-    color: '#fb923c', icon: 'bi-database-fill-gear'
+    icon: 'bi-database-fill-gear', color: '#f97316', bgColor: 'rgba(249, 115, 22, 0.12)', borderColor: 'rgba(249, 115, 22, 0.25)'
   },
   { 
     id: 3, title: 'Full-Stack Development', slug: 'fullstack',
     desc: 'Become a versatile software engineer by mastering both frontend interface design and backend database/server architectures.', 
     duration: '16 Weeks', price: '₦120,000',
-    color: '#818cf8', icon: 'bi-layers-half'
+    icon: 'bi-layers-half', color: '#6366f1', bgColor: 'rgba(99, 102, 241, 0.12)', borderColor: 'rgba(99, 102, 241, 0.25)'
   },
   { 
     id: 4, title: 'Mobile App Development', slug: 'mobile',
     desc: 'Create beautiful, native-feeling mobile applications for iOS and Android platforms using modern cross-platform frameworks.', 
     duration: '12 Weeks', price: '₦85,000',
-    color: '#a78bfa', icon: 'bi-phone-fill'
+    icon: 'bi-phone-fill', color: '#8b5cf6', bgColor: 'rgba(139, 92, 246, 0.12)', borderColor: 'rgba(139, 92, 246, 0.25)'
   },
   { 
     id: 5, title: 'Data Science & Analytics', slug: 'data-science',
     desc: 'Unlock business insights and drive decisions by learning data cleaning, statistical modeling, machine learning, and visualization.', 
     duration: '16 Weeks', price: '₦100,000',
-    color: '#60a5fa', icon: 'bi-bar-chart-line-fill'
+    icon: 'bi-bar-chart-line-fill', color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.12)', borderColor: 'rgba(59, 130, 246, 0.25)'
   },
   { 
     id: 6, title: 'Cybersecurity Principles', slug: 'cybersecurity',
     desc: 'Defend network infrastructures, learn penetration testing, ethical hacking, and secure applications against modern digital threats.', 
     duration: '10 Weeks', price: '₦90,000',
-    color: '#f87171', icon: 'bi-shield-lock-fill'
+    icon: 'bi-shield-lock-fill', color: '#f43f5e', bgColor: 'rgba(244, 63, 94, 0.12)', borderColor: 'rgba(244, 63, 94, 0.25)'
   },
   { 
     id: 7, title: 'Cloud Computing Architecture', slug: 'cloud',
     desc: 'Learn cloud infrastructures, serverless deployments, and deployment architectures on AWS and modern cloud ecosystems.', 
     duration: '14 Weeks', price: '₦110,000',
-    color: '#38bdf8', icon: 'bi-cloud-check-fill'
+    icon: 'bi-cloud-check-fill', color: '#0ea5e9', bgColor: 'rgba(14, 165, 233, 0.12)', borderColor: 'rgba(14, 165, 233, 0.25)'
   },
   { 
     id: 8, title: 'DevOps Engineering', slug: 'devops',
     desc: 'Bridge the gap between development and operations by mastering continuous integration, Docker containers, and automation tools.', 
     duration: '12 Weeks', price: '₦95,000',
-    color: '#34d399', icon: 'bi-terminal-fill'
+    icon: 'bi-terminal-fill', color: '#10b981', bgColor: 'rgba(16, 185, 129, 0.12)', borderColor: 'rgba(16, 185, 129, 0.25)'
   },
   { 
     id: 9, title: 'Artificial Intelligence', slug: 'ai',
     desc: 'Learn neural network basics, cognitive computing concepts, deep learning models, and building smart automated systems.', 
     duration: '16 Weeks', price: '₦130,000',
-    color: '#e879f9', icon: 'bi-cpu-fill'
+    icon: 'bi-cpu-fill', color: '#d946ef', bgColor: 'rgba(217, 70, 239, 0.12)', borderColor: 'rgba(217, 70, 239, 0.25)'
   },
   { 
     id: 10, title: 'Machine Learning Basics', slug: 'ml',
     desc: 'Dive deep into supervised and unsupervised learning algorithms, regression models, and training intelligent model weights.', 
     duration: '14 Weeks', price: '₦115,000',
-    color: '#fbbf24', icon: 'bi-robot'
+    icon: 'bi-robot', color: '#f59e0b', bgColor: 'rgba(245, 158, 11, 0.12)', borderColor: 'rgba(245, 158, 11, 0.25)'
   }
 ])
 
@@ -82,24 +82,19 @@ function goToPage(p) {
   }
 }
 
-function onCardMouseMove(e) {
-  if (window.matchMedia('(hover: none)').matches) return
-  const card = e.currentTarget
-  const rect = card.getBoundingClientRect()
-  card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`)
-  card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`)
-}
+// Mouse-following gradient REMOVED for cleaner design
+// function onCardMouseMove(e) { ... }
 </script>
 
 <template>
-  <section class="programs container bg-lines" data-component="programs">
+  <section class="programs container bg-lines" id="programs" data-component="programs">
     <!-- Section Header -->
     <div class="section-header" v-scroll-reveal>
-      <span class="badge-pill badge-pill--orange">
+      <span class="badge-pill badge-pill--primary">
         <i class="bi bi-mortarboard-fill"></i>
         Academy Curriculum
       </span>
-      <h2>Our <span class="text-gradient">Programs</span> & <span class="text-gradient-orange">Tracks</span></h2>
+      <h2>Our <span class="text-gradient">Programs</span> & Tracks</h2>
       <p>
         Explore our diverse range of tech programs designed to equip you with the practical skills 
         and professional mindset needed for a high-paying career in technology.
@@ -109,17 +104,12 @@ function onCardMouseMove(e) {
     <!-- Program Cards Grid -->
     <div class="program-grid">
       <article 
-        class="program-card" 
+        class="program-card unified-card" 
         v-for="(program, index) in paginatedPrograms" 
         :key="program.id"
-        :style="{ '--card-accent': program.color }"
-        @mousemove="onCardMouseMove"
       >
-        <!-- Gradient border effect on hover -->
-        <div class="card-border-glow" aria-hidden="true"></div>
-
         <div class="card-header">
-          <div class="icon-box" :style="{ backgroundColor: program.color + '12', color: program.color }">
+          <div class="icon-wrapper" :style="{ background: program.bgColor, color: program.color, borderColor: program.borderColor }">
             <i class="bi" :class="program.icon"></i>
           </div>
           <span class="duration-tag">
@@ -141,8 +131,7 @@ function onCardMouseMove(e) {
           
           <router-link 
             :to="{ path: '/enrollment', query: { course: program.slug } }" 
-            class="btn-enroll"
-            :style="{ '--hover-bg': program.color }"
+            class="btn btn-primary"
           >
             <span>Enroll Now</span>
             <i class="bi bi-arrow-right-short"></i>
@@ -204,71 +193,10 @@ function onCardMouseMove(e) {
 }
 
 .program-card {
-  position: relative;
-  background: 
-    radial-gradient(
-      500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(59, 130, 246, 0.10),
-      transparent 60%
-    ),
-    var(--color-surface);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
-  padding: var(--space-8);
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
   height: 100%;
-  overflow: hidden;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
-}
-
-/* Gradient border glow on hover */
-.card-border-glow {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, var(--card-accent), transparent 60%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 2;
-}
-
-.program-card:hover {
-  transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translate3d(-4px, -6px, 15px);
-  border-color: var(--card-accent);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 var(--color-inset-strong),
-    2px 2px 0px var(--card-accent),
-    4px 4px 0px var(--card-accent);
-}
-
-.program-card:hover .card-border-glow {
-  opacity: 1;
-}
-
-/* 3D pop out effect on card children */
-.program-card .card-header {
-  transform: translateZ(10px);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.program-card .card-body {
-  transform: translateZ(15px);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.program-card .card-footer {
-  transform: translateZ(12px);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .program-card:hover .card-header {
@@ -290,17 +218,18 @@ function onCardMouseMove(e) {
   align-items: center;
 }
 
-.icon-box {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-sm);
+.icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid transparent;
   display: grid;
   place-items: center;
-  font-size: 1.5rem;
-  transition: transform 0.3s var(--ease-out-expo);
+  font-size: 1.35rem;
+  transition: transform 0.3s ease;
 }
 
-.program-card:hover .icon-box {
+.program-card:hover .icon-wrapper {
   transform: scale(1.08) rotate(3deg);
 }
 
@@ -371,27 +300,26 @@ function onCardMouseMove(e) {
   color: var(--text);
 }
 
-/* Enroll Button */
+/* Enroll Button - using unified button system */
 .btn-enroll {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   padding: 10px 20px;
   font-size: 0.875rem;
   font-weight: 600;
   border-radius: var(--radius-full);
-  background: var(--color-background-soft);
-  border: 1px solid var(--color-border-light);
-  color: var(--text);
+  background: var(--secondary);
+  border: none;
+  color: var(--text-on-primary);
   transition: all 0.3s var(--ease-out-expo);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
 }
 
 .btn-enroll:hover {
-  background-color: var(--hover-bg);
-  border-color: var(--hover-bg);
-  color: var(--text-on-primary);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  background: var(--secondary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(249, 115, 22, 0.5);
 }
 
 .btn-enroll i {
@@ -400,7 +328,7 @@ function onCardMouseMove(e) {
 }
 
 .btn-enroll:hover i {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
 /* Pagination */

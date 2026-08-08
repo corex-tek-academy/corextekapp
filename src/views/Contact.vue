@@ -12,8 +12,8 @@
 
       <div class="container hero-inner animate-fade-in-up">
         <span class="editorial-badge">
-          <span class="pulse-ring pulse-orange"></span>
-          <span class="badge-text">Connect With Us • <span class="accent-orange-tag">24/7 Admissions Support</span></span>
+          <span class="pulse-ring pulse-blue"></span>
+          <span class="badge-text">Connect With Us • <span class="accent-blue-tag">24/7 Admissions Support</span></span>
           <i class="bi bi-arrow-right-short badge-arrow"></i>
         </span>
 
@@ -24,7 +24,7 @@
 
         <p class="editorial-lead">
           Have questions about our syllabus, tuition payments, schedules, or career placement? <br />
-          We are here to guide you along every step of your digital learning journey.
+          
         </p>
       </div>
     </section>
@@ -279,8 +279,7 @@ async function handleNewsletterSubmit() {
 /* Contact Hero Banner */
 .contact-hero {
   position: relative;
-  margin-top: 70px;
-  padding: 110px 0 70px;
+  padding: 150px 0 90px;
   overflow: hidden;
   background: var(--color-background);
   text-align: center;
@@ -412,10 +411,10 @@ async function handleNewsletterSubmit() {
 
 /* Form and Newsletter Grid */
 .form-news-section {
-  margin-top: -30px;
+  /* margin-top: -30px; */
   position: relative;
   z-index: 20;
-  padding: 0 24px;
+  padding: 60px 24px;
 }
 
 .form-news-grid {
@@ -495,7 +494,7 @@ async function handleNewsletterSubmit() {
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-  color: #94a3b8;
+  color: var(--text-tertiary);
 }
 
 .contact-form input:focus,
@@ -524,15 +523,15 @@ async function handleNewsletterSubmit() {
 }
 
 .btn-submit-primary {
-  background: var(--primary) !important;
-  color: #ffffff !important;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+  background: var(--secondary) !important;
+  color: var(--text-on-primary) !important;
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.35);
 }
 
 .btn-submit-primary:hover:not(:disabled) {
-  background: var(--primary-hover) !important;
+  background: var(--secondary-hover) !important;
   transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(59, 130, 246, 0.45);
+  box-shadow: 0 12px 24px rgba(249, 115, 22, 0.5);
 }
 
 .btn-submit-primary:disabled {
@@ -548,7 +547,7 @@ async function handleNewsletterSubmit() {
   border-radius: 10px;
   background-color: rgba(16, 185, 129, 0.08);
   border: 1px solid rgba(16, 185, 129, 0.2);
-  color: #10b981;
+  color: var(--accent-green);
   font-size: 0.85rem;
   font-weight: 600;
   margin-top: 8px;
@@ -594,13 +593,13 @@ async function handleNewsletterSubmit() {
 
 .btn-submit-light {
   background: var(--secondary) !important;
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
   box-shadow: 0 4px 16px rgba(249, 115, 22, 0.3);
 }
 
 .btn-submit-light:hover:not(:disabled) {
   background: var(--secondary-hover) !important;
-  color: #ffffff !important;
+  color: var(--text-on-primary) !important;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(249, 115, 22, 0.45);
 }
@@ -609,6 +608,13 @@ async function handleNewsletterSubmit() {
   opacity: 0.7;
   cursor: not-allowed;
 }
+
+.card-call .icon-circle,
+.card-email .icon-circle,
+.card-location .icon-circle { background-color: rgba(59, 130, 246, 0.12); color: var(--primary); }
+.card-call::before,
+.card-email::before,
+.card-location::before { background-color: var(--primary); }
 
 /* Info Cards Section */
 .info-cards-section {
@@ -672,13 +678,6 @@ async function handleNewsletterSubmit() {
   font-size: 1.35rem;
   flex-shrink: 0;
 }
-
-.card-call .icon-circle { background-color: rgba(249, 115, 22, 0.12); color: var(--secondary); }
-.card-call::before { background-color: var(--secondary); }
-.card-email .icon-circle { background-color: rgba(59, 130, 246, 0.12); color: var(--primary); }
-.card-email::before { background-color: var(--primary); }
-.card-location .icon-circle { background-color: rgba(16, 185, 129, 0.12); color: #34d399; }
-.card-location::before { background-color: #34d399; }
 
 .info-card .card-body {
   display: flex;

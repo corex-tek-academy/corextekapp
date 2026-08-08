@@ -53,7 +53,13 @@ export default defineConfig({
         // Optimize chunk file names for better caching
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
-        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
+        assetFileNames: (assetInfo) => {
+          // Exclude PNG files from production build (use WebP/AVIF instead)
+          if (assetInfo.name.endsWith('.png')) {
+            return 'assets/png/[name]-[hash][extname]'
+          }
+          return 'assets/[ext]/[name]-[hash].[ext]'
+        },
       },
     },
     // Enable source maps for production debugging
@@ -64,6 +70,10 @@ export default defineConfig({
     chunkSizeWarningLimit: 1000,
     // Optimize CSS code splitting
     cssCodeSplit: true,
+    // Additional optimization: exclude PNG from build if WebP/AVIF exist
+    assetsInlineLimit: 4096, // Inline assets smaller than 4KB
+    // Optimize CSS
+    cssTarget: 'chrome80', // Target modern browsers for better CSS optimization
   },
   // Uncomment for GitHub Pages deployment
   // base: '/corextekapp/',

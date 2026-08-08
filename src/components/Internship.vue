@@ -9,14 +9,14 @@ import OptimizedImage from '@/components/OptimizedImage.vue'
   <div class="container internship bg-dots">
     <div class="internship-grid">
       <div class="internship-text" v-scroll-reveal.left>
-        <span class="badge-pill badge-pill--teal">
+        <span class="badge-pill badge-pill--primary">
           <i class="bi bi-briefcase-fill"></i>
           Enrollment Now Open
         </span>
         
         <h2 class="section-title">
           Break Into Tech As a 
-          <span class="text-gradient-secondary">Front-End Developer.</span>
+          Front-End Developer.
         </h2>
         
         <p class="section-desc">
@@ -39,7 +39,7 @@ import OptimizedImage from '@/components/OptimizedImage.vue'
         </div>
         
         <div class="cta-wrapper">
-          <router-link to="/enrollment" class="btn btn-primary" role="button">
+          <router-link to="/enrollment" class="btn btn-primary-orange" role="button">
             <span>Join Cohort 1</span>
             <i class="bi bi-arrow-right" aria-hidden="true"></i>
           </router-link>
@@ -121,7 +121,7 @@ import OptimizedImage from '@/components/OptimizedImage.vue'
 }
 
 .meta-item i {
-  color: var(--accent-teal);
+  color: var(--primary);
   font-size: 0.95rem;
 }
 
@@ -146,21 +146,24 @@ import OptimizedImage from '@/components/OptimizedImage.vue'
   overflow: hidden;
 }
 
-.btn-primary {
-  background: var(--secondary-gradient);
-  color: var(--text-on-primary);
+.btn-primary-orange {
+  background: var(--secondary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.35);
 }
 
-.btn-primary:hover {
+.btn-primary-orange:hover {
   transform: translateY(-2px);
-  color: var(--text-on-primary);
+  background: var(--secondary-hover) !important;
+  box-shadow: 0 10px 28px rgba(249, 115, 22, 0.5);
+  color: #ffffff !important;
 }
 
-.btn-primary i {
+.btn-primary-orange i {
   transition: transform 0.25s var(--ease-out-expo);
 }
 
-.btn-primary:hover i {
+.btn-primary-orange:hover i {
   transform: translateX(4px);
 }
 
