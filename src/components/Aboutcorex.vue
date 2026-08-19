@@ -1,4 +1,10 @@
 <script setup>
+import { onMounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const values = [
   {
     icon: 'bi-bullseye',
@@ -25,6 +31,38 @@ const values = [
     borderColor: 'rgba(16, 185, 129, 0.25)',
   },
 ]
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  // Animate cards appearing in sequence
+  gsap.from('.about-card', {
+    scrollTrigger: {
+      trigger: '.about-grid',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 1
+    },
+    y: 60,
+    opacity: 0,
+    stagger: 0.2,
+    ease: 'power2.out'
+  })
+
+  // Animate icons popping in
+  gsap.from('.card-icon', {
+    scrollTrigger: {
+      trigger: '.about-grid',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 0.8
+    },
+    scale: 0,
+    opacity: 0,
+    stagger: 0.2,
+    ease: 'back.out(1.7)'
+  })
+})
 </script>
 
 <template>

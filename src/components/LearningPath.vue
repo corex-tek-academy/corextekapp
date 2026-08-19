@@ -96,6 +96,7 @@ const steps = [
 onMounted(() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
+  // Animate timeline line growth on scroll
   gsap.to('.timeline-line-glow', {
     scrollTrigger: {
       trigger: '.path-timeline',
@@ -105,6 +106,34 @@ onMounted(() => {
     },
     scaleY: 1,
     ease: 'none'
+  })
+
+  // Animate timeline items appearing in sequence
+  gsap.from('.timeline-item', {
+    scrollTrigger: {
+      trigger: '.path-timeline',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 1
+    },
+    y: 50,
+    opacity: 0,
+    stagger: 0.15,
+    ease: 'power2.out'
+  })
+
+  // Animate timeline markers popping in
+  gsap.from('.timeline-marker', {
+    scrollTrigger: {
+      trigger: '.path-timeline',
+      start: 'top 70%',
+      end: 'bottom 85%',
+      scrub: 0.8
+    },
+    scale: 0,
+    opacity: 0,
+    stagger: 0.15,
+    ease: 'back.out(1.7)'
   })
 })
 </script>
@@ -210,7 +239,7 @@ onMounted(() => {
   transform: translateY(-3px);
 }
 
-/* Horizontal connecting threads - simplified */
+/* Horizontal connecting threads with glow effect */
 .timeline-card::after {
   content: '';
   position: absolute;
@@ -220,6 +249,19 @@ onMounted(() => {
   background: var(--color-border);
   z-index: 1;
   opacity: 0.5;
+}
+
+/* Glow pulse effect on connecting threads */
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 48px;
+  height: 2px;
+  background: var(--step-color);
+  z-index: 2;
+  opacity: 0;
+  filter: blur(8px);
 }
 
 /* Card phase label */
@@ -274,7 +316,6 @@ onMounted(() => {
 
 .item-left .timeline-card::before {
   right: -48px;
-  animation: glowPulseLeft 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .item-right .timeline-card {
@@ -288,6 +329,14 @@ onMounted(() => {
 
 .item-right .timeline-card::before {
   left: -48px;
+}
+
+/* Glow pulse animations for connecting threads */
+.item-left .timeline-card::before {
+  animation: glowPulseLeft 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.item-right .timeline-card::before {
   animation: glowPulseRight 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 

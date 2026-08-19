@@ -215,6 +215,65 @@ onMounted(() => {
       rotateX: 8,
       ease: 'none'
     })
+
+    // 3. Enhanced scroll effects for floating cards
+    gsap.to('.card-left', {
+      scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: 'center top',
+        scrub: 0.5
+      },
+      x: -20,
+      opacity: 0.3,
+      ease: 'none'
+    })
+
+    gsap.to('.card-right', {
+      scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: 'center top',
+        scrub: 0.5
+      },
+      x: 20,
+      opacity: 0.3,
+      ease: 'none'
+    })
+
+    // 4. Parallax background bubbles
+    gsap.to('.hero-bubble-1', {
+      scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.3
+      },
+      y: -100,
+      ease: 'none'
+    })
+
+    gsap.to('.hero-bubble-2', {
+      scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.4
+      },
+      y: -80,
+      ease: 'none'
+    })
+
+    gsap.to('.hero-bubble-3', {
+      scrollTrigger: {
+        trigger: '.hero-section',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.35
+      },
+      y: -120,
+      ease: 'none'
+    })
   }
 
   // 3. Stats Viewport Observer

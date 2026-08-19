@@ -1,5 +1,6 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
+import PageLoader from '@/components/PageLoader.vue'
 
 // ── Above the fold (static import for instant render) ──
 import Hero from '@/components/Hero.vue'
@@ -24,30 +25,107 @@ const Contact = defineAsyncComponent(() => import('@/components/Contact.vue'))
     <header>
       <Hero />
     </header>
-    
+
     <Partnership />
-    
-    <Stats />
-    
-    <About />
-    
-    <Aboutcorex />
-    
-    <WhyChoose />
-    
-    <LearningPath />
-    
-    <Internship />
-    
-    <Programs />
-    
-    <FAQ />
-    
-    <Testimonial />
-    
-    <CTABanner />
-    
-    <Contact />
+
+    <Suspense>
+      <template #default>
+        <Stats />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <About />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <Aboutcorex />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <WhyChoose />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <LearningPath />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <Internship />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <Programs />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <FAQ />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <Testimonial />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <CTABanner />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
+
+    <Suspense>
+      <template #default>
+        <Contact />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
   </div>
 </template>
 

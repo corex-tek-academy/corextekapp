@@ -2,10 +2,17 @@
   <div class="enrollment-page">
     <EnrollmentHero />
 
-    <RegistrationForm
-      @register-success="onRegisterSuccess"
-      @register-error="onRegisterError"
-    />
+    <Suspense>
+      <template #default>
+        <RegistrationForm
+          @register-success="onRegisterSuccess"
+          @register-error="onRegisterError"
+        />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
 
     <!-- Academy Introductory Video -->
     <section class="video-section container">
@@ -25,20 +32,35 @@
 
     <!-- Student Testimonials -->
     <section class="testimonials-dock">
-      <Testimonial />
+      <Suspense>
+        <template #default>
+          <Testimonial />
+        </template>
+        <template #fallback>
+          <PageLoader />
+        </template>
+      </Suspense>
     </section>
 
-    <SuccessModal
-      :show="showModal"
-      :type="modalType"
-      :message="modalMessage"
-      @close="closeModal"
-    />
+    <Suspense>
+      <template #default>
+        <SuccessModal
+          :show="showModal"
+          :type="modalType"
+          :message="modalMessage"
+          @close="closeModal"
+        />
+      </template>
+      <template #fallback>
+        <PageLoader />
+      </template>
+    </Suspense>
   </div>
 </template>
 
 <script setup>
 import { ref, defineAsyncComponent } from 'vue'
+import PageLoader from '@/components/PageLoader.vue'
 
 // Critical components - statically imported for instant render
 import EnrollmentHero from '@/components/EnrollmentHero.vue'

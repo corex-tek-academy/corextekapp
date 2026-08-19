@@ -30,6 +30,12 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const features = [
   {
     icon: 'bi-person-video3',
@@ -80,6 +86,38 @@ const features = [
     borderColor: 'rgba(16, 185, 129, 0.25)',
   },
 ]
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  // Animate feature cards appearing in sequence
+  gsap.from('.feature-card', {
+    scrollTrigger: {
+      trigger: '.features-grid',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 1
+    },
+    y: 50,
+    opacity: 0,
+    stagger: 0.15,
+    ease: 'power2.out'
+  })
+
+  // Animate icons popping in
+  gsap.from('.icon-wrapper', {
+    scrollTrigger: {
+      trigger: '.features-grid',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 0.8
+    },
+    scale: 0,
+    opacity: 0,
+    stagger: 0.15,
+    ease: 'back.out(1.7)'
+  })
+})
 </script>
 
 <style scoped>

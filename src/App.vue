@@ -1,13 +1,20 @@
 <script setup>
-import { onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 import SpotlightCursor from './components/SpotlightCursor.vue'
+import PageLoader from './components/PageLoader.vue'
 import Lenis from 'lenis'
 
+const isInitialLoading = ref(true)
 let lenis = null
 
 onMounted(() => {
+  // Hide initial pre-loader after a brief delay
+  setTimeout(() => {
+    isInitialLoading.value = false
+  }, 800)
+
   // Respect prefers-reduced-motion
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
@@ -36,14 +43,20 @@ onUnmounted(() => {
 
 <template>
   <div class="app-wrapper">
-    <SpotlightCursor />
-    <Navbar />
-    <router-view v-slot="{ Component }">
-      <transition name="page-fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
-    <Footer />
+    <!-- Initial pre-loader -->
+    <PageLoader v-if="isInitialLoading" />
+
+    <!-- Main app content -->
+    <template v-else>
+      <SpotlightCursor />
+      <Navbar />
+      <router-view v-slot="{ Component }">
+        <transition name="page-fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+      <Footer />
+    </template>
   </div>
 </template>
 
