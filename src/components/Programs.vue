@@ -1,5 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const pageSize = 3
 const programs = ref([
@@ -84,6 +88,38 @@ function goToPage(p) {
 
 // Mouse-following gradient REMOVED for cleaner design
 // function onCardMouseMove(e) { ... }
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  // Animate program cards appearing in sequence
+  gsap.from('.program-card', {
+    scrollTrigger: {
+      trigger: '.programs-grid',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 1
+    },
+    y: 50,
+    opacity: 0,
+    stagger: 0.15,
+    ease: 'power2.out'
+  })
+
+  // Animate icons popping in
+  gsap.from('.icon-wrapper', {
+    scrollTrigger: {
+      trigger: '.programs-grid',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 0.8
+    },
+    scale: 0,
+    opacity: 0,
+    stagger: 0.15,
+    ease: 'back.out(1.7)'
+  })
+})
 </script>
 
 <template>

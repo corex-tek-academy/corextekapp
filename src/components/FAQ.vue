@@ -48,7 +48,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const activeIndex = ref(null)
 
@@ -82,6 +86,24 @@ function toggleFAQ(index) {
     activeIndex.value = index
   }
 }
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  // Animate FAQ items appearing in sequence
+  gsap.from('.faq-item', {
+    scrollTrigger: {
+      trigger: '.faq-list',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 1
+    },
+    y: 30,
+    opacity: 0,
+    stagger: 0.1,
+    ease: 'power2.out'
+  })
+})
 </script>
 
 <style scoped>

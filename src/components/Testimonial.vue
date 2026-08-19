@@ -70,6 +70,8 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Img1 from '/src/assets/image/progimg22.png'
 import Img2 from '/src/assets/image/progimg1.png'
 import Img3 from '/src/assets/image/proimg0.png'
@@ -80,6 +82,8 @@ import Img1Avif from '/src/assets/image/progimg22.avif'
 import Img2Avif from '/src/assets/image/progimg1.avif'
 import Img3Avif from '/src/assets/image/proimg0.avif'
 import OptimizedImage from '@/components/OptimizedImage.vue'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const testimonials = ref([
   {
@@ -147,6 +151,34 @@ const stopAutoSlide = () => {
 
 onMounted(() => {
   startAutoSlide()
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  // Animate testimonial card appearing
+  gsap.from('.testify', {
+    scrollTrigger: {
+      trigger: '.testimonial-section',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 1
+    },
+    y: 60,
+    opacity: 0,
+    ease: 'power2.out'
+  })
+
+  // Animate header
+  gsap.from('.header', {
+    scrollTrigger: {
+      trigger: '.testimonial-section',
+      start: 'top 75%',
+      end: 'bottom 85%',
+      scrub: 0.8
+    },
+    y: 40,
+    opacity: 0,
+    ease: 'power2.out'
+  })
 })
 
 onUnmounted(() => {
