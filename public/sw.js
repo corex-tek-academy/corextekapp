@@ -48,6 +48,11 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
+  // Skip navigation requests to let Vue Router handle HTML5 history mode
+  if (event.request.mode === 'navigate') {
+    return
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((cachedResponse) => {
