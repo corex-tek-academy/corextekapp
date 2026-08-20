@@ -348,7 +348,7 @@ onUnmounted(() => {
         <div class="hero-badge-container">
           <span class="editorial-badge">
             <span class="pulse-ring pulse-blue"></span>
-            <span class="badge-text">Cohort 1 Enrolling • <span class="accent-blue-tag">Feb 2026 Batch</span></span>
+            <span class="badge-text">Cohort 1 Enrolling • <span class="accent-blue-tag">Mar 2026 Batch</span></span>
             <i class="bi bi-arrow-right-short badge-arrow"></i>
           </span>
         </div>
